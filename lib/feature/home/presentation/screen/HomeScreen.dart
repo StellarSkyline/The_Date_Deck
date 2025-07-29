@@ -1,3 +1,4 @@
+import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Color(0xFFFBF8F0)
             ),
             body: HomePage(),
+            bottomNavigationBar: BottomNav(onPressed: (index) => {}),
 
         )
         );
