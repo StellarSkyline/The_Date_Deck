@@ -3,26 +3,13 @@
 A Random Date Idea Generator Mobile/Web/Desktop App
 
 ## Team
-
----
-
 Seth Torralba | sethosrictorralba@gmail.com
-Simon Montgomery | 
 
-# Figma Spec
+Simon Montgomery | simonam@bellsouth.net
 
----
-
+## Figma Spec
 https://www.figma.com/design/hCDmP844hXJC1wSPR33ej6/Date-Deck?node-id=0-1&t=K0D5hGb5TGSBtiPM-1
 
-## GitHub Page
+## GitHub Repo
+https://github.com/StellarSkyline/The_Date_Deck
 
----
-
-Flutter
-
-# GitHub Repo
-
----
-
-TO BE ADDED
