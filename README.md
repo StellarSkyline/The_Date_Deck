@@ -1,16 +1,28 @@
 # date_deck
 
-A Random Date Generator App
+A Random Date Idea Generator Mobile/Web/Desktop App
 
-## Getting Started
+## Team
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+Seth Torralba | sethosrictorralba@gmail.com
+Simon Montgomery | 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Figma Spec
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+https://www.figma.com/design/hCDmP844hXJC1wSPR33ej6/Date-Deck?node-id=0-1&t=K0D5hGb5TGSBtiPM-1
+
+## GitHub Page
+
+---
+
+Flutter
+
+# GitHub Repo
+
+---
+
+TO BE ADDED
