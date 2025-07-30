@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShufflePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _ShufflePageState();
+    @override
+    State<StatefulWidget> createState() => _ShufflePageState();
 
 }
 
@@ -14,11 +14,37 @@ class _ShufflePageState extends State<ShufflePage>{
     Widget build(BuildContext context) {
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                Container(height:40, child: HorizontalList(onPressed: (index)=> {})),
-                SizedBox(height:300, width:300, child: Placeholder())
+                SizedBox(height: 8),
+                Container(height: 42, child: HorizontalList(onPressed: (index) => {})),
+                Expanded(
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: ListView.builder(
+                            itemCount: 100, //Add Item Count here
+                            itemBuilder: (context, index) {
+                                return Text("Add Text here", style: TextStyle(fontSize: 16, color: Colors.black));
+                            }
+                        )
+                    )
+                ),
+                Center(
+                    child: SizedBox(
+                        width: 228,
+                        height: 55,
+                        child: ElevatedButton(
+                            onPressed: () => {},
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                backgroundColor: Color(0xFFE06F7C)
+                            ),
+                            child: Text("Shuffle Deck", style: TextStyle(color: Colors.white, fontSize: 16))
+                        )
+                    )
+                ),
+                SizedBox(height: 8)
             ]
-
         );
     }
 

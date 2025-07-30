@@ -19,6 +19,9 @@ abstract class DateDao {
   @Query('SELECT * FROM Date WHERE id = :id')
   Stream<Date?> findDateById(int id);
 
+  @Query('SELECT DISTINCT(id) FROM Date')
+  Future<int?> getTotalDateCount();
+
   @insert
   Future<void> insertDate(Date date);
 }
