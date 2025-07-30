@@ -1,8 +1,13 @@
+import 'package:date_deck/core/database/date_dao.dart';
 import 'package:date_deck/feature/shuffle/presentation/components/HorizontalList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShufflePage extends StatefulWidget {
+    final DateDao dao;
+
+    const ShufflePage(this.dao, {super.key});
+
     @override
     State<StatefulWidget> createState() => _ShufflePageState();
 
@@ -21,11 +26,22 @@ class _ShufflePageState extends State<ShufflePage>{
                 Expanded(
                     child: Padding(
                         padding: EdgeInsets.all(10),
-                        child: ListView.builder(
-                            itemCount: 100, //Add Item Count here
-                            itemBuilder: (context, index) {
-                                return Text("Add Text here", style: TextStyle(fontSize: 16, color: Colors.black));
-                            }
+                        child: StreamBuilder(
+                          stream: widget.dao.getAllDatesAsStream(),
+                          builder: (_, asyncSnapshot) {
+
+                            final dates = asyncSnapshot.data ?? List.empty();
+
+                            return ListView.builder(
+                                itemCount: dates.length,
+                                //Add Item Count here
+                                itemBuilder: (context, index) {
+                                    return Text(dates[index].fullDescription,
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.black));
+                                  }
+                            );
+                          }
                         )
                     )
                 ),
