@@ -20,14 +20,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var _currentPage = 0;
 
-    final List pages = [
-        HomePage(),
-        ShufflePage(),
-        FavoritesPage()
-    ];
-
     @override
     Widget build(BuildContext context) {
+
+        final List pages = [
+            HomePage(),
+            ShufflePage(widget.dao),
+            FavoritesPage()
+        ];
+
         return SafeArea(child:
             Scaffold(
                 backgroundColor: Color(0xFFF4F4F4),

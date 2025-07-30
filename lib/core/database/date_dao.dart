@@ -8,6 +8,9 @@ abstract class DateDao {
   @Query('SELECT * FROM Date')
   Future<List<Date>> getAllDates();
 
+  @Query('SELECT * FROM Date')
+  Stream<List<Date>> getAllDatesAsStream();
+
   @Query('SELECT TOP 10 * FROM Date')
   Future<List<Date>> getTopDates();
 
@@ -20,7 +23,7 @@ abstract class DateDao {
   Stream<Date?> findDateById(int id);
 
   @Query('SELECT DISTINCT(id) FROM Date')
-  Future<int?> getTotalDateCount();
+  Stream<int?> getTotalDateCount();
 
   @insert
   Future<void> insertDate(Date date);
