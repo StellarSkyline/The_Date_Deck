@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShufflePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _ShufflePageState();
+    @override
+    State<StatefulWidget> createState() => _ShufflePageState();
 
 }
 
@@ -15,10 +15,10 @@ class _ShufflePageState extends State<ShufflePage>{
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-                Container(height:40, child: HorizontalList(onPressed: (index)=> {})),
-                SizedBox(height:300, width:300, child: Placeholder())
+                SizedBox(height: 8),
+                Container(height: 42, child: HorizontalList(onPressed: (index) => {})),
+                SizedBox(height: 300, width: 300, child: Placeholder())
             ]
-
         );
     }
 
