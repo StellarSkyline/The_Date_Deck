@@ -14,8 +14,13 @@ Future<void> main() async {
 
     final dateDao = database.dateDao;
 
-    final testDate = Date(2, "testDate", "A Date used for Testing", Category.games, Suit.spade);
-    await dateDao.insertDate(testDate);
+    final dateCount = await dateDao.getTotalDateCount();
+
+    if ( dateCount == 0) {
+        final testDate = Date(2, "testDate", "A Date used for Testing", Category.games, Suit.spade);
+        await dateDao.insertDate(testDate);
+    }
+
 
     runApp(MyApp(dateDao));
 }

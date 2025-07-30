@@ -26,32 +26,26 @@ class _HomeScreenState extends State<HomeScreen> {
         FavoritesPage()
     ];
 
-
     @override
     Widget build(BuildContext context) {
         return SafeArea(child:
-        Scaffold(
-            backgroundColor: Color(0xFFF4F4F4),
-            appBar: AppBar(
-                title: Text("Date Deck"),
-                centerTitle: true,
-                backgroundColor: Color(0xFFFBF8F0),
-                leading: Align(
-                    alignment: Alignment.center,
-                    child: StreamBuilder(
-                        stream: widget.dao.findDateById(2),
-                        builder: (_, snapshot) => Text('name: ${snapshot.data?.shortName ?? 'Nah'}')
-                    ),
+            Scaffold(
+                backgroundColor: Color(0xFFF4F4F4),
+                appBar: AppBar(
+                    title: Text("Date Deck"),
+                    centerTitle: true,
+                    backgroundColor: Color(0xFFFBF8F0)
                 ),
-            ),
-            bottomNavigationBar: BottomNav(onPressed: (index) => {
-                setState((){
-                    _currentPage = index;
-                })
-            }),
-            body: pages[_currentPage],
+                bottomNavigationBar: BottomNav(onPressed: (index) => {
+                        setState(() {
+                                _currentPage = index;
+                            }
+                        )
+                    }
+                ),
+                body: pages[_currentPage]
 
-        )
+            )
         );
     }
 
