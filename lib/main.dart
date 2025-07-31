@@ -17,7 +17,7 @@ Future<void> main() async {
     final allDates = await dateDao.getAllDates();
 
     if ( allDates.isEmpty ) {
-        final testDate = Date(2, "testDate", "A Date used for Testing", Category.games, Suit.spade);
+        final testDate = Date(id: 2, shortName: "testDate", fullDescription: "A Date used for Testing", category: Category.games, suit: Suit.spade);
         await dateDao.insertDate(testDate);
     }
 

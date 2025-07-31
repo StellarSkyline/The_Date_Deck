@@ -18,5 +18,16 @@ class Date {
 
   bool favorite = false;
 
-  Date(this.id, this.shortName, this.fullDescription, this.category, this.suit);
+  Date ({required this.id, required this.shortName, required this.fullDescription, required this.category, required this.suit,});
+
+  factory Date.fromJson(Map<String, dynamic> json) {
+    return Date(
+      id: json['id'] as int,
+      shortName: 'emptystring',//: json[''] as String,
+      fullDescription: json['Name'] as String,
+      category: json['Category'] as Category,
+      suit: json['Card Suit'] as Suit,
+
+    );
+  }
 }
