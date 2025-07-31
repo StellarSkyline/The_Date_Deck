@@ -1,8 +1,8 @@
 import 'package:date_deck/core/database/date_dao.dart';
-import 'package:date_deck/feature/favorites/presentation/screen/FavoritesPage.dart';
+import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/HomePage.dart';
-import 'package:date_deck/feature/shuffle/presentation/screen/ShufflePage.dart';
+import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,5 @@
 import 'package:date_deck/core/database/date_dao.dart';
-import 'package:date_deck/feature/shuffle/presentation/components/HorizontalList.dart';
+import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
