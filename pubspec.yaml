@@ -46,6 +46,8 @@ dev_dependencies:
   #Floor database Generator
   floor_generator: ^1.4.2
   build_runner: ^2.1.2
+  #Multi Provider
+  provider: ^6.1.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
