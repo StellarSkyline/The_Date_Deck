@@ -1,4 +1,4 @@
-import 'package:date_deck/feature/home/data/HomeRepository.dart';
+import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../feature/home/core/database/date_dao.dart';
