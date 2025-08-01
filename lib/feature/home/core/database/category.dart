@@ -1,6 +1,6 @@
 enum Category{
-  active,
-  creative,
-  games,
-  cooking
+  Active,
+  Creative,
+  Games,
+  Cooking
 }

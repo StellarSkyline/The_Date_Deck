@@ -140,22 +140,22 @@ class _$DateDao extends DateDao {
   Future<List<Date>> getAllDates() async {
     return _queryAdapter.queryList('SELECT * FROM Date',
         mapper: (Map<String, Object?> row) => Date(
-            row['id'] as int,
-            row['shortName'] as String,
-            row['fullDescription'] as String,
-            Category.values[row['category'] as int],
-            Suit.values[row['suit'] as int]));
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]));
   }
 
   @override
   Stream<List<Date>> getAllDatesAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Date',
         mapper: (Map<String, Object?> row) => Date(
-            row['id'] as int,
-            row['shortName'] as String,
-            row['fullDescription'] as String,
-            Category.values[row['category'] as int],
-            Suit.values[row['suit'] as int]),
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]),
         queryableName: 'Date',
         isView: false);
   }
@@ -164,11 +164,11 @@ class _$DateDao extends DateDao {
   Future<List<Date>> getTopDates() async {
     return _queryAdapter.queryList('SELECT TOP 10 * FROM Date',
         mapper: (Map<String, Object?> row) => Date(
-            row['id'] as int,
-            row['shortName'] as String,
-            row['fullDescription'] as String,
-            Category.values[row['category'] as int],
-            Suit.values[row['suit'] as int]));
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]));
   }
 
   @override
@@ -176,27 +176,39 @@ class _$DateDao extends DateDao {
     return _queryAdapter.queryListStream(
         'SELECT * FROM Date WHERE favorite = 1',
         mapper: (Map<String, Object?> row) => Date(
-            row['id'] as int,
-            row['shortName'] as String,
-            row['fullDescription'] as String,
-            Category.values[row['category'] as int],
-            Suit.values[row['suit'] as int]),
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]),
         queryableName: 'Date',
         isView: false);
   }
 
   @override
-  Stream<Date?> findDateById(int id) {
+  Stream<Date?> findDateByIdAsStream(int id) {
     return _queryAdapter.queryStream('SELECT * FROM Date WHERE id = ?1',
         mapper: (Map<String, Object?> row) => Date(
-            row['id'] as int,
-            row['shortName'] as String,
-            row['fullDescription'] as String,
-            Category.values[row['category'] as int],
-            Suit.values[row['suit'] as int]),
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]),
         arguments: [id],
         queryableName: 'Date',
         isView: false);
+  }
+
+  @override
+  Future<Date?> findDateById(int id) async {
+    return _queryAdapter.query('SELECT * FROM Date WHERE id = ?1',
+        mapper: (Map<String, Object?> row) => Date(
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]),
+        arguments: [id]);
   }
 
   @override

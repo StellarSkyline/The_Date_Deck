@@ -1,7 +1,7 @@
 import 'package:floor/floor.dart';
 
-import 'category.dart';
-import 'suit.dart';
+import '../../core/database/category.dart';
+import '../../core/database/suit.dart';
 
 @entity
 class Date {
@@ -25,8 +25,8 @@ class Date {
       id: json['id'] as int,
       shortName: 'emptystring',//: json[''] as String,
       fullDescription: json['Name'] as String,
-      category: json['Category'] as Category,
-      suit: json['Card Suit'] as Suit,
+      category: Category.values.byName(json['Category']),
+      suit: Suit.values.byName(json['Card Suit']),
 
     );
   }
