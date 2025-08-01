@@ -13,11 +13,7 @@ class MyApp extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return MultiProvider(providers: [
-                ChangeNotifierProvider(create: (context) {
-                    final vm = HomeViewModel();
-                    vm.init();
-                    return vm;
-                })
+                ChangeNotifierProvider(create: (context) => HomeViewModel())
             ],
             child:
             MaterialApp(
