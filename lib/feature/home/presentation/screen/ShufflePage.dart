@@ -1,12 +1,11 @@
-import 'package:date_deck/core/database/date_dao.dart';
-import 'package:date_deck/feature/shuffle/presentation/components/HorizontalList.dart';
+import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../domain/HomeViewModel.dart';
 
 class ShufflePage extends StatefulWidget {
-    final DateDao dao;
-
-    const ShufflePage(this.dao, {super.key});
 
     @override
     State<StatefulWidget> createState() => _ShufflePageState();
@@ -17,6 +16,7 @@ class _ShufflePageState extends State<ShufflePage>{
 
     @override
     Widget build(BuildContext context) {
+        final vm = context.watch<HomeViewModel>();
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -27,21 +27,21 @@ class _ShufflePageState extends State<ShufflePage>{
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
-                          stream: widget.dao.getAllDatesAsStream(),
-                          builder: (_, asyncSnapshot) {
+                            stream: vm.dao.getAllDatesAsStream(),
+                            builder: (_, asyncSnapshot) {
 
-                            final dates = asyncSnapshot.data ?? List.empty();
+                                final dates = asyncSnapshot.data ?? List.empty();
 
-                            return ListView.builder(
-                                itemCount: dates.length,
-                                //Add Item Count here
-                                itemBuilder: (context, index) {
-                                    return Text(dates[index].fullDescription,
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.black));
-                                  }
-                            );
-                          }
+                                return ListView.builder(
+                                    itemCount: dates.length,
+                                    //Add Item Count here
+                                    itemBuilder: (context, index) {
+                                        return Text(dates[index].fullDescription,
+                                            style: TextStyle(
+                                                fontSize: 16, color: Colors.black));
+                                    }
+                                );
+                            }
                         )
                     )
                 ),

@@ -1,0 +1,52 @@
+
+import 'package:flutter/cupertino.dart';
+import '../../core/database/category.dart';
+import '../../core/database/database.dart';
+import '../../core/database/date.dart';
+import '../../core/database/date_dao.dart';
+import '../../core/database/suit.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+import '../model/date_idea.dart';
+
+class HomeRepository {
+
+    Future<List<DateIdea>> parseJson() async {
+        List<DateIdea> list = [];
+        final String response = await rootBundle.loadString('assets/json/date_idea_database.json');
+        //final data = await jsonDecode(response);
+
+       final data = (jsonDecode(response) as List)
+           .cast<Map<String, dynamic>>();
+
+       data.forEach((element) {
+           list.add(element as DateIdea);
+
+       });
+
+       list.forEach((element) {
+           print(element.toString());
+       });
+
+
+        return data.map<DateIdea>((json) => DateIdea.fromJson(json)).toList();;
+    }
+
+    Future<DateDao> buildDatabase() async {
+        WidgetsFlutterBinding.ensureInitialized();
+        final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
+
+        final dateDao = database.dateDao;
+
+        final allDates = await dateDao.getAllDates();
+
+        if (allDates.isEmpty) {
+            final testDate = Date(2, "testDate", "A Date used for Testing", Category.games, Suit.spade);
+            await dateDao.insertDate(testDate);
+        }
+
+        return dateDao;
+
+    }
+
+}

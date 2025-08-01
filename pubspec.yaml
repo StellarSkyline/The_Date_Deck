@@ -48,6 +48,8 @@ dev_dependencies:
   #Floor database Generator
   floor_generator: ^1.4.2
   build_runner: ^2.1.2
+  #Multi Provider
+  provider: ^6.1.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,7 +66,7 @@ flutter:
   assets:
   - assets/images/
   - assets/icons/
-  - assets/json/
+  - assets/json/date_idea_database.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
