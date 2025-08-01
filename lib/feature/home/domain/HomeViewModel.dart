@@ -1,7 +1,7 @@
 import 'package:date_deck/feature/home/data/HomeRepository.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../core/database/date_dao.dart';
+import '../../../feature/home/core/database/date_dao.dart';
 
 class HomeViewModel extends ChangeNotifier {
   late DateDao _dao;
