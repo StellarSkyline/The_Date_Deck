@@ -12,9 +12,24 @@ import '../model/date_idea.dart';
 class HomeRepository {
 
     Future<List<DateIdea>> parseJson() async {
+        List<DateIdea> list = [];
         final String response = await rootBundle.loadString('assets/json/date_idea_database.json');
-        final data = await json.decode(response);
-        return data.map((json) => DateIdea.fromJson(json)).toList();
+        //final data = await jsonDecode(response);
+
+       final data = (jsonDecode(response) as List)
+           .cast<Map<String, dynamic>>();
+
+       data.forEach((element) {
+           list.add(element as DateIdea);
+
+       });
+
+       list.forEach((element) {
+           print(element.toString());
+       });
+
+
+        return data.map<DateIdea>((json) => DateIdea.fromJson(json)).toList();;
     }
 
     Future<DateDao> buildDatabase() async {

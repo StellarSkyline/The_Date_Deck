@@ -33,6 +33,7 @@ class _BottomNavState extends State<BottomNav> {
             backgroundColor: Color(0xFFFBF8F0),
             type: BottomNavigationBarType.fixed,
             onTap: (index) => {
+                print(vm.test[index].name),
                 widget.onPressed(index),
                 setState(() {
                         _currentSelection = index;
