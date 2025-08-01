@@ -11,10 +11,10 @@ import '../model/date_idea.dart';
 
 class HomeRepository {
 
-    Future<DateIdea> parseJson() async {
+    Future<List<DateIdea>> parseJson() async {
         final String response = await rootBundle.loadString('assets/json/date_idea_database.json');
         final data = await json.decode(response);
-        return DateIdea.fromJson(data);
+        return data.map((json) => DateIdea.fromJson(json)).toList();
     }
 
     Future<DateDao> buildDatabase() async {
