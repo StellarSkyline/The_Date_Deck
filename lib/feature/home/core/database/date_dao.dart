@@ -1,6 +1,6 @@
 import 'package:floor/floor.dart';
 
-import 'date.dart';
+import '../../data/model/date.dart';
 
 @dao
 abstract class DateDao {
@@ -20,7 +20,11 @@ abstract class DateDao {
 
   // find by ID
   @Query('SELECT * FROM Date WHERE id = :id')
-  Stream<Date?> findDateById(int id);
+  Stream<Date?> findDateByIdAsStream(int id);
+
+  // find by ID
+  @Query('SELECT * FROM Date WHERE id = :id')
+  Future<Date?> findDateById(int id);
 
   @Query('SELECT DISTINCT(id) FROM Date')
   Stream<int?> getTotalDateCount();

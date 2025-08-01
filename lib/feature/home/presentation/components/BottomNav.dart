@@ -40,7 +40,7 @@ class _BottomNavState extends State<BottomNav> {
                 )
             },
             unselectedItemColor: Color(0xFF5E4E81),
-            selectedItemColor: Color(0xFFE06F7C),
+            selectedItemColor: Color(0xFFE06F7C)
         );
     }
 }
