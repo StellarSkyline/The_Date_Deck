@@ -4,20 +4,20 @@ import 'package:flutter/cupertino.dart';
 import '../../../feature/home/core/database/date_dao.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  //Repo
+
   final _HomeRepo = HomeRepository();
 
   //State
   late DateDao _dao;
   DateDao get dao => _dao;
-
-
+  
   //Constructor
   HomeViewModel() {
     init();
   }
 
-  //Methods
+
+//Methods
   Future<void> init() async {
     _dao = await _HomeRepo.buildDatabase();
     notifyListeners();
