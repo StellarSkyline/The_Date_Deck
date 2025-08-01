@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../domain/HomeViewModel.dart';
 
 class BottomNav extends StatefulWidget {
 
@@ -19,6 +21,8 @@ class _BottomNavState extends State<BottomNav> {
 
     @override
     Widget build(BuildContext context) {
+        final vm = context.watch<HomeViewModel>();
+
         return BottomNavigationBar(
             items: [
                 BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_home.svg', color: _currentSelection == 0 ? Color(0xFFE06F7C) : Color(0xFF5E4E81)), label: 'Home'),
@@ -29,6 +33,7 @@ class _BottomNavState extends State<BottomNav> {
             backgroundColor: Color(0xFFFBF8F0),
             type: BottomNavigationBarType.fixed,
             onTap: (index) => {
+                print(vm.test()),
                 widget.onPressed(index),
                 setState(() {
                         _currentSelection = index;
