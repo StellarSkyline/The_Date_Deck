@@ -4,8 +4,9 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../../data/model/date.dart';
 import 'date_dao.dart';
-import 'suit.dart';
-import 'category.dart';
+import '../../data/model/category.dart';
+import '../../data/model/suit.dart';
+
 
 
 part 'database.g.dart';

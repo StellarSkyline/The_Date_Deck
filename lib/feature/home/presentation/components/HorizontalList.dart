@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class HorizontalList extends StatefulWidget {
     final ValueChanged<int> onPressed;
 
-    HorizontalList({super.key, required this.onPressed});
+    const HorizontalList({super.key, required this.onPressed});
+
     @override
     State<StatefulWidget> createState() => _HorizontalListState();
 
@@ -24,7 +25,7 @@ class _HorizontalListState extends State<HorizontalList> {
                 return Padding(padding: EdgeInsetsGeometry.all(5.0),
                     child: ElevatedButton(
                         onPressed: () => {
-                            //widget.onPressed(index),
+                            widget.onPressed(index),
                             setState(() {
                                     _currentIndex = index;
                                 }

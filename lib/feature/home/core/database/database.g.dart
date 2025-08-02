@@ -137,17 +137,6 @@ class _$DateDao extends DateDao {
   final InsertionAdapter<Date> _dateInsertionAdapter;
 
   @override
-  Future<List<Date>> getAllDates() async {
-    return _queryAdapter.queryList('SELECT * FROM Date',
-        mapper: (Map<String, Object?> row) => Date(
-            id: row['id'] as int,
-            shortName: row['shortName'] as String,
-            fullDescription: row['fullDescription'] as String,
-            category: Category.values[row['category'] as int],
-            suit: Suit.values[row['suit'] as int]));
-  }
-
-  @override
   Stream<List<Date>> getAllDatesAsStream() {
     return _queryAdapter.queryListStream('SELECT * FROM Date',
         mapper: (Map<String, Object?> row) => Date(
@@ -161,8 +150,8 @@ class _$DateDao extends DateDao {
   }
 
   @override
-  Future<List<Date>> getTopDates() async {
-    return _queryAdapter.queryList('SELECT TOP 10 * FROM Date',
+  Future<List<Date>> getAllDates() async {
+    return _queryAdapter.queryList('SELECT * FROM Date',
         mapper: (Map<String, Object?> row) => Date(
             id: row['id'] as int,
             shortName: row['shortName'] as String,
@@ -186,7 +175,7 @@ class _$DateDao extends DateDao {
   }
 
   @override
-  Stream<Date?> findDateByIdAsStream(int id) {
+  Stream<Date?> findByIdAsStream(int id) {
     return _queryAdapter.queryStream('SELECT * FROM Date WHERE id = ?1',
         mapper: (Map<String, Object?> row) => Date(
             id: row['id'] as int,
@@ -200,7 +189,7 @@ class _$DateDao extends DateDao {
   }
 
   @override
-  Future<Date?> findDateById(int id) async {
+  Future<Date?> findById(int id) async {
     return _queryAdapter.query('SELECT * FROM Date WHERE id = ?1',
         mapper: (Map<String, Object?> row) => Date(
             id: row['id'] as int,
@@ -209,6 +198,18 @@ class _$DateDao extends DateDao {
             category: Category.values[row['category'] as int],
             suit: Suit.values[row['suit'] as int]),
         arguments: [id]);
+  }
+
+  @override
+  Future<List<Date>> getAllByCategoryAsStream(Category category) async {
+    return _queryAdapter.queryList('SELECT * FROM Date WHERE category = ?1',
+        mapper: (Map<String, Object?> row) => Date(
+            id: row['id'] as int,
+            shortName: row['shortName'] as String,
+            fullDescription: row['fullDescription'] as String,
+            category: Category.values[row['category'] as int],
+            suit: Suit.values[row['suit'] as int]),
+        arguments: [category.index]);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,23 +14,30 @@ class ShufflePage extends StatefulWidget {
 }
 
 class _ShufflePageState extends State<ShufflePage>{
+    var _currentCategory = 0;
 
     @override
     Widget build(BuildContext context) {
         final vm = context.watch<HomeViewModel>();
+
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                 SizedBox(height: 8),
-                Container(height: 42, child: HorizontalList(onPressed: (index) => {})),
+                Container(height: 42, child: HorizontalList(onPressed: (index) => {
+                  setState(() {
+                    _currentCategory = index;
+                  }),
+                  vm.changeStreamData(Category.values[_currentCategory])
+                })),
                 Expanded(
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
-                            stream: vm.dao.getAllDatesAsStream(),
+                            stream: vm.streamController.stream,
+                            initialData: vm.test,
                             builder: (_, asyncSnapshot) {
-
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
                                     itemCount: dates.length,
@@ -64,4 +72,5 @@ class _ShufflePageState extends State<ShufflePage>{
     }
 
 }
+
 

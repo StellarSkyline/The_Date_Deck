@@ -21,7 +21,7 @@ class HomeRepository {
 
 
         data.map<Date>((json) => Date.fromJson(json)).toList().forEach((element) async {
-            dateDao.findDateById(element.id).then((value) async {
+            dateDao.findById(element.id).then((value) async {
                 if(value == null) {
                     await dateDao.insertDate(element);
                 }
