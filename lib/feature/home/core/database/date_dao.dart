@@ -35,4 +35,7 @@ abstract class DateDao {
 
   @insert
   Future<void> insertDate(Date date);
+
+  @update
+  Future<void> updateDate(Date date);
 }

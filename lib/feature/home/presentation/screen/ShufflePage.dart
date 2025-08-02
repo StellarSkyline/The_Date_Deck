@@ -47,7 +47,7 @@ class _ShufflePageState extends State<ShufflePage> {
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
                             stream: streamController.stream,
-                            initialData: vm.initialSuffhleDate,
+                            initialData: vm.initialShuffleDate,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
@@ -56,7 +56,15 @@ class _ShufflePageState extends State<ShufflePage> {
                                         return CardComponent(
                                             name: dates[index].fullDescription,
                                             suit: dates[index].suit,
-                                            onPress: (index) => {});
+                                            favorite: dates[index].favorite,
+                                            onPress: (value) => {
+                                                setState(() {
+
+                                                }),
+                                                dates[index].favorite = !dates[index].favorite,
+                                                vm.dao.updateDate(dates[index]),
+                                            },
+                                        );
                                     }
                                 );
                             }

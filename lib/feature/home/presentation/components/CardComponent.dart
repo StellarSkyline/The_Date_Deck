@@ -8,9 +8,10 @@ class CardComponent extends StatelessWidget {
 
     final String name;
     final Suit suit;
-    final ValueChanged<int> onPress;
+    final bool favorite;
+    final ValueChanged onPress;
 
-    CardComponent({required this.name, required this.suit, required this.onPress});
+    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress});
 
     @override
     Widget build(BuildContext context) {
@@ -82,10 +83,12 @@ class CardComponent extends StatelessWidget {
                                                 width: 121,
                                                 height: 25,
                                                 child: ElevatedButton(
-                                                    onPressed: () => {},
+                                                    onPressed: () => {
+                                                      onPress(0)
+                                                    },
                                                     style: ElevatedButton.styleFrom(
                                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                                        backgroundColor: Color(0xFFE06F7C)
+                                                        backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
                                                     ),
                                                     child: Text("Favorite",
                                                         style: TextStyle(

@@ -16,7 +16,7 @@ class HomeViewModel extends ChangeNotifier {
     DateDao get dao => _dao;
 
     List<Date> _initialShuffleDate = List.empty();
-    List<Date> get initialSuffhleDate => _initialShuffleDate;
+    List<Date> get initialShuffleDate => _initialShuffleDate;
 
     List<Date> _initialFavoritesDate = List.empty();
     List<Date> get initialFavoritesDate => _initialFavoritesDate;
