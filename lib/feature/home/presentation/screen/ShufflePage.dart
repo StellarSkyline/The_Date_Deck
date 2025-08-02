@@ -19,7 +19,6 @@ class _ShufflePageState extends State<ShufflePage>{
     @override
     Widget build(BuildContext context) {
         final vm = context.watch<HomeViewModel>();
-        vm.initialStreamData();
 
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -44,7 +43,7 @@ class _ShufflePageState extends State<ShufflePage>{
                                     itemCount: dates.length,
                                     //Add Item Count here
                                     itemBuilder: (context, index) {
-                                        return Text(dates[index].fullDescription + Category.values[_currentCategory].toString(),
+                                        return Text(dates[index].fullDescription,
                                             style: TextStyle(
                                                 fontSize: 16, color: Colors.black));
                                     }

@@ -30,7 +30,6 @@ class _HorizontalListState extends State<HorizontalList> {
                                     _currentIndex = index;
                                 }
                             )
-
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

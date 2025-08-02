@@ -15,6 +15,9 @@ class HomeViewModel extends ChangeNotifier {
   late DateDao _dao;
   DateDao get dao => _dao;
 
+  List<Date> _test = List.empty();
+  List<Date> get test => _test;
+
   final StreamController<List<Date>> _streamController = StreamController<List<Date>>();
   StreamController<List<Date>> get streamController => _streamController;
 
@@ -27,6 +30,7 @@ class HomeViewModel extends ChangeNotifier {
 //Methods
   Future<void> init() async {
     _dao = await _HomeRepo.buildDatabase();
+    _test = await dao.getAllByCategoryAsStream(Category.Active);
     notifyListeners();
   }
 
