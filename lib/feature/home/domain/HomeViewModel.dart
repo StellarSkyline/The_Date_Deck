@@ -43,4 +43,17 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> initShuffle() async {
+    _test = await dao.getAllByCategoryAsStream(Category.Active);
+    _test.shuffle();
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    // Close the StreamController to release its resources
+    _streamController.close();
+    super.dispose(); // Always call super.dispose()
+  }
+
 }
