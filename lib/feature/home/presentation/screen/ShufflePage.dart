@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +24,7 @@ class _ShufflePageState extends State<ShufflePage> {
         final vm = context.watch<HomeViewModel>();
 
         setState(() {
-                streamController = vm.streamController;
+                streamController = vm.streamControllerShuffle;
             }
         );
 
@@ -40,7 +39,7 @@ class _ShufflePageState extends State<ShufflePage> {
                                     _currentCategory = index;
                                 }
                             ),
-                            vm.changeStreamData(Category.values[_currentCategory])
+                            vm.changeStreamDataCategory(Category.values[_currentCategory])
                         }
                     )),
                 Expanded(
@@ -48,17 +47,26 @@ class _ShufflePageState extends State<ShufflePage> {
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
                             stream: streamController.stream,
-                            initialData: vm.initialDates,
+                            initialData: vm.initialShuffleDate,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
                                     itemCount: 4,
-                                    //Add Item Count here
                                     itemBuilder: (context, index) {
                                         return CardComponent(
                                             name: dates[index].fullDescription,
                                             suit: dates[index].suit,
-                                            onPress: (index) => {});
+                                            favorite: dates[index].favorite,
+                                            onPress: (value) => {
+                                                setState(() {
+
+                                                    }
+                                                ),
+                                                dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                vm.updateDate(dates[index]),
+                                                vm.changeStreamDataFavorites()
+                                            }
+                                        );
                                     }
                                 );
                             }
@@ -72,12 +80,12 @@ class _ShufflePageState extends State<ShufflePage> {
                         child: ElevatedButton(
                             onPressed: () =>
                             {
-                                vm.changeStreamData(Category.values[_currentCategory])
+                                vm.changeStreamDataCategory(Category.values[_currentCategory])
                             },
                             style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFFE06F7C),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                backgroundColor: Color(0xFFE06F7C)
+                                    borderRadius: BorderRadius.circular(10))
                             ),
                             child: Text("Shuffle Deck",
                                 style: TextStyle(color: Colors.white, fontSize: 16))

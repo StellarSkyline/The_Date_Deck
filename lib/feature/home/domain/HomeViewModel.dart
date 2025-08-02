@@ -8,46 +8,76 @@ import '../../../feature/home/core/database/date_dao.dart';
 import '../data/model/category.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  //Repo
-  final _HomeRepo = HomeRepository();
+    //Repo
+    final _HomeRepo = HomeRepository();
 
-  //State
-  late DateDao _dao;
-  DateDao get dao => _dao;
+    //State
+    late DateDao _dao;
+    DateDao get dao => _dao;
 
-  List<Date> _initialDates = List.empty();
-  List<Date> get initialDates => _initialDates;
+    List<Date> _initialShuffleDate = List.empty();
+    List<Date> get initialShuffleDate => _initialShuffleDate;
 
-  final StreamController<List<Date>> _streamController = StreamController<List<Date>>.broadcast();
-  StreamController<List<Date>> get streamController => _streamController;
+    List<Date> _initialFavoritesDate = List.empty();
+    List<Date> get initialFavoritesDate => _initialFavoritesDate;
 
+    final StreamController<List<Date>> _streamControllerShuffle = StreamController<List<Date>>.broadcast();
+    StreamController<List<Date>> get streamControllerShuffle => _streamControllerShuffle;
 
-  //Constructor
-  HomeViewModel() {
-    init();
-  }
+    final StreamController<List<Date>> _streamControllerFavorites = StreamController<List<Date>>.broadcast();
+    StreamController<List<Date>> get streamControllerFavorites => _streamControllerFavorites;
 
-//Methods
-  Future<void> init() async {
-    _dao = await _HomeRepo.buildDatabase();
-    _initialDates = await dao.getAllByCategoryAsStream(Category.Active);
-    _initialDates.shuffle();
-    notifyListeners();
-  }
+    //Constructor
+    HomeViewModel() {
+        init();
+    }
 
-  void changeStreamData(Category category)  {
-    dao.getAllByCategoryAsStream(category).then((data) {
-      data.shuffle();
-      _streamController.sink.add(data);
-    });
-    notifyListeners();
-  }
+    //Methods
+    Future<void> init() async {
+        _dao = await _HomeRepo.buildDatabase();
+        initShuffle();
+        initFavorites();
+        notifyListeners();
+    }
 
-  Future<void> initShuffle() async {
-    _initialDates = await dao.getAllByCategoryAsStream(Category.Active);
-    _initialDates.shuffle();
-    notifyListeners();
-  }
+    Future<void> initShuffle() async {
+        _initialShuffleDate = await dao.getAllByCategoryAsStream(Category.Active);
+        _initialShuffleDate.shuffle();
+    }
 
+    Future<void> initFavorites() async {
+        _initialFavoritesDate = await dao.getFavorites();
+    }
+
+    void changeStreamDataCategory(Category category) {
+        dao.getAllByCategoryAsStream(category).then((data) {
+                data.shuffle();
+                _streamControllerShuffle.sink.add(data);
+                _initialShuffleDate = data;
+            }
+        );
+        notifyListeners();
+    }
+
+    void updateDate(Date date) {
+        dao.updateDate(date);
+        notifyListeners();
+    }
+
+    void changeStreamDataFavorites() {
+        print('beingcalled');
+
+        dao.getAllByCategoryAsStream(Category.Active).then((data) {
+            data.shuffle();
+            _initialShuffleDate = data;
+        });
+
+        dao.getFavorites().then((data) {
+                _streamControllerFavorites.sink.add(data);
+                _initialFavoritesDate = data;
+            }
+        );
+        notifyListeners();
+    }
 
 }

@@ -15,7 +15,7 @@ abstract class DateDao {
 
   // get favorites (stream)
   @Query('SELECT * FROM Date WHERE favorite = 1')
-  Stream<List<Date>> getFavorites();
+  Future<List<Date>> getFavorites();
 
   // find by ID (stream)
   @Query('SELECT * FROM Date WHERE id = :id')
@@ -35,4 +35,7 @@ abstract class DateDao {
 
   @insert
   Future<void> insertDate(Date date);
+
+  @update
+  Future<void> updateDate(Date date);
 }
