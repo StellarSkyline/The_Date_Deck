@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class HorizontalList extends StatefulWidget {
     final ValueChanged<int> onPressed;
 
-    HorizontalList({super.key, required this.onPressed});
+    const HorizontalList({super.key, required this.onPressed});
+
     @override
     State<StatefulWidget> createState() => _HorizontalListState();
 
@@ -29,6 +30,7 @@ class _HorizontalListState extends State<HorizontalList> {
                                     _currentIndex = index;
                                 }
                             )
+
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

@@ -1,30 +1,34 @@
 import 'package:floor/floor.dart';
 
+import '../../data/model/category.dart';
 import '../../data/model/date.dart';
 
 @dao
 abstract class DateDao {
-  // get all
-  @Query('SELECT * FROM Date')
-  Future<List<Date>> getAllDates();
-
+  // get all (stream)
   @Query('SELECT * FROM Date')
   Stream<List<Date>> getAllDatesAsStream();
 
-  @Query('SELECT TOP 10 * FROM Date')
-  Future<List<Date>> getTopDates();
+  // get all (future)
+  @Query('SELECT * FROM Date')
+  Future<List<Date>> getAllDates();
 
-  // get favorites
+  // get favorites (stream)
   @Query('SELECT * FROM Date WHERE favorite = 1')
   Stream<List<Date>> getFavorites();
 
-  // find by ID
+  // find by ID (stream)
   @Query('SELECT * FROM Date WHERE id = :id')
-  Stream<Date?> findDateByIdAsStream(int id);
+  Stream<Date?> findByIdAsStream(int id);
 
-  // find by ID
+  // find by ID (future)
   @Query('SELECT * FROM Date WHERE id = :id')
-  Future<Date?> findDateById(int id);
+  Future<Date?> findById(int id);
+
+  // get by Category (stream)
+  @Query('SELECT * FROM Date WHERE category = :category')
+  Stream<List<Date>> getAllByCategoryAsStream(Category category);
+
 
   @Query('SELECT DISTINCT(id) FROM Date')
   Stream<int?> getTotalDateCount();

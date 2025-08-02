@@ -1,3 +1,4 @@
+import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,31 +14,35 @@ class ShufflePage extends StatefulWidget {
 }
 
 class _ShufflePageState extends State<ShufflePage>{
+    var _currentCategory = 0;
 
     @override
     Widget build(BuildContext context) {
         final vm = context.watch<HomeViewModel>();
+
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                 SizedBox(height: 8),
-                Container(height: 42, child: HorizontalList(onPressed: (index) => {})),
+                Container(height: 42, child: HorizontalList(onPressed: (index) => {
+                  setState(() {
+                    _currentCategory = index;
+                  }),
+                  (context as Element).reassemble()
+                })),
                 Expanded(
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
-                            stream: vm.dao.getAllDatesAsStream(),
+                            stream: vm.dao.getAllByCategoryAsStream(Category.values[_currentCategory]),
                             builder: (_, asyncSnapshot) {
-
                                 final dates = asyncSnapshot.data ?? List.empty();
-
-
                                 return ListView.builder(
                                     itemCount: dates.length,
                                     //Add Item Count here
                                     itemBuilder: (context, index) {
-                                        return Text(dates[index].fullDescription,
+                                        return Text(dates[index].fullDescription + Category.values[_currentCategory].toString(),
                                             style: TextStyle(
                                                 fontSize: 16, color: Colors.black));
                                     }
@@ -66,4 +71,5 @@ class _ShufflePageState extends State<ShufflePage>{
     }
 
 }
+
 

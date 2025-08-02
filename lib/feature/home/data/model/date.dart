@@ -1,7 +1,8 @@
 import 'package:floor/floor.dart';
 
-import '../../core/database/category.dart';
-import '../../core/database/suit.dart';
+import 'category.dart';
+import 'suit.dart';
+
 
 @entity
 class Date {
