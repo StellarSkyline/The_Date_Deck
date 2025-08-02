@@ -37,7 +37,7 @@ class _ShufflePageState extends State<ShufflePage>{
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
                             stream: vm.streamController.stream,
-                            initialData: vm.test,
+                            initialData: vm.test.getRange(0, 4).toList(),
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
@@ -56,7 +56,9 @@ class _ShufflePageState extends State<ShufflePage>{
                         width: 228,
                         height: 55,
                         child: ElevatedButton(
-                            onPressed: () => {},
+                            onPressed: () => {
+                              vm.changeStreamData(Category.values[_currentCategory])
+                            },
                             style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                 backgroundColor: Color(0xFFE06F7C)
