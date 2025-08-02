@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../data/model/category.dart';
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
@@ -44,15 +45,14 @@ class _FavoritesPageState extends State<FavoritesPage>{
                                         return CardComponent(
                                             name: dates[index].fullDescription,
                                             suit: dates[index].suit,
-                                            favorite: dates[index].favorite == 2,
+                                            favorite: dates[index].favorite,
                                             onPress: (value) => {
                                                 setState(() {
 
                                                     }
                                                 ),
-                                                dates[index].favorite == 0 ? dates[index].favorite = 2 : dates[index].favorite = 0,
-                                                vm.dao.updateDate(dates[index]),
-                                                vm.changeStreamDataCategory(Category.Active),
+                                                dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                vm.updateDate(dates[index]),
                                                 vm.changeStreamDataFavorites()
                                             }
                                         );

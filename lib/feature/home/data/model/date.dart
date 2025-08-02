@@ -17,7 +17,7 @@ class Date {
 
   final Suit suit;
 
-  int favorite = 0;
+  bool favorite = false;
 
   Date ({required this.id, required this.shortName, required this.fullDescription, required this.category, required this.suit, required this.favorite});
 
@@ -28,7 +28,7 @@ class Date {
       fullDescription: json['Name'] as String,
       category: Category.values.byName(json['Category']),
       suit: Suit.values.byName(json['Card Suit']),
-      favorite: 0,
+      favorite: false,
     );
   }
 }

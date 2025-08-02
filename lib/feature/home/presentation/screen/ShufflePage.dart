@@ -56,16 +56,15 @@ class _ShufflePageState extends State<ShufflePage> {
                                         return CardComponent(
                                             name: dates[index].fullDescription,
                                             suit: dates[index].suit,
-                                            favorite: dates[index].favorite == 2,
+                                            favorite: dates[index].favorite,
                                             onPress: (value) => {
                                                 setState(() {
 
                                                     }
                                                 ),
-                                                dates[index].favorite == 0 ? dates[index].favorite = 2 : dates[index].favorite = 0,
-                                                vm.dao.updateDate(dates[index]),
+                                                dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                vm.updateDate(dates[index]),
                                                 vm.changeStreamDataFavorites()
-
                                             }
                                         );
                                     }
