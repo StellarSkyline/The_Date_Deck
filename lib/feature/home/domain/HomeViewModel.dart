@@ -18,7 +18,7 @@ class HomeViewModel extends ChangeNotifier {
   List<Date> _test = List.empty();
   List<Date> get test => _test;
 
-  final StreamController<List<Date>> _streamController = StreamController<List<Date>>();
+  final StreamController<List<Date>> _streamController = StreamController<List<Date>>.broadcast();
   StreamController<List<Date>> get streamController => _streamController;
 
 
@@ -49,11 +49,5 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  @override
-  void dispose() {
-    // Close the StreamController to release its resources
-    _streamController.close();
-    super.dispose(); // Always call super.dispose()
-  }
 
 }

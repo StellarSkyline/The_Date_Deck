@@ -47,7 +47,7 @@ class _ShufflePageState extends State<ShufflePage> {
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
-                            stream: streamController.stream.asBroadcastStream(),
+                            stream: streamController.stream,
                             initialData: vm.test.getRange(0, 4).toList(),
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
@@ -87,12 +87,6 @@ class _ShufflePageState extends State<ShufflePage> {
                 SizedBox(height: 8)
             ]
         );
-    }
-
-    @override
-    void dispose() {
-        streamController.close();
-        super.dispose();
     }
 }
 
