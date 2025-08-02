@@ -36,6 +36,8 @@ class CardComponent extends StatelessWidget {
                 textColor = Color(0xFFE06F7C);
         }
 
+        //print(favorite);
+
         return SizedBox(
             width: 397,
             height: 170,

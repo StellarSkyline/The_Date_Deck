@@ -21,8 +21,11 @@ class HomeViewModel extends ChangeNotifier {
     List<Date> _initialFavoritesDate = List.empty();
     List<Date> get initialFavoritesDate => _initialFavoritesDate;
 
-    final StreamController<List<Date>> _streamController = StreamController<List<Date>>.broadcast();
-    StreamController<List<Date>> get streamController => _streamController;
+    final StreamController<List<Date>> _streamControllerShuffle = StreamController<List<Date>>.broadcast();
+    StreamController<List<Date>> get streamControllerShuffle => _streamControllerShuffle;
+
+    final StreamController<List<Date>> _streamControllerFavorites = StreamController<List<Date>>.broadcast();
+    StreamController<List<Date>> get streamControllerFavorites => _streamControllerFavorites;
 
     //Constructor
     HomeViewModel() {
@@ -43,22 +46,31 @@ class HomeViewModel extends ChangeNotifier {
     }
 
     Future<void> initFavorites() async {
-      //add init here
-
+        _initialFavoritesDate = await dao.getFavorites();
     }
 
     void changeStreamDataCategory(Category category) {
         dao.getAllByCategoryAsStream(category).then((data) {
                 data.shuffle();
-                _streamController.sink.add(data);
+                _streamControllerShuffle.sink.add(data);
+                _initialShuffleDate = data;
             }
         );
         notifyListeners();
     }
 
-    void changeStreamDataFavorites() {
-      // add update stream data here
+    void updateDate(Date date) {
+        dao.updateDate(date);
+        notifyListeners();
+    }
 
+    void changeStreamDataFavorites() {
+        print('beingcalled');
+        dao.getFavorites().then((data) {
+                _streamControllerFavorites.sink.add(data);
+                _initialFavoritesDate = data;
+            }
+        );
         notifyListeners();
     }
 

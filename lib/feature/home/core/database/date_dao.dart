@@ -14,8 +14,8 @@ abstract class DateDao {
   Future<List<Date>> getAllDates();
 
   // get favorites (stream)
-  @Query('SELECT * FROM Date WHERE favorite = 1')
-  Stream<List<Date>> getFavorites();
+  @Query('SELECT * FROM Date WHERE favorite = 2')
+  Future<List<Date>> getFavorites();
 
   // find by ID (stream)
   @Query('SELECT * FROM Date WHERE id = :id')

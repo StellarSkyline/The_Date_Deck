@@ -24,7 +24,7 @@ class _ShufflePageState extends State<ShufflePage> {
         final vm = context.watch<HomeViewModel>();
 
         setState(() {
-                streamController = vm.streamController;
+                streamController = vm.streamControllerShuffle;
             }
         );
 
@@ -56,14 +56,17 @@ class _ShufflePageState extends State<ShufflePage> {
                                         return CardComponent(
                                             name: dates[index].fullDescription,
                                             suit: dates[index].suit,
-                                            favorite: dates[index].favorite,
+                                            favorite: dates[index].favorite == 2,
                                             onPress: (value) => {
                                                 setState(() {
 
-                                                }),
-                                                dates[index].favorite = !dates[index].favorite,
+                                                    }
+                                                ),
+                                                dates[index].favorite == 0 ? dates[index].favorite = 2 : dates[index].favorite = 0,
                                                 vm.dao.updateDate(dates[index]),
-                                            },
+                                                vm.changeStreamDataFavorites()
+
+                                            }
                                         );
                                     }
                                 );
