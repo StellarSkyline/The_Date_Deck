@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/model/date.dart';
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
 
@@ -44,7 +45,11 @@ class _ShufflePageState extends State<ShufflePage>{
                                     itemCount: dates.length,
                                     //Add Item Count here
                                     itemBuilder: (context, index) {
-                                        return CardComponent(name: dates[index].fullDescription, suit: dates[index].suit, onPress: (index) => {});
+                                        return CardComponent(name: dates[index].fullDescription, suit: dates[index].suit, onPress: (index) => {
+                                            dates[index].favorite = !dates[index].favorite,
+                                            vm.dao.updateDate(dates[index]),
+                                            print(dates[index].favorite)
+                                        });
                                     }
                                 );
                             }

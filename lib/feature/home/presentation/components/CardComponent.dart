@@ -82,7 +82,9 @@ class CardComponent extends StatelessWidget {
                                                 width: 121,
                                                 height: 25,
                                                 child: ElevatedButton(
-                                                    onPressed: () => {},
+                                                    onPressed: () => {
+                                                      onPress(0),
+                                                    },
                                                     style: ElevatedButton.styleFrom(
                                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                                         backgroundColor: Color(0xFFE06F7C)
