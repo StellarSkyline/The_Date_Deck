@@ -66,6 +66,12 @@ class HomeViewModel extends ChangeNotifier {
 
     void changeStreamDataFavorites() {
         print('beingcalled');
+
+        dao.getAllByCategoryAsStream(Category.Active).then((data) {
+            data.shuffle();
+            _initialShuffleDate = data;
+        });
+
         dao.getFavorites().then((data) {
                 _streamControllerFavorites.sink.add(data);
                 _initialFavoritesDate = data;

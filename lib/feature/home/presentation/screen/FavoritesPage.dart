@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../data/model/category.dart';
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
 
@@ -51,6 +52,7 @@ class _FavoritesPageState extends State<FavoritesPage>{
                                                 ),
                                                 dates[index].favorite == 0 ? dates[index].favorite = 2 : dates[index].favorite = 0,
                                                 vm.dao.updateDate(dates[index]),
+                                                vm.changeStreamDataCategory(Category.Active),
                                                 vm.changeStreamDataFavorites()
                                             }
                                         );
