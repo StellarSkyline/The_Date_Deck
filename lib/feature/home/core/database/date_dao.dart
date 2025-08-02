@@ -27,7 +27,7 @@ abstract class DateDao {
 
   // get by Category (stream)
   @Query('SELECT * FROM Date WHERE category = :category')
-  Stream<List<Date>> getAllByCategoryAsStream(Category category);
+  Future<List<Date>> getAllByCategoryAsStream(Category category);
 
 
   @Query('SELECT DISTINCT(id) FROM Date')

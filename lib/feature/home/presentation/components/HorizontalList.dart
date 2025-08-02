@@ -25,7 +25,7 @@ class _HorizontalListState extends State<HorizontalList> {
                 return Padding(padding: EdgeInsetsGeometry.all(5.0),
                     child: ElevatedButton(
                         onPressed: () => {
-                            //widget.onPressed(index),
+                            widget.onPressed(index),
                             setState(() {
                                     _currentIndex = index;
                                 }

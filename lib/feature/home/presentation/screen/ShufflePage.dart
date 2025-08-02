@@ -19,6 +19,7 @@ class _ShufflePageState extends State<ShufflePage>{
     @override
     Widget build(BuildContext context) {
         final vm = context.watch<HomeViewModel>();
+        vm.initialStreamData();
 
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -29,13 +30,14 @@ class _ShufflePageState extends State<ShufflePage>{
                   setState(() {
                     _currentCategory = index;
                   }),
-                  (context as Element).reassemble()
+                  vm.changeStreamData(Category.values[_currentCategory])
                 })),
                 Expanded(
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
-                            stream: vm.dao.getAllByCategoryAsStream(Category.values[_currentCategory]),
+                            stream: vm.streamController.stream,
+                            initialData: vm.test,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
