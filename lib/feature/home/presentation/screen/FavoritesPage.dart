@@ -34,12 +34,11 @@ class _FavoritesPageState extends State<FavoritesPage>{
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
                             stream: streamController.stream,
-                            initialData: vm.initialDates,
+                            initialData: vm.initialSuffhleDate,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
                                     itemCount: dates.length,
-                                    //Add Item Count here
                                     itemBuilder: (context, index) {
                                         return CardComponent(
                                             name: dates[index].fullDescription,
