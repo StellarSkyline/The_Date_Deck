@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,29 +16,38 @@ class ShufflePage extends StatefulWidget {
 
 }
 
-class _ShufflePageState extends State<ShufflePage>{
+class _ShufflePageState extends State<ShufflePage> {
     var _currentCategory = 0;
+    var streamController = StreamController();
 
     @override
     Widget build(BuildContext context) {
         final vm = context.watch<HomeViewModel>();
+
+        setState(() {
+                streamController = vm.streamController;
+            }
+        );
 
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                 SizedBox(height: 8),
-                Container(height: 42, child: HorizontalList(onPressed: (index) => {
-                  setState(() {
-                    _currentCategory = index;
-                  }),
-                  vm.changeStreamData(Category.values[_currentCategory])
-                })),
+                Container(height: 42, child: HorizontalList(onPressed: (index) =>
+                        {
+                            setState(() {
+                                    _currentCategory = index;
+                                }
+                            ),
+                            vm.changeStreamData(Category.values[_currentCategory])
+                        }
+                    )),
                 Expanded(
                     child: Padding(
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
-                            stream: vm.streamController.stream,
+                            stream: streamController.stream,
                             initialData: vm.test.getRange(0, 4).toList(),
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
@@ -44,7 +55,10 @@ class _ShufflePageState extends State<ShufflePage>{
                                     itemCount: dates.length,
                                     //Add Item Count here
                                     itemBuilder: (context, index) {
-                                        return CardComponent(name: dates[index].fullDescription, suit: dates[index].suit, onPress: (index) => {});
+                                        return CardComponent(
+                                            name: dates[index].fullDescription,
+                                            suit: dates[index].suit,
+                                            onPress: (index) => {});
                                     }
                                 );
                             }
@@ -56,14 +70,17 @@ class _ShufflePageState extends State<ShufflePage>{
                         width: 228,
                         height: 55,
                         child: ElevatedButton(
-                            onPressed: () => {
-                              vm.changeStreamData(Category.values[_currentCategory])
+                            onPressed: () =>
+                            {
+                                vm.changeStreamData(Category.values[_currentCategory])
                             },
                             style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
                                 backgroundColor: Color(0xFFE06F7C)
                             ),
-                            child: Text("Shuffle Deck", style: TextStyle(color: Colors.white, fontSize: 16))
+                            child: Text("Shuffle Deck",
+                                style: TextStyle(color: Colors.white, fontSize: 16))
                         )
                     )
                 ),
@@ -71,7 +88,5 @@ class _ShufflePageState extends State<ShufflePage>{
             ]
         );
     }
-
 }
-
 
