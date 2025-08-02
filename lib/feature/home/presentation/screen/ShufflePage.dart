@@ -31,8 +31,6 @@ class _ShufflePageState extends State<ShufflePage>{
                             builder: (_, asyncSnapshot) {
 
                                 final dates = asyncSnapshot.data ?? List.empty();
-
-
                                 return ListView.builder(
                                     itemCount: dates.length,
                                     //Add Item Count here

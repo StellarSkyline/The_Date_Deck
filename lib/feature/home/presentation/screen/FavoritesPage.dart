@@ -1,9 +1,17 @@
+import 'package:date_deck/feature/home/presentation/components/CardComponent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/database/suit.dart';
+
 class FavoritesPage extends StatelessWidget{
+
     @override
     Widget build(BuildContext context) {
-        return Placeholder(color: Colors.yellow);
+        return CardComponent(
+            name: "test",
+            suit: Suit.Diamond,
+            onPress: (index) => {}
+        );
     }
 }
