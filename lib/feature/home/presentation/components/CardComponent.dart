@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as Math;
 
-import '../../core/database/suit.dart';
+import '../../data/model/suit.dart';
 class CardComponent extends StatelessWidget {
 
     final String name;

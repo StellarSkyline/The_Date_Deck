@@ -2,7 +2,8 @@ import 'package:date_deck/feature/home/presentation/components/CardComponent.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/database/suit.dart';
+import '../../data/model/suit.dart';
+
 
 class FavoritesPage extends StatelessWidget{
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/HomeViewModel.dart';
+import '../components/CardComponent.dart';
 
 class ShufflePage extends StatefulWidget {
 
@@ -43,9 +44,7 @@ class _ShufflePageState extends State<ShufflePage>{
                                     itemCount: dates.length,
                                     //Add Item Count here
                                     itemBuilder: (context, index) {
-                                        return Text(dates[index].fullDescription,
-                                            style: TextStyle(
-                                                fontSize: 16, color: Colors.black));
+                                        return CardComponent(name: dates[index].fullDescription, suit: dates[index].suit, onPress: (index) => {});
                                     }
                                 );
                             }
