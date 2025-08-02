@@ -31,12 +31,14 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> init() async {
     _dao = await _HomeRepo.buildDatabase();
     _test = await dao.getAllByCategoryAsStream(Category.Active);
+    _test.shuffle();
     notifyListeners();
   }
 
   void changeStreamData(Category category)  {
     dao.getAllByCategoryAsStream(category).then((data) {
-      _streamController.sink.add(data);
+      data.shuffle();
+      _streamController.sink.add(data.getRange(0, 4).toList());
     });
     notifyListeners();
   }
