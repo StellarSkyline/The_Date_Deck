@@ -15,8 +15,8 @@ class HomeViewModel extends ChangeNotifier {
   late DateDao _dao;
   DateDao get dao => _dao;
 
-  List<Date> _test = List.empty();
-  List<Date> get test => _test;
+  List<Date> _initialDates = List.empty();
+  List<Date> get initialDates => _initialDates;
 
   final StreamController<List<Date>> _streamController = StreamController<List<Date>>.broadcast();
   StreamController<List<Date>> get streamController => _streamController;
@@ -30,22 +30,22 @@ class HomeViewModel extends ChangeNotifier {
 //Methods
   Future<void> init() async {
     _dao = await _HomeRepo.buildDatabase();
-    _test = await dao.getAllByCategoryAsStream(Category.Active);
-    _test.shuffle();
+    _initialDates = await dao.getAllByCategoryAsStream(Category.Active);
+    _initialDates.shuffle();
     notifyListeners();
   }
 
   void changeStreamData(Category category)  {
     dao.getAllByCategoryAsStream(category).then((data) {
       data.shuffle();
-      _streamController.sink.add(data.getRange(0, 4).toList());
+      _streamController.sink.add(data);
     });
     notifyListeners();
   }
 
   Future<void> initShuffle() async {
-    _test = await dao.getAllByCategoryAsStream(Category.Active);
-    _test.shuffle();
+    _initialDates = await dao.getAllByCategoryAsStream(Category.Active);
+    _initialDates.shuffle();
     notifyListeners();
   }
 

@@ -48,11 +48,11 @@ class _ShufflePageState extends State<ShufflePage> {
                         padding: EdgeInsets.all(10),
                         child: StreamBuilder(
                             stream: streamController.stream,
-                            initialData: vm.test.getRange(0, 4).toList(),
+                            initialData: vm.initialDates,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
                                 return ListView.builder(
-                                    itemCount: dates.length,
+                                    itemCount: 4,
                                     //Add Item Count here
                                     itemBuilder: (context, index) {
                                         return CardComponent(
