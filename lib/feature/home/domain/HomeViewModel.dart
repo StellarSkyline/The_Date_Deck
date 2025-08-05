@@ -49,6 +49,11 @@ class HomeViewModel extends ChangeNotifier {
         _initialFavoritesDate = await dao.getFavorites();
     }
 
+    void updateDate(Date date) {
+        dao.updateDate(date);
+        notifyListeners();
+    }
+
     void changeStreamDataCategory(Category category) {
         dao.getAllByCategoryAsStream(category).then((data) {
                 data.shuffle();
@@ -59,18 +64,12 @@ class HomeViewModel extends ChangeNotifier {
         notifyListeners();
     }
 
-    void updateDate(Date date) {
-        dao.updateDate(date);
-        notifyListeners();
-    }
-
     void changeStreamDataFavorites() {
-        print('beingcalled');
-
         dao.getAllByCategoryAsStream(Category.Active).then((data) {
-            data.shuffle();
-            _initialShuffleDate = data;
-        });
+                data.shuffle();
+                _initialShuffleDate = data;
+            }
+        );
 
         dao.getFavorites().then((data) {
                 _streamControllerFavorites.sink.add(data);

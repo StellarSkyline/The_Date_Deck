@@ -7,17 +7,13 @@ class HomePage extends StatelessWidget {
 
         return Center(
             child: Column(
-                spacing: 30,
+              mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                     SizedBox(height: 30),
                     SvgPicture.asset('assets/images/img_main.svg',
-                        width: 306,
-                        height: 447),
-                    Text("The\nRandom \nDate Generator",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 24
-                        ))
+                        width: 350,
+                        height: 500),
                 ]
             )
         );

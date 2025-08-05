@@ -82,8 +82,8 @@ class CardComponent extends StatelessWidget {
                                     Expanded(
                                         child: Center(
                                             child: SizedBox(
-                                                width: 121,
-                                                height: 25,
+                                                width: 150,
+                                                height: 35,
                                                 child: ElevatedButton(
                                                     onPressed: () => {
                                                       onPress(0)

@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/model/category.dart';
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
 
