@@ -1,0 +1,602 @@
+[
+  {
+    "Category": "Active",
+    "Name": "Do a fun science experiment from online tutorials.",
+    "Card Suit": "Spade",
+    "id": 4
+  },
+  {
+    "Category": "Active",
+    "Name": "Write and perform a short skit.",
+    "Card Suit": "Club",
+    "id": 96
+  },
+  {
+    "Category": "Active",
+    "Name": "Have a 'silly hat' party.",
+    "Card Suit": "Heart",
+    "id": 9
+  },
+  {
+    "Category": "Active",
+    "Name": "Learn to juggle (or try to!).",
+    "Card Suit": "Diamond",
+    "id": 41
+  },
+  {
+    "Category": "Active",
+    "Name": "Watch a documentary about a topic you both find interesting.",
+    "Card Suit": "Spade",
+    "id": 95
+  },
+  {
+    "Category": "Active",
+    "Name": "Have a 'DIY project brainstorm' session.",
+    "Card Suit": "Club",
+    "id": 67
+  },
+  {
+    "Category": "Active",
+    "Name": "Create a time capsule.",
+    "Card Suit": "Heart",
+    "id": 54
+  },
+  {
+    "Category": "Active",
+    "Name": "Learn about each other's childhoods (if not already discussed in depth).",
+    "Card Suit": "Diamond",
+    "id": 12
+  },
+  {
+    "Category": "Active",
+    "Name": "Make homemade playdough or slime.",
+    "Card Suit": "Spade",
+    "id": 20
+  },
+  {
+    "Category": "Active",
+    "Name": "Give each other hand or foot massages.",
+    "Card Suit": "Club",
+    "id": 10
+  },
+  {
+    "Category": "Active",
+    "Name": "Host a book club for two.",
+    "Card Suit": "Heart",
+    "id": 85
+  },
+  {
+    "Category": "Active",
+    "Name": "Practice mindfulness exercises.",
+    "Card Suit": "Diamond",
+    "id": 57
+  },
+  {
+    "Category": "Active",
+    "Name": "Have a 'declutter and organize' party.",
+    "Card Suit": "Spade",
+    "id": 24
+  },
+  {
+    "Category": "Active",
+    "Name": "Write down your favorite memories together.",
+    "Card Suit": "Club",
+    "id": 33
+  },
+  {
+    "Category": "Active",
+    "Name": "Create a family tree or history project.",
+    "Card Suit": "Heart",
+    "id": 64
+  },
+  {
+    "Category": "Active",
+    "Name": "Practice speaking a new language together.",
+    "Card Suit": "Diamond",
+    "id": 39
+  },
+  {
+    "Category": "Active",
+    "Name": "Have an indoor 'Olympics' with silly challenges.",
+    "Card Suit": "Spade",
+    "id": 70
+  },
+  {
+    "Category": "Active",
+    "Name": "Learn basic sign language phrases.",
+    "Card Suit": "Club",
+    "id": 5
+  },
+  {
+    "Category": "Active",
+    "Name": "Do a puzzle box or logic game together.",
+    "Card Suit": "Heart",
+    "id": 83
+  },
+  {
+    "Category": "Active",
+    "Name": "Have a 'spa day' for your pets (if you have them) and then for yourselves.",
+    "Card Suit": "Diamond",
+    "id": 40
+  },
+  {
+    "Category": "Active",
+    "Name": "Give each other makeovers (silly or serious).",
+    "Card Suit": "Club",
+    "id": 69
+  },
+  {
+    "Category": "Active",
+    "Name": "Have a 'talent show' where you learn something new to present to each other.",
+    "Card Suit": "Spade",
+    "id": 53
+  },
+  {
+    "Category": "Active",
+    "Name": "Learn basic magic tricks together.",
+    "Card Suit": "Heart",
+    "id": 3
+  },
+  {
+    "Category": "Active",
+    "Name": "Indoor obstacle course: Get silly and navigate a course through your house.",
+    "Card Suit": "Diamond",
+    "id": 13
+  },
+  {
+    "Category": "Active",
+    "Name": "'Question game' night: Use prompt cards to ask deep or funny questions.",
+    "Card Suit": "Club",
+    "id": 45
+  },
+  {
+    "Category": "Active",
+    "Name": "Plan out your next month or year together: Discuss goals, events, aspirations.",
+    "Card Suit": "Spade",
+    "id": 93
+  },
+  {
+    "Category": "Active",
+    "Name": "Write down things you appreciate about each other: Read them aloud.",
+    "Card Suit": "Heart",
+    "id": 32
+  },
+  {
+    "Category": "Active",
+    "Name": "Plant an indoor herb garden or houseplant together.",
+    "Card Suit": "Diamond",
+    "id": 44
+  },
+  {
+    "Category": "Active",
+    "Name": "Recreate your first date at home: If possible, mimic the activities or food.",
+    "Card Suit": "Club",
+    "id": 51
+  },
+  {
+    "Category": "Active",
+    "Name": "Silly photoshoot: Use props, change outfits, take fun photos of each other.",
+    "Card Suit": "Spade",
+    "id": 75
+  },
+  {
+    "Category": "Active",
+    "Name": "'Dress-up' dinner: Put on your nicest clothes and set an elegant table at home.",
+    "Card Suit": "Heart",
+    "id": 42
+  },
+  {
+    "Category": "Active",
+    "Name": "Small home improvement project: Tackle a minor DIY task you've put off.",
+    "Card Suit": "Diamond",
+    "id": 87
+  },
+  {
+    "Category": "Active",
+    "Name": "'No electricity' night: Play board games by candlelight, talk, connect without screens.",
+    "Card Suit": "Club",
+    "id": 15
+  },
+  {
+    "Category": "Active",
+    "Name": "At-home workout: Follow a fitness video or design your own routine.",
+    "Card Suit": "Spade",
+    "id": 72
+  },
+  {
+    "Category": "Active",
+    "Name": "Build with LEGOs or other building toys: Get creative together.",
+    "Card Suit": "Heart",
+    "id": 18
+  },
+  {
+    "Category": "Active",
+    "Name": "Themed costume night: Dress up just for fun, maybe around a movie or era.",
+    "Card Suit": "Diamond",
+    "id": 79
+  },
+  {
+    "Category": "Active",
+    "Name": "Learn a simple dance: Look up tutorials for a new style (salsa, swing, etc.).",
+    "Card Suit": "Club",
+    "id": 60
+  },
+  {
+    "Category": "Active",
+    "Name": "Indoor 'camping': Set up a tent, tell ghost stories, use flashlights.",
+    "Card Suit": "Spade",
+    "id": 80
+  },
+  {
+    "Category": "Creative",
+    "Name": "Decorate a shared space in your home.",
+    "Card Suit": "Heart",
+    "id": 94
+  },
+  {
+    "Category": "Creative",
+    "Name": "Practice mindful listening: Take turns speaking without interruption.",
+    "Card Suit": "Diamond",
+    "id": 34
+  },
+  {
+    "Category": "Creative",
+    "Name": "Do a couple's quiz or compatibility test online.",
+    "Card Suit": "Club",
+    "id": 91
+  },
+  {
+    "Category": "Creative",
+    "Name": "Write bucket lists together.",
+    "Card Suit": "Spade",
+    "id": 25
+  },
+  {
+    "Category": "Creative",
+    "Name": "Learn basic origami or paper crafting.",
+    "Card Suit": "Heart",
+    "id": 55
+  },
+  {
+    "Category": "Creative",
+    "Name": "Create a vision board for your relationship: Goals and dreams as a couple.",
+    "Card Suit": "Diamond",
+    "id": 66
+  },
+  {
+    "Category": "Creative",
+    "Name": "'Show and tell' with sentimental items: Share stories behind cherished objects.",
+    "Card Suit": "Club",
+    "id": 90
+  },
+  {
+    "Category": "Creative",
+    "Name": "Practice yoga or meditation together: Follow an online guided session.",
+    "Card Suit": "Spade",
+    "id": 59
+  },
+  {
+    "Category": "Creative",
+    "Name": "Write a short story or poem together: Collaborate on a creative piece.",
+    "Card Suit": "Heart",
+    "id": 21
+  },
+  {
+    "Category": "Creative",
+    "Name": "Learn basic photography: Practice taking photos of each other or objects around the house.",
+    "Card Suit": "Diamond",
+    "id": 26
+  },
+  {
+    "Category": "Creative",
+    "Name": "'Dream board' session: Create a collage of your goals and aspirations.",
+    "Card Suit": "Club",
+    "id": 68
+  },
+  {
+    "Category": "Creative",
+    "Name": "Journal together: Share thoughts, dreams, and reflections.",
+    "Card Suit": "Heart",
+    "id": 7
+  },
+  {
+    "Category": "Creative",
+    "Name": "Plan a dream vacation: Research destinations, activities, and budget for fun.",
+    "Card Suit": "Spade",
+    "id": 88
+  },
+  {
+    "Category": "Creative",
+    "Name": "DIY craft project: Simple things like making candles, soaps, or decorating mugs.",
+    "Card Suit": "Diamond",
+    "id": 71
+  },
+  {
+    "Category": "Creative",
+    "Name": "Create a shared playlist: Add songs that remind you of each other or special moments.",
+    "Card Suit": "Club",
+    "id": 62
+  },
+  {
+    "Category": "Creative",
+    "Name": "Read a book together: Or take turns reading aloud from a shared novel.",
+    "Card Suit": "Spade",
+    "id": 63
+  },
+  {
+    "Category": "Creative",
+    "Name": "At-home spa night: Face masks, bubble bath, relaxing music, candles.",
+    "Card Suit": "Heart",
+    "id": 92
+  },
+  {
+    "Category": "Creative",
+    "Name": "Give each other massages: Set a relaxing mood with oils and music.",
+    "Card Suit": "Diamond",
+    "id": 31
+  },
+  {
+    "Category": "Creative",
+    "Name": "Write letters to each other: Express your feelings on paper.",
+    "Card Suit": "Club",
+    "id": 23
+  },
+  {
+    "Category": "Creative",
+    "Name": "Paint or draw together: No artistic skill needed, just have fun.",
+    "Card Suit": "Spade",
+    "id": 28
+  },
+  {
+    "Category": "Games",
+    "Name": "Build a tower out of household items.",
+    "Card Suit": "Heart",
+    "id": 36
+  },
+  {
+    "Category": "Games",
+    "Name": "Play charades or Pictionary.",
+    "Card Suit": "Diamond",
+    "id": 43
+  },
+  {
+    "Category": "Games",
+    "Name": "Have a 'bad movie' night: Pick a notoriously terrible film and make fun of it.",
+    "Card Suit": "Club",
+    "id": 46
+  },
+  {
+    "Category": "Games",
+    "Name": "Listen to a full album you both love, from start to finish.",
+    "Card Suit": "Spade",
+    "id": 8
+  },
+  {
+    "Category": "Games",
+    "Name": "DIY trivia night: Create questions for each other on favorite topics.",
+    "Card Suit": "Heart",
+    "id": 2
+  },
+  {
+    "Category": "Games",
+    "Name": "Try a murder mystery game or escape room kit: Solve a puzzle together.",
+    "Card Suit": "Diamond",
+    "id": 11
+  },
+  {
+    "Category": "Games",
+    "Name": "Indoor scavenger hunt: Hide clues leading to a small prize or activity.",
+    "Card Suit": "Club",
+    "id": 16
+  },
+  {
+    "Category": "Games",
+    "Name": "Watch old home videos or look through photo albums: Reminisce about shared memories.",
+    "Card Suit": "Spade",
+    "id": 76
+  },
+  {
+    "Category": "Games",
+    "Name": "'Talent show' for two: Show off silly skills or hidden talents.",
+    "Card Suit": "Heart",
+    "id": 86
+  },
+  {
+    "Category": "Games",
+    "Name": "Brain teasers or riddles: Challenge each other with logic puzzles.",
+    "Card Suit": "Diamond",
+    "id": 50
+  },
+  {
+    "Category": "Games",
+    "Name": "Concert video or live performance: Watch a favorite band's concert from your couch.",
+    "Card Suit": "Club",
+    "id": 27
+  },
+  {
+    "Category": "Games",
+    "Name": "Stargazing (if visible) or space documentary: Cuddle up and learn about the cosmos.",
+    "Card Suit": "Spade",
+    "id": 89
+  },
+  {
+    "Category": "Games",
+    "Name": "Listen to a podcast or audiobook: Choose a captivating story or topic.",
+    "Card Suit": "Heart",
+    "id": 49
+  },
+  {
+    "Category": "Games",
+    "Name": "Video game nostalgia: Play old console or PC games from your childhood.",
+    "Card Suit": "Diamond",
+    "id": 56
+  },
+  {
+    "Category": "Games",
+    "Name": "Learn a new card game: Teach each other your favorite lesser-known card games.",
+    "Card Suit": "Club",
+    "id": 0
+  },
+  {
+    "Category": "Games",
+    "Name": "Build a blanket fort: And then watch a movie or read inside your cozy creation.",
+    "Card Suit": "Spade",
+    "id": 29
+  },
+  {
+    "Category": "Games",
+    "Name": "Karaoke night: Find online tracks and sing your hearts out.",
+    "Card Suit": "Heart",
+    "id": 99
+  },
+  {
+    "Category": "Games",
+    "Name": "Video game night: Compete or cooperate in your favorite video games.",
+    "Card Suit": "Diamond",
+    "id": 17
+  },
+  {
+    "Category": "Games",
+    "Name": "Jigsaw puzzle: Work on a challenging puzzle together.",
+    "Card Suit": "Club",
+    "id": 98
+  },
+  {
+    "Category": "Games",
+    "Name": "Board game tournament: Dust off your favorite board games for some friendly competition.",
+    "Card Suit": "Spade",
+    "id": 84
+  },
+  {
+    "Category": "Games",
+    "Name": "Movie marathon: Pick a director, actor, or genre and binge-watch a few films.",
+    "Card Suit": "Heart",
+    "id": 58
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Just talk! Put away all distractions and have a deep conversation.",
+    "Card Suit": "Diamond",
+    "id": 77
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Homemade bread baking: Enjoy the aroma and the delicious results.",
+    "Card Suit": "Club",
+    "id": 97
+  },
+  {
+    "Category": "Cooking",
+    "Name": "'Cookbook roulette': Blindly pick a page from a cookbook and make the dish.",
+    "Card Suit": "Spade",
+    "id": 38
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Big pancake or waffle breakfast/brunch: Indulge in comfort food.",
+    "Card Suit": "Heart",
+    "id": 6
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Make homemade sushi: Surprisingly fun and a great skill to learn.",
+    "Card Suit": "Diamond",
+    "id": 74
+  },
+  {
+    "Category": "Cooking",
+    "Name": "DIY fondue night: Cheese or chocolate, with a variety of dippers.",
+    "Card Suit": "Club",
+    "id": 48
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Gourmet hot chocolate bar: With all the fixings \u2013 marshmallows, whipped cream, drizzles.",
+    "Card Suit": "Spade",
+    "id": 61
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Coffee or tea tasting: Try different blends or brewing methods.",
+    "Card Suit": "Heart",
+    "id": 22
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Themed snack night: Think movie popcorn and candy, or international snacks.",
+    "Card Suit": "Diamond",
+    "id": 14
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Elaborate charcuterie board: Focus on presentation and new pairings.",
+    "Card Suit": "Club",
+    "id": 30
+  },
+  {
+    "Category": "Cooking",
+    "Name": "'Chopped' style challenge: Use random ingredients from your pantry to create a dish.",
+    "Card Suit": "Spade",
+    "id": 65
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Homemade pasta night: A bit more involved, but incredibly rewarding.",
+    "Card Suit": "Heart",
+    "id": 52
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Decorate cupcakes or cookies: Get creative with frosting and sprinkles.",
+    "Card Suit": "Diamond",
+    "id": 78
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Dessert bar: Set up various toppings for ice cream or sundaes.",
+    "Card Suit": "Club",
+    "id": 73
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Create custom cocktails or mocktails: Experiment with new flavors.",
+    "Card Suit": "Spade",
+    "id": 35
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Blind taste test: Sample different cheeses, chocolates, or even wines/beverages.",
+    "Card Suit": "Heart",
+    "id": 1
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Make homemade pizzas: Each of you designs your own personal masterpiece.",
+    "Card Suit": "Diamond",
+    "id": 47
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Indoor picnic: Lay out a blanket on the living room floor with snacks and drinks.",
+    "Card Suit": "Club",
+    "id": 82
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Bake something sweet: Cookies, brownies, or a homemade pie.",
+    "Card Suit": "Spade",
+    "id": 19
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Theme dinner night: Go all out with Italian, Mexican, or even 'breakfast for dinner.'",
+    "Card Suit": "Heart",
+    "id": 81
+  },
+  {
+    "Category": "Cooking",
+    "Name": "Cook a new recipe together: Pick a cuisine you've always wanted to try.",
+    "Card Suit": "Diamond",
+    "id": 37
+  }
+]
