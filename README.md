@@ -15,3 +15,6 @@ https://www.figma.com/design/hCDmP844hXJC1wSPR33ej6/Date-Deck?node-id=0-1&t=K0D5
 ## GitHub Repo
 https://github.com/StellarSkyline/The_Date_Deck
 
+## Version 1.0
+MVP completed
+
