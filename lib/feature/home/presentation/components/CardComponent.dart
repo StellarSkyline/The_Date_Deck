@@ -36,8 +36,6 @@ class CardComponent extends StatelessWidget {
                 textColor = Color(0xFFE06F7C);
         }
 
-        //print(favorite);
-
         return SizedBox(
             width: 397,
             height: 170,
@@ -66,14 +64,16 @@ class CardComponent extends StatelessWidget {
                                 ]
                             ),
                             Expanded(
-                                child: Text(
-                                    name,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.black
+                                child: Center(
+                                  child: Text(
+                                      name,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black
 
-                                    )
+                                      )
+                                  )
                                 )
                             ),
                             Row(
