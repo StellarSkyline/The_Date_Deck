@@ -34,7 +34,6 @@ class HomeViewModel extends ChangeNotifier {
 
     //Methods
     Future<void> init() async {
-        print("Home VM Init Called");
         _dao = await _HomeRepo.buildDatabase();
         initShuffle();
         initFavorites();

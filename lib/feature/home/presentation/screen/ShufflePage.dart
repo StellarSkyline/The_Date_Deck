@@ -30,13 +30,6 @@ class _ShufflePageState extends State<ShufflePage> {
             }
         );
 
-        if (vm.initialShuffleDate.isEmpty) {
-            setState(() {
-                    databaseState = false;
-                }
-            );
-        }
-
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -52,13 +45,17 @@ class _ShufflePageState extends State<ShufflePage> {
                         }
                     )),
                 Expanded(
-                    child: databaseState ? Padding(
-                            padding: EdgeInsets.all(10),
-                            child: StreamBuilder(
-                                stream: streamController.stream,
-                                initialData: vm.initialShuffleDate,
-                                builder: (_, asyncSnapshot) {
-                                    final dates = asyncSnapshot.data ?? List.empty();
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: StreamBuilder(
+                            stream: streamController.stream,
+                            initialData: vm.initialShuffleDate,
+                            builder: (_, asyncSnapshot) {
+                                final dates = asyncSnapshot.data ?? List.empty();
+                                if (dates.isEmpty) {
+                                    return EmptyHandler(textTitle: "Please Shuffle Cards");
+                                }
+                                else {
                                     return ListView.builder(
                                         itemCount: 4,
                                         itemBuilder: (context, index) {
@@ -67,9 +64,6 @@ class _ShufflePageState extends State<ShufflePage> {
                                                 suit: dates[index].suit,
                                                 favorite: dates[index].favorite,
                                                 onPress: (value) => {
-                                                    // setState(() {
-                                                    //     }
-                                                    // ),
                                                     dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
                                                     vm.updateDate(dates[index]),
                                                     vm.changeStreamDataFavorites()
@@ -78,8 +72,9 @@ class _ShufflePageState extends State<ShufflePage> {
                                         }
                                     );
                                 }
-                            )
-                        ) : EmptyHandler(textTitle: "Please Shuffle Cards")
+                            }
+                        )
+                    )
                 ),
                 Center(
                     child: SizedBox(
@@ -87,12 +82,7 @@ class _ShufflePageState extends State<ShufflePage> {
                         height: 55,
                         child: ElevatedButton(
                             onPressed: () => {
-                                setState(() {
-                                        databaseState = true;
-                                    }
-                                ),
                                 vm.changeStreamDataCategory(Category.values[_currentCategory])
-
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xFFE06F7C),

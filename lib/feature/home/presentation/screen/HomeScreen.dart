@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget build(BuildContext context) {
 
         final List pages = [
-            HomePage(),
+            //HomePage(),
             ShufflePage(),
             FavoritesPage()
         ];

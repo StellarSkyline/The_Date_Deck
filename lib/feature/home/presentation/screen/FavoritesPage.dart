@@ -11,14 +11,12 @@ import '../components/CardComponent.dart';
 class FavoritesPage extends StatefulWidget{
     @override
     State<StatefulWidget> createState() => _FavoritesPageState();
-
 }
 
 class _FavoritesPageState extends State<FavoritesPage>{
 
     //Widget State
     var streamController = StreamController();
-
     var databaseState = true;
 
     @override
@@ -29,26 +27,23 @@ class _FavoritesPageState extends State<FavoritesPage>{
             }
         );
 
-        if (vm.initialFavoritesDate.isEmpty) {
-            setState(() {
-                    databaseState = false;
-                }
-            );
-        }
-
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                 SizedBox(height: 8),
                 Expanded(
-                    child: databaseState ? Padding(
-                            padding: EdgeInsets.all(10),
-                            child: StreamBuilder(
-                                stream: streamController.stream,
-                                initialData: vm.initialFavoritesDate,
-                                builder: (_, asyncSnapshot) {
-                                    final dates = asyncSnapshot.data ?? List.empty();
+                    child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: StreamBuilder(
+                            stream: streamController.stream,
+                            initialData: vm.initialFavoritesDate,
+                            builder: (_, asyncSnapshot) {
+                                final dates = asyncSnapshot.data ?? List.empty();
+                                if (dates.isEmpty) {
+                                    return EmptyHandler(textTitle: "Favorites is Empty");
+                                }
+                                else {
                                     return ListView.builder(
                                         itemCount: dates.length,
                                         itemBuilder: (context, index) {
@@ -57,7 +52,6 @@ class _FavoritesPageState extends State<FavoritesPage>{
                                                 suit: dates[index].suit,
                                                 favorite: dates[index].favorite,
                                                 onPress: (value) => {
-                                                    setState(() {}),
                                                     dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
                                                     vm.updateDate(dates[index]),
                                                     vm.changeStreamDataFavorites()
@@ -66,8 +60,9 @@ class _FavoritesPageState extends State<FavoritesPage>{
                                         }
                                     );
                                 }
-                            )
-                        ) : EmptyHandler(textTitle: "Favorites is Empty")
+                            }
+                        )
+                    )
                 ),
                 SizedBox(height: 8)
             ]

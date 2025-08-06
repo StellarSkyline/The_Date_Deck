@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'feature/home/domain/HomeViewModel.dart';
-import 'feature/home/presentation/screen/HomeScreen.dart';
+import 'feature/home/presentation/screen/HomePage.dart';
 
 void main() {
     runApp(
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
             ),
-            home: HomeScreen()
+            home: HomePage()
         );
     }
 }
