@@ -87,11 +87,12 @@ class _ShufflePageState extends State<ShufflePage> {
                         height: 55,
                         child: ElevatedButton(
                             onPressed: () => {
-                                vm.changeStreamDataCategory(Category.values[_currentCategory]),
                                 setState(() {
-                                        //databaseState = vm.initialShuffleDate.isEmpty ? false : true;
+                                        databaseState = true;
                                     }
-                                )
+                                ),
+                                vm.changeStreamDataCategory(Category.values[_currentCategory])
+
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xFFE06F7C),
