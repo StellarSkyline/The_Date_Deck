@@ -4,6 +4,8 @@ import 'package:date_deck/feature/home/presentation/screen/HomePage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
 
+import '../components/EmptyHandler.dart';
+
 class HomeScreen extends StatefulWidget {
 
     @override
