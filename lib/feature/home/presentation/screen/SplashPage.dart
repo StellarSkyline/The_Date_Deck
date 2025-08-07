@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'HomeScreen.dart';
-
-//TODO: Update UI For THis
 
 class HomePage extends StatefulWidget {
   @override

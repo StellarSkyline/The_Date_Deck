@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'feature/home/domain/HomeViewModel.dart';
-import 'feature/home/presentation/screen/HomePage.dart';
+import 'feature/home/presentation/screen/SplashPage.dart';
 
 void main() {
     runApp(

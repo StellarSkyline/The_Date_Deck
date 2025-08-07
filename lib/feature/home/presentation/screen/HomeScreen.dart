@@ -1,6 +1,6 @@
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
-import 'package:date_deck/feature/home/presentation/screen/HomePage.dart';
+import 'package:date_deck/feature/home/presentation/screen/SplashPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget build(BuildContext context) {
 
         final List pages = [
-            //HomePage(),
             ShufflePage(),
             FavoritesPage()
         ];
