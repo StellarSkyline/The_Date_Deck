@@ -26,18 +26,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     return SafeArea(
-        child:Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30),
-                  SvgPicture.asset('assets/images/img_main.svg',
-                      width: 350,
-                      height: 500),
-                ]
+      child:Scaffold(
+        backgroundColor: Color(0xFFF4F4F4),
+        body:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children:[
+            SvgPicture.asset('assets/images/img_main.svg',
+                width: 350,
+                height: 500
+            ),
+            Text("The Random Date Idea Generator",
+                textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                color: Color(0xFF5E4E81)
+              )
             )
+
+          ]
         )
+      )
+
     );
   }
 }
+
