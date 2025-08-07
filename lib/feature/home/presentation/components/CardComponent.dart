@@ -12,8 +12,9 @@ class CardComponent extends StatelessWidget {
     final Suit suit;
     final bool favorite;
     final ValueChanged onPress;
+    final String categoryName;
 
-    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress});
+    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName});
 
     @override
     Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class CardComponent extends StatelessWidget {
 
         return SizedBox(
             width: 397,
-            height: 170,
+            height: 200,
             child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 color: Color(0xFFFBF8F0),
@@ -65,17 +66,26 @@ class CardComponent extends StatelessWidget {
                                     )
                                 ]
                             ),
-                            Expanded(
-                                child: Center(
-                                  child: Text(
-                                      name,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.black
+                            Text(
+                                "Category: $categoryName",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black
 
-                                      )
-                                  )
+                                )
+                            ),
+                            Expanded(
+                                child: Padding(
+                                    padding: EdgeInsetsGeometry.all(8.0),
+                                    child: Text(
+                                        name,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black
+                                        )
+                                    )
                                 )
                             ),
                             Row(
@@ -88,13 +98,13 @@ class CardComponent extends StatelessWidget {
                                                 height: 35,
                                                 child: ElevatedButton(
                                                     onPressed: () => {
-                                                      onPress(0)
+                                                        onPress(0)
                                                     },
                                                     style: ElevatedButton.styleFrom(
                                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                                        backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
+                                                        backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81))
                                                     ),
-                                                    child: Text(favorite ?"Remove" : "Favorite",
+                                                    child: Text(favorite ? "Remove" : "Favorite",
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 15.0
