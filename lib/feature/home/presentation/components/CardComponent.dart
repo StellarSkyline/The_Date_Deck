@@ -4,14 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import 'dart:math' as Math;
 
 import '../../data/model/suit.dart';
+
+//TODO: Add Category Title to Card
 class CardComponent extends StatelessWidget {
 
     final String name;
     final Suit suit;
     final bool favorite;
     final ValueChanged onPress;
+    final String categoryName;
 
-    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress});
+    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName});
 
     @override
     Widget build(BuildContext context) {
@@ -36,11 +39,9 @@ class CardComponent extends StatelessWidget {
                 textColor = Color(0xFFE06F7C);
         }
 
-        //print(favorite);
-
         return SizedBox(
             width: 397,
-            height: 170,
+            height: 200,
             child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 color: Color(0xFFFBF8F0),
@@ -65,14 +66,25 @@ class CardComponent extends StatelessWidget {
                                     )
                                 ]
                             ),
-                            Expanded(
-                                child: Text(
-                                    name,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.black
+                            Text(
+                                "Category: $categoryName",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black
 
+                                )
+                            ),
+                            Expanded(
+                                child: Padding(
+                                    padding: EdgeInsetsGeometry.all(8.0),
+                                    child: Text(
+                                        name,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black
+                                        )
                                     )
                                 )
                             ),
@@ -82,17 +94,17 @@ class CardComponent extends StatelessWidget {
                                     Expanded(
                                         child: Center(
                                             child: SizedBox(
-                                                width: 121,
-                                                height: 25,
+                                                width: 150,
+                                                height: 35,
                                                 child: ElevatedButton(
                                                     onPressed: () => {
-                                                      onPress(0)
+                                                        onPress(0)
                                                     },
                                                     style: ElevatedButton.styleFrom(
                                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                                        backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
+                                                        backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81))
                                                     ),
-                                                    child: Text(favorite ?"Remove" : "Favorite",
+                                                    child: Text(favorite ? "Remove" : "Favorite",
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 15.0

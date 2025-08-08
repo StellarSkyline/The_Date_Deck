@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
+import '../components/EmptyHandler.dart';
 
 class ShufflePage extends StatefulWidget {
 
@@ -18,6 +19,7 @@ class ShufflePage extends StatefulWidget {
 class _ShufflePageState extends State<ShufflePage> {
     var _currentCategory = 0;
     var streamController = StreamController();
+    var databaseState = true;
 
     @override
     Widget build(BuildContext context) {
@@ -50,25 +52,27 @@ class _ShufflePageState extends State<ShufflePage> {
                             initialData: vm.initialShuffleDate,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
-                                return ListView.builder(
-                                    itemCount: 4,
-                                    itemBuilder: (context, index) {
-                                        return CardComponent(
-                                            name: dates[index].fullDescription,
-                                            suit: dates[index].suit,
-                                            favorite: dates[index].favorite,
-                                            onPress: (value) => {
-                                                setState(() {
-
-                                                    }
-                                                ),
-                                                dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
-                                                vm.updateDate(dates[index]),
-                                                vm.changeStreamDataFavorites()
-                                            }
-                                        );
-                                    }
-                                );
+                                if (dates.isEmpty) {
+                                    return EmptyHandler(textTitle: "Please Shuffle Cards");
+                                }
+                                else {
+                                    return ListView.builder(
+                                        itemCount: 4,
+                                        itemBuilder: (context, index) {
+                                            return CardComponent(
+                                                name: dates[index].fullDescription,
+                                                suit: dates[index].suit,
+                                                favorite: dates[index].favorite,
+                                                categoryName: dates[index].category.displayName,
+                                                onPress: (value) => {
+                                                    dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                    vm.updateDate(dates[index]),
+                                                    vm.changeStreamDataFavorites()
+                                                }
+                                            );
+                                        }
+                                    );
+                                }
                             }
                         )
                     )
@@ -78,8 +82,7 @@ class _ShufflePageState extends State<ShufflePage> {
                         width: 228,
                         height: 55,
                         child: ElevatedButton(
-                            onPressed: () =>
-                            {
+                            onPressed: () => {
                                 vm.changeStreamDataCategory(Category.values[_currentCategory])
                             },
                             style: ElevatedButton.styleFrom(

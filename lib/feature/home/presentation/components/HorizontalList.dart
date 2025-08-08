@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../domain/HomeViewModel.dart';
 
 class HorizontalList extends StatefulWidget {
     final ValueChanged<int> onPressed;
@@ -12,12 +15,12 @@ class HorizontalList extends StatefulWidget {
 }
 
 class _HorizontalListState extends State<HorizontalList> {
-    var _currentIndex = 0;
-
     final List items = ["Active", "Creative", "Games", "Cooking"];
 
     @override
     Widget build(BuildContext context) {
+        final vm = context.watch<HomeViewModel>();
+
         return ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: items.length,
@@ -26,14 +29,11 @@ class _HorizontalListState extends State<HorizontalList> {
                     child: ElevatedButton(
                         onPressed: () => {
                             widget.onPressed(index),
-                            setState(() {
-                                    _currentIndex = index;
-                                }
-                            )
+                            vm.setCategoryIndex(index)
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            backgroundColor: _currentIndex == index ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
+                            backgroundColor: vm.categoryIndex == index ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
                         child: Text(items[index],
                             style: TextStyle(
                                 color: Colors.white,

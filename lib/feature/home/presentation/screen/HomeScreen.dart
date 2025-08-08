@@ -1,8 +1,10 @@
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
-import 'package:date_deck/feature/home/presentation/screen/HomePage.dart';
+import 'package:date_deck/feature/home/presentation/screen/SplashPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
+
+import '../components/EmptyHandler.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -19,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget build(BuildContext context) {
 
         final List pages = [
-            HomePage(),
             ShufflePage(),
             FavoritesPage()
         ];
@@ -27,11 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
         return SafeArea(child:
             Scaffold(
                 backgroundColor: Color(0xFFF4F4F4),
-                appBar: AppBar(
-                    title: Text("Date Deck"),
-                    centerTitle: true,
-                    backgroundColor: Color(0xFFFBF8F0)
-                ),
                 bottomNavigationBar: BottomNav(onPressed: (index) => {
                         setState(() {
                                 _currentPage = index;
