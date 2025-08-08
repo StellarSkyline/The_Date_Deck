@@ -15,6 +15,9 @@ class HomeViewModel extends ChangeNotifier {
     late DateDao _dao;
     DateDao get dao => _dao;
 
+    int _categoryIndex = 0;
+    int get categoryIndex => _categoryIndex;
+
     List<Date> _initialShuffleDate = List.empty();
     List<Date> get initialShuffleDate => _initialShuffleDate;
 
@@ -43,6 +46,11 @@ class HomeViewModel extends ChangeNotifier {
     Future<void> initShuffle() async {
         _initialShuffleDate = await dao.getAllByCategoryAsStream(Category.Active);
         _initialShuffleDate.shuffle();
+    }
+
+    void setCategoryIndex(int index) {
+        _categoryIndex = index;
+        notifyListeners();
     }
 
     Future<void> initFavorites() async {
