@@ -10,10 +10,8 @@ import '../components/CardComponent.dart';
 import '../components/EmptyHandler.dart';
 
 class ShufflePage extends StatefulWidget {
-
     @override
     State<StatefulWidget> createState() => _ShufflePageState();
-
 }
 
 class _ShufflePageState extends State<ShufflePage> {
