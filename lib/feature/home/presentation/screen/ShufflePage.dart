@@ -17,7 +17,6 @@ class ShufflePage extends StatefulWidget {
 }
 
 class _ShufflePageState extends State<ShufflePage> {
-    var _currentCategory = 0;
     var streamController = StreamController();
     var databaseState = true;
 
@@ -37,11 +36,9 @@ class _ShufflePageState extends State<ShufflePage> {
                 SizedBox(height: 8),
                 Container(height: 42, child: HorizontalList(onPressed: (index) =>
                         {
-                            setState(() {
-                                    _currentCategory = index;
-                                }
-                            ),
-                            vm.changeStreamDataCategory(Category.values[_currentCategory])
+                            vm.setCategoryIndex(index),
+                            vm.changeStreamDataCategory(Category.values[vm.categoryIndex]),
+                            vm.setInitialShuffleDate(Category.values[vm.categoryIndex])
                         }
                     )),
                 Expanded(
@@ -67,7 +64,8 @@ class _ShufflePageState extends State<ShufflePage> {
                                                 onPress: (value) => {
                                                     dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
                                                     vm.updateDate(dates[index]),
-                                                    vm.changeStreamDataFavorites()
+                                                    vm.changeStreamDataFavorites(),
+                                                    vm.setInitialShuffleDate(Category.values[vm.categoryIndex])
                                                 }
                                             );
                                         }
@@ -83,7 +81,7 @@ class _ShufflePageState extends State<ShufflePage> {
                         height: 55,
                         child: ElevatedButton(
                             onPressed: () => {
-                                vm.changeStreamDataCategory(Category.values[_currentCategory])
+                                vm.changeStreamDataCategory(Category.values[vm.categoryIndex])
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xFFE06F7C),

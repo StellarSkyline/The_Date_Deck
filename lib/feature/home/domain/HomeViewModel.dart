@@ -53,6 +53,11 @@ class HomeViewModel extends ChangeNotifier {
         notifyListeners();
     }
 
+    Future<void> setInitialShuffleDate(Category category) async {
+        _initialShuffleDate = await dao.getAllByCategoryAsStream(category);
+        notifyListeners();
+    }
+
     Future<void> initFavorites() async {
         _initialFavoritesDate = await dao.getFavorites();
     }
