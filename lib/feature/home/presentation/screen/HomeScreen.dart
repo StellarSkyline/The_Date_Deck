@@ -25,18 +25,19 @@ class _HomeScreenState extends State<HomeScreen> {
             FavoritesPage()
         ];
 
-        return SafeArea(child:
-            Scaffold(
-                backgroundColor: Color(0xFFF4F4F4),
-                bottomNavigationBar: BottomNav(onPressed: (index) => {
-                        setState(() {
-                                _currentPage = index;
-                            }
-                        )
-                    }
-                ),
-                body: pages[_currentPage]
-
+        return Container(
+            color: Color(0xFFF4F4F4),
+            child: SafeArea(
+                child: Scaffold(
+                    bottomNavigationBar: BottomNav(onPressed: (index) => {
+                            setState(() {
+                                    _currentPage = index;
+                                }
+                            )
+                        }
+                    ),
+                    body: pages[_currentPage]
+                )
             )
         );
     }
