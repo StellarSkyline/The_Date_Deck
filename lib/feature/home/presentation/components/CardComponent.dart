@@ -43,6 +43,7 @@ class CardComponent extends StatelessWidget {
             width: 397,
             height: 200,
             child: Card(
+              elevation: 8,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 color: Color(0xFFFBF8F0),
                 child: Padding(

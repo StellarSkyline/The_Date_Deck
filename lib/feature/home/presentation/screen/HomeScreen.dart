@@ -26,9 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ];
 
         return Container(
-            color: Color(0xFFF4F4F4),
+            color: Color(0xFFFBF8F0),
             child: SafeArea(
                 child: Scaffold(
+                  backgroundColor: Color(0xFFFBF8F0),
                     bottomNavigationBar: BottomNav(onPressed: (index) => {
                             setState(() {
                                     _currentPage = index;
