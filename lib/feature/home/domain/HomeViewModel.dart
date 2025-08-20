@@ -15,6 +15,9 @@ class HomeViewModel extends ChangeNotifier {
     late DateDao _dao;
     DateDao get dao => _dao;
 
+    int _categoryIndex = 0;
+    int get categoryIndex => _categoryIndex;
+
     List<Date> _initialShuffleDate = List.empty();
     List<Date> get initialShuffleDate => _initialShuffleDate;
 
@@ -45,8 +48,23 @@ class HomeViewModel extends ChangeNotifier {
         _initialShuffleDate.shuffle();
     }
 
+    void setCategoryIndex(int index) {
+        _categoryIndex = index;
+        notifyListeners();
+    }
+
+    Future<void> setInitialShuffleDate(Category category) async {
+        _initialShuffleDate = await dao.getAllByCategoryAsStream(category);
+        notifyListeners();
+    }
+
     Future<void> initFavorites() async {
         _initialFavoritesDate = await dao.getFavorites();
+    }
+
+    void updateDate(Date date) {
+        dao.updateDate(date);
+        notifyListeners();
     }
 
     void changeStreamDataCategory(Category category) {
@@ -59,18 +77,12 @@ class HomeViewModel extends ChangeNotifier {
         notifyListeners();
     }
 
-    void updateDate(Date date) {
-        dao.updateDate(date);
-        notifyListeners();
-    }
-
     void changeStreamDataFavorites() {
-        print('beingcalled');
-
         dao.getAllByCategoryAsStream(Category.Active).then((data) {
-            data.shuffle();
-            _initialShuffleDate = data;
-        });
+                data.shuffle();
+                _initialShuffleDate = data;
+            }
+        );
 
         dao.getFavorites().then((data) {
                 _streamControllerFavorites.sink.add(data);

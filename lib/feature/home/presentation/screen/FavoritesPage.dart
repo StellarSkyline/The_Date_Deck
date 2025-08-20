@@ -1,23 +1,23 @@
 import 'dart:async';
 
+import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/model/category.dart';
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
 
 class FavoritesPage extends StatefulWidget{
     @override
     State<StatefulWidget> createState() => _FavoritesPageState();
-
 }
 
 class _FavoritesPageState extends State<FavoritesPage>{
 
     //Widget State
     var streamController = StreamController();
+    var databaseState = true;
 
     @override
     Widget build(BuildContext context) {
@@ -26,6 +26,7 @@ class _FavoritesPageState extends State<FavoritesPage>{
                 streamController = vm.streamControllerFavorites;
             }
         );
+
         return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -39,25 +40,27 @@ class _FavoritesPageState extends State<FavoritesPage>{
                             initialData: vm.initialFavoritesDate,
                             builder: (_, asyncSnapshot) {
                                 final dates = asyncSnapshot.data ?? List.empty();
-                                return ListView.builder(
-                                    itemCount: dates.length,
-                                    itemBuilder: (context, index) {
-                                        return CardComponent(
-                                            name: dates[index].fullDescription,
-                                            suit: dates[index].suit,
-                                            favorite: dates[index].favorite,
-                                            onPress: (value) => {
-                                                setState(() {
-
-                                                    }
-                                                ),
-                                                dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
-                                                vm.updateDate(dates[index]),
-                                                vm.changeStreamDataFavorites()
-                                            }
-                                        );
-                                    }
-                                );
+                                if (dates.isEmpty) {
+                                    return EmptyHandler(textTitle: "Favorites is Empty");
+                                }
+                                else {
+                                    return ListView.builder(
+                                        itemCount: dates.length,
+                                        itemBuilder: (context, index) {
+                                            return CardComponent(
+                                                name: dates[index].fullDescription,
+                                                suit: dates[index].suit,
+                                                favorite: dates[index].favorite,
+                                                categoryName: dates[index].category.displayName,
+                                                onPress: (value) => {
+                                                    dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                    vm.updateDate(dates[index]),
+                                                    vm.changeStreamDataFavorites()
+                                                }
+                                            );
+                                        }
+                                    );
+                                }
                             }
                         )
                     )
