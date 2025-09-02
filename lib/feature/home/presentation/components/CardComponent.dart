@@ -26,16 +26,16 @@ class CardComponent extends StatelessWidget {
 
         switch (suit) {
             case Suit.Club:
-                cardSuit = SvgPicture.asset('assets/icons/icn_club.svg');
+                cardSuit = SvgPicture.asset('assets/icons/icn_club.svg',height:20,width:20);
                 textColor = Colors.black;
             case Suit.Spade:
-                cardSuit = SvgPicture.asset('assets/icons/icn_spade.svg');
+                cardSuit = SvgPicture.asset('assets/icons/icn_spade.svg',height:20,width:20);
                 textColor = Colors.black;
             case Suit.Heart:
-                cardSuit = SvgPicture.asset('assets/icons/icn_heart.svg');
+                cardSuit = SvgPicture.asset('assets/icons/icn_heart.svg',height:20,width:20);
                 textColor = Color(0xFFE06F7C);
             case Suit.Diamond:
-                cardSuit = SvgPicture.asset('assets/icons/icn_diamond.svg');
+                cardSuit = SvgPicture.asset('assets/icons/icn_diamond.svg',height:20,width:20);
                 textColor = Color(0xFFE06F7C);
         }
 
@@ -58,7 +58,7 @@ class CardComponent extends StatelessWidget {
                                         children: [
                                             Text(cardValue,
                                                 style: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 20,
                                                     color: textColor
                                                 )
                                             ),
@@ -77,18 +77,22 @@ class CardComponent extends StatelessWidget {
                                 )
                             ),
                             Expanded(
-                                child: Padding(
-                                    padding: EdgeInsetsGeometry.all(8.0),
-                                    child: Text(
-                                        name,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.black
-                                        )
-                                    )
+                                child: Image.asset(
+                                    'assets/images/img_test.png',
+                                  fit: BoxFit.cover
                                 )
                             ),
+                          Padding(
+                              padding: EdgeInsetsGeometry.all(8.0),
+                              child: Text(
+                                  name,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black
+                                  )
+                              )
+                          ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -126,7 +130,7 @@ class CardComponent extends StatelessWidget {
                                                 angle: Math.pi,
                                                 child: Text(cardValue,
                                                     style: TextStyle(
-                                                        fontSize: 15,
+                                                        fontSize: 20,
                                                         color: textColor
                                                     )
                                                 )

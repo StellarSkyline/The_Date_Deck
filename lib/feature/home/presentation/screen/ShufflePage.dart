@@ -58,7 +58,7 @@ class _ShufflePageState extends State<ShufflePage> {
                     child: CardSwiper(
                       controller: controller,
                       cardsCount: dates.length,
-                      allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal:true, vertical:false),
+                      allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                       onSwipe: (pIndex, cIndex, direction) {
                         switch (direction) {
                           case CardSwiperDirection.right:
@@ -66,9 +66,7 @@ class _ShufflePageState extends State<ShufflePage> {
                             vm.updateDate(dates[pIndex]);
                             vm.changeStreamDataFavorites();
                           default:
-                            debugPrint(
-                              'The card $pIndex was swiped to the ${direction.name}. Now the card $cIndex is on top',
-                            );
+                            debugPrint('The card $pIndex was swiped to the ${direction.name}. Now the card $cIndex is on top');
                         }
                         return true;
                       },
