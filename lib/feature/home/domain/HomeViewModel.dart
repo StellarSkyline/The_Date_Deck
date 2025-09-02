@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
 import '../../../feature/home/core/database/date_dao.dart';
 import '../data/model/category.dart';
@@ -14,6 +15,11 @@ class HomeViewModel extends ChangeNotifier {
     //State
     late DateDao _dao;
     DateDao get dao => _dao;
+
+    final CardSwiperController _controller = CardSwiperController();
+    CardSwiperController get controller => _controller;
+
+
 
     int _categoryIndex = 0;
     int get categoryIndex => _categoryIndex;

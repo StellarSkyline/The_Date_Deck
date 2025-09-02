@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/HomeViewModel.dart';
@@ -21,6 +22,7 @@ class _ShufflePageState extends State<ShufflePage> {
     @override
     Widget build(BuildContext context) {
         final vm = context.watch<HomeViewModel>();
+        final controller = vm.controller;
 
         setState(() {
                 streamController = vm.streamControllerShuffle;
@@ -51,22 +53,26 @@ class _ShufflePageState extends State<ShufflePage> {
                                     return EmptyHandler(textTitle: "Please Shuffle Cards");
                                 }
                                 else {
-                                    return ListView.builder(
-                                        itemCount: 4,
-                                        itemBuilder: (context, index) {
-                                            return CardComponent(
-                                                name: dates[index].fullDescription,
-                                                suit: dates[index].suit,
-                                                favorite: dates[index].favorite,
-                                                categoryName: dates[index].category.displayName,
-                                                onPress: (value) => {
-                                                    dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
-                                                    vm.updateDate(dates[index]),
-                                                    vm.changeStreamDataFavorites(),
-                                                    vm.setInitialShuffleDate(Category.values[vm.categoryIndex])
-                                                }
-                                            );
+                                    return Flexible(
+                                      child: CardSwiper(
+                                        controller: controller,
+                                        cardsCount: dates.length,
+                                        cardBuilder: (context, index, horizontalThresholdPercentage,
+                                        verticalThresholdPercentage,) {
+                                          return CardComponent(
+                                              name: dates[index].fullDescription,
+                                              suit: dates[index].suit,
+                                              favorite: dates[index].favorite,
+                                              categoryName: dates[index].category.displayName,
+                                              onPress: (value) => {
+                                                dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                vm.updateDate(dates[index]),
+                                                vm.changeStreamDataFavorites(),
+                                                vm.setInitialShuffleDate(Category.values[vm.categoryIndex])
+                                              }
+                                          );
                                         }
+                                      )
                                     );
                                 }
                             }
@@ -97,3 +103,22 @@ class _ShufflePageState extends State<ShufflePage> {
     }
 }
 
+/*
+ListView.builder(
+                                        itemCount: 4,
+                                        itemBuilder: (context, index) {
+                                            return CardComponent(
+                                                name: dates[index].fullDescription,
+                                                suit: dates[index].suit,
+                                                favorite: dates[index].favorite,
+                                                categoryName: dates[index].category.displayName,
+                                                onPress: (value) => {
+                                                    dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                                                    vm.updateDate(dates[index]),
+                                                    vm.changeStreamDataFavorites(),
+                                                    vm.setInitialShuffleDate(Category.values[vm.categoryIndex])
+                                                }
+                                            );
+                                        }
+                                    );
+ */

@@ -40,8 +40,8 @@ class CardComponent extends StatelessWidget {
         }
 
         return SizedBox(
-            width: 397,
-            height: 200,
+            width: 483,
+            height: 609,
             child: Card(
               elevation: 8,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
