@@ -5,7 +5,6 @@ import 'dart:math' as Math;
 
 import '../../data/model/suit.dart';
 
-//TODO: Add Category Title to Card
 class CardComponent extends StatelessWidget {
 
     final String name;
