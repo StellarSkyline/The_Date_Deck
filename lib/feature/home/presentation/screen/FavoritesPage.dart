@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:date_deck/feature/home/presentation/components/CardFavoriteComponent.dart';
 import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _FavoritesPageState extends State<FavoritesPage>{
                                     return ListView.builder(
                                         itemCount: dates.length,
                                         itemBuilder: (context, index) {
-                                            return CardComponent(
+                                            return CardFavoriteComponent(
                                                 name: dates[index].fullDescription,
                                                 suit: dates[index].suit,
                                                 favorite: dates[index].favorite,

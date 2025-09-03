@@ -43,6 +43,7 @@ dependencies:
   http: ^1.4.0
   flutter_launcher_icons: ^0.14.4
   provider: ^6.1.5
+  flutter_card_swiper: ^7.0.2
 
 dev_dependencies:
   flutter_test:
