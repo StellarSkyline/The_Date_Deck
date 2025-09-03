@@ -84,7 +84,7 @@ class HomeViewModel extends ChangeNotifier {
     }
 
     void changeStreamDataFavorites() {
-        dao.getAllByCategoryAsStream(Category.Active).then((data) {
+        dao.getAllByCategoryAsStream(Category.values[_categoryIndex]).then((data) {
                 data.shuffle();
                 _initialShuffleDate = data;
             }
