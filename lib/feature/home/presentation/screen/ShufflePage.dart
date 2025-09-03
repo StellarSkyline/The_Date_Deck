@@ -54,37 +54,35 @@ class _ShufflePageState extends State<ShufflePage> {
                 if (dates.isEmpty) {
                   return EmptyHandler(textTitle: "Please Shuffle Cards");
                 } else {
-                  return Flexible(
-                    child: CardSwiper(
-                      controller: controller,
-                      cardsCount: dates.length,
-                      allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
-                      onSwipe: (pIndex, cIndex, direction) {
-                        switch (direction) {
-                          case CardSwiperDirection.right:
-                            dates[pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
-                            vm.updateDate(dates[pIndex]);
-                            vm.changeStreamDataFavorites();
-                          default:
-                            debugPrint('The card $pIndex was swiped to the ${direction.name}. Now the card $cIndex is on top');
-                        }
-                        return true;
-                      },
-                      cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
-                        return CardComponent(
-                          name: dates[index].fullDescription,
-                          suit: dates[index].suit,
-                          favorite: dates[index].favorite,
-                          categoryName: dates[index].category.displayName,
-                          onPress: (value) => {
-                            dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
-                            vm.updateDate(dates[index]),
-                            vm.changeStreamDataFavorites(),
-                            vm.setInitialShuffleDate(Category.values[vm.categoryIndex]),
-                          },
-                        );
-                      },
-                    ),
+                  return CardSwiper(
+                    controller: controller,
+                    cardsCount: dates.length,
+                    allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
+                    onSwipe: (pIndex, cIndex, direction) {
+                      switch (direction) {
+                        case CardSwiperDirection.right:
+                          dates[pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
+                          vm.updateDate(dates[pIndex]);
+                          vm.changeStreamDataFavorites();
+                        default:
+                          debugPrint('The card $pIndex was swiped to the ${direction.name}. Now the card $cIndex is on top');
+                      }
+                      return true;
+                    },
+                    cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
+                      return CardComponent(
+                        name: dates[index].fullDescription,
+                        suit: dates[index].suit,
+                        favorite: dates[index].favorite,
+                        categoryName: dates[index].category.displayName,
+                        onPress: (value) => {
+                          dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
+                          vm.updateDate(dates[index]),
+                          vm.changeStreamDataFavorites(),
+                          vm.setInitialShuffleDate(Category.values[vm.categoryIndex]),
+                        },
+                      );
+                    },
                   );
                 }
               },
