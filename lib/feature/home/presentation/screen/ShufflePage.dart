@@ -75,6 +75,7 @@ class _ShufflePageState extends State<ShufflePage> {
                         suit: dates[index].suit,
                         favorite: dates[index].favorite,
                         categoryName: dates[index].category.displayName,
+                        effortValue: dates[index].effortValue,
                         onPress: (value) => {
                           dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
                           vm.updateDate(dates[index]),

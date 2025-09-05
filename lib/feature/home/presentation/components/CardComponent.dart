@@ -12,16 +12,17 @@ class CardComponent extends StatelessWidget {
     final bool favorite;
     final ValueChanged onPress;
     final String categoryName;
+    final int effortValue;
 
-    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName});
+    CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName, required this.effortValue});
 
     @override
     Widget build(BuildContext context) {
         Widget cardSuit = SvgPicture.asset('assets/icons/icn_club.svg');
         Color textColor = Colors.black;
         List<String> cardNumbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-        cardNumbers.shuffle();
-        String cardValue = cardNumbers.first;
+
+        String cardValue = cardNumbers[effortValue-1];
 
         switch (suit) {
             case Suit.Club:
