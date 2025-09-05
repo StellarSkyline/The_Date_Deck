@@ -84,18 +84,22 @@ class CardFavoriteComponent extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: EdgeInsetsGeometry.directional(start: 0, end: 8, top: 0, bottom: 0),
-                    child: SizedBox(
-                      width: 115,
-                      height: 25,
-                      child: ElevatedButton(
-                        onPressed: () => {onPress(0)},
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
+                  Expanded(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.directional(start: 0, end: 8, top: 0, bottom: 0),
+                        child: SizedBox(
+                          width: 115,
+                          height: 25,
+                          child: ElevatedButton(
+                            onPressed: () => {onPress(0)},
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
+                            ),
+                            child: Text(favorite ? "Remove" : "Favorite", style: TextStyle(color: Colors.white, fontSize: 15.0)),
+                          ),
                         ),
-                        child: Text(favorite ? "Remove" : "Favorite", style: TextStyle(color: Colors.white, fontSize: 15.0)),
                       ),
                     ),
                   ),
