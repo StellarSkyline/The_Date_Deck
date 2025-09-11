@@ -79,14 +79,14 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   //Methods
-  Future<void> init() async {
+  void init() async {
     _dao = await _HomeRepo.buildDatabase();
     initShuffle();
     initFavorites();
     notifyListeners();
   }
 
-  Future<void> initShuffle() async {
+   void initShuffle() async {
     _initialShuffleDate = await dao.getAllByCategoryAsStream(Category.Active);
     _initialShuffleDate.shuffle();
   }
@@ -101,7 +101,7 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> initFavorites() async {
+  void initFavorites() async {
     _initialFavoritesDate = await dao.getFavorites();
   }
 
