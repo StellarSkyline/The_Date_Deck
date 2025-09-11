@@ -47,18 +47,18 @@ class HomeViewModel extends ChangeNotifier {
   //Replace img_default with illustrations
   final _graphics = [
     Image.asset('assets/images/img_ace.png', fit: BoxFit.cover),
-    SvgPicture.asset('assets/images/img_2.svg', fit: BoxFit.contain),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
-    SvgPicture.asset('assets/images/img_default.svg'),
+    Image.asset('assets/images/img_2.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_default.png'),
   ];
   get graphics => _graphics;
 
