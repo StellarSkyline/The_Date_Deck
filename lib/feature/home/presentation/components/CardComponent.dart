@@ -11,7 +11,7 @@ class CardComponent extends StatelessWidget {
   final String name;
   final Suit suit;
   final bool favorite;
-  final ValueChanged onPress;
+  final VoidCallback onPress;
   final String categoryName;
   final int effortValue;
 
@@ -67,7 +67,7 @@ class CardComponent extends StatelessWidget {
                         width: 150,
                         height: 35,
                         child: ElevatedButton(
-                          onPressed: () => {onPress(0)},
+                          onPressed: () => {onPress()},
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),

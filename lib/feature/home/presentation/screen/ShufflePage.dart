@@ -64,8 +64,12 @@ class _ShufflePageState extends State<ShufflePage> {
                           dates[pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
                           vm.updateDate(dates[pIndex]);
                           vm.changeStreamDataFavorites();
+                        case CardSwiperDirection.top:
+                          dates[pIndex].favorite = false;
+                          vm.updateDate(dates[pIndex]);
+                          vm.changeStreamDataFavorites();
                         default:
-                          debugPrint('The card $pIndex was swiped to the ${direction.name}. Now the card $cIndex is on top');
+                          break;
                       }
                       return true;
                     },
@@ -76,11 +80,12 @@ class _ShufflePageState extends State<ShufflePage> {
                         favorite: dates[index].favorite,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
-                        onPress: (value) => {
-                          dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
-                          vm.updateDate(dates[index]),
-                          vm.changeStreamDataFavorites(),
-                          vm.setInitialShuffleDate(Category.values[vm.categoryIndex]),
+                        onPress: () =>{
+                          if(dates[index].favorite) {
+                            controller.swipe(CardSwiperDirection.top)
+                          } else {
+                            controller.swipe(CardSwiperDirection.right)
+                          }
                         },
                       );
                     },
