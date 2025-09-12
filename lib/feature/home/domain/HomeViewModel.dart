@@ -17,7 +17,7 @@ class HomeViewModel extends ChangeNotifier {
   //State
   late DateDao _dao;
 
-  DateDao get dao => _dao;
+
 
   final CardSwiperController _controller = CardSwiperController();
 
@@ -87,7 +87,7 @@ class HomeViewModel extends ChangeNotifier {
   }
 
    void initShuffle() async {
-    _initialShuffleDate = await dao.getAllByCategoryAsStream(Category.Active);
+    _initialShuffleDate = await _dao.getAllByCategoryAsStream(Category.Active);
     _initialShuffleDate.shuffle();
   }
 
@@ -97,21 +97,21 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> setInitialShuffleDate(Category category) async {
-    _initialShuffleDate = await dao.getAllByCategoryAsStream(category);
+    _initialShuffleDate = await _dao.getAllByCategoryAsStream(category);
     notifyListeners();
   }
 
   void initFavorites() async {
-    _initialFavoritesDate = await dao.getFavorites();
+    _initialFavoritesDate = await _dao.getFavorites();
   }
 
   void updateDate(Date date) {
-    dao.updateDate(date);
+    _dao.updateDate(date);
     notifyListeners();
   }
 
   void changeStreamDataCategory(Category category) {
-    dao.getAllByCategoryAsStream(category).then((data) {
+    _dao.getAllByCategoryAsStream(category).then((data) {
       data.shuffle();
       _streamControllerShuffle.sink.add(data);
       _initialShuffleDate = data;
@@ -120,12 +120,12 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void changeStreamDataFavorites() {
-    dao.getAllByCategoryAsStream(Category.values[_categoryIndex]).then((data) {
+    _dao.getAllByCategoryAsStream(Category.values[_categoryIndex]).then((data) {
       data.shuffle();
       _initialShuffleDate = data;
     });
 
-    dao.getFavorites().then((data) {
+    _dao.getFavorites().then((data) {
       _streamControllerFavorites.sink.add(data);
       _initialFavoritesDate = data;
     });
