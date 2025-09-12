@@ -46,11 +46,11 @@ class HomeViewModel extends ChangeNotifier {
   //Graphics Logic
   //Replace img_default with illustrations
   final _graphics = [
-    Image.asset('assets/images/img_ace.png', fit: BoxFit.cover),
+    Image.asset('assets/images/img_1.png', fit: BoxFit.contain),
     Image.asset('assets/images/img_2.png', fit: BoxFit.contain),
-     Image.asset('assets/images/img_default.png'),
-     Image.asset('assets/images/img_default.png'),
-     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_3.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_4.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_5.png', fit: BoxFit.contain),
      Image.asset('assets/images/img_default.png'),
      Image.asset('assets/images/img_default.png'),
      Image.asset('assets/images/img_default.png'),
