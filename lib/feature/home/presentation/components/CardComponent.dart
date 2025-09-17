@@ -15,7 +15,7 @@ class CardComponent extends StatelessWidget {
   final String categoryName;
   final int effortValue;
 
-  CardComponent({required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName, required this.effortValue});
+  const CardComponent({super.key, required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName, required this.effortValue});
 
   @override
   Widget build(BuildContext context) {
