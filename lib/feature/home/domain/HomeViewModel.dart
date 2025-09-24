@@ -17,8 +17,6 @@ class HomeViewModel extends ChangeNotifier {
   //State
   late DateDao _dao;
 
-
-
   final CardSwiperController _controller = CardSwiperController();
 
   CardSwiperController get controller => _controller;
@@ -51,11 +49,11 @@ class HomeViewModel extends ChangeNotifier {
      Image.asset('assets/images/img_3.png', fit: BoxFit.contain),
      Image.asset('assets/images/img_4.png', fit: BoxFit.contain),
      Image.asset('assets/images/img_5.png', fit: BoxFit.contain),
-     Image.asset('assets/images/img_default.png'),
-     Image.asset('assets/images/img_default.png'),
-     Image.asset('assets/images/img_default.png'),
-     Image.asset('assets/images/img_default.png'),
-     Image.asset('assets/images/img_default.png'),
+     Image.asset('assets/images/img_6.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_7.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_8.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_9.png', fit: BoxFit.contain),
+     Image.asset('assets/images/img_10.png', fit: BoxFit.contain),
      Image.asset('assets/images/img_default.png'),
      Image.asset('assets/images/img_default.png'),
      Image.asset('assets/images/img_default.png'),
@@ -68,8 +66,8 @@ class HomeViewModel extends ChangeNotifier {
   final _suitGraphics = [
     {'suit': SvgPicture.asset('assets/icons/icn_club.svg', fit: BoxFit.fill), 'color': Colors.black},
     {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', fit: BoxFit.fill), 'color': Colors.black},
-    {'suit':SvgPicture.asset('assets/icons/icn_heart.svg', fit: BoxFit.fill), 'color':Color(0xFFE06F7C)},
-    {'suit':SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill), 'color':Color(0xFFE06F7C)}
+    {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', fit: BoxFit.fill), 'color':Color(0xFFE06F7C)},
+    {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill), 'color':Color(0xFFE06F7C)}
   ];
   get suitGraphics => _suitGraphics;
 
