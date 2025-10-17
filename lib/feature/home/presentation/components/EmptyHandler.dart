@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class EmptyHandler extends StatelessWidget {
     final String textTitle;
-    EmptyHandler({required this.textTitle});
+    const EmptyHandler({required this.textTitle});
 
     @override
     Widget build(BuildContext context) {

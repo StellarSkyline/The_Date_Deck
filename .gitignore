@@ -52,3 +52,4 @@ app.*.map.json
 /windows/flutter/generated_plugins.cmake
 /macos/Flutter/GeneratedPluginRegistrant.swift
 /lib/feature/home/core/database/database.g.dart
+/assets/images/img_main.png
