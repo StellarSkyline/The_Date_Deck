@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import '../../domain/HomeViewModel.dart';
 import 'HomeScreen.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,13 +17,16 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 1), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<HomeViewModel>();
+    vm.init();
+
     return Container(
       color: Color(0xFFF4F4F4),
       child: SafeArea(

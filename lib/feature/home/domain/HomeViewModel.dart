@@ -74,15 +74,12 @@ class HomeViewModel extends ChangeNotifier {
   get suitGraphics => _suitGraphics;
 
   //Constructor
-  HomeViewModel() {
-    init();
-  }
+  HomeViewModel() {  }
 
   //Methods
   Future<void> init() async {
     _dao = await _HomeRepo.buildDatabase();
-    Timer(Duration(seconds: 3), () {
-      print('a');
+    Timer(Duration(milliseconds: 300), () {
       initShuffle();
       initFavorites();
       notifyListeners();
@@ -90,7 +87,6 @@ class HomeViewModel extends ChangeNotifier {
   }
 
    void initShuffle() async {
-    print('b');
     _initialShuffleDate = await _dao.getAllByCategoryAsStream(Category.Active);
     _initialShuffleDate.shuffle();
   }
