@@ -1,13 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'dart:math' as Math;
-
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../data/model/suit.dart';
 import '../../domain/HomeViewModel.dart';
 
-//TODO: Add Category Title to Card
 class CardFavoriteComponent extends StatelessWidget {
   final String name;
   final Suit suit;

@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
-
 import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
 import '../components/EmptyHandler.dart';
@@ -36,7 +33,14 @@ class _ShufflePageState extends State<ShufflePage> {
               builder: (context, snapshot) {
                 final dates = snapshot.data;
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 100,
+                      height:100,
+                      child: CircularProgressIndicator(),
+                    )
+                  );
                 } else if (snapshot.hasError) {
                   return EmptyHandler(textTitle: "Please Shuffle Cards");
                 } else {
