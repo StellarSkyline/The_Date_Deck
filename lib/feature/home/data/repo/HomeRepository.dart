@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 
 import '../../core/database/Constants.dart';
@@ -10,26 +9,15 @@ import '../../core/database/date_dao.dart';
 import '../model/date.dart';
 
 class HomeRepository {
+  //Database Initalization
   Future<DateDao> buildDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
     final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
 
-    final dateDao = database.dateDao;
-
-    final String response = await rootBundle.loadString('assets/json/date_idea_database.json');
-
-    final data = (jsonDecode(response) as List).cast<Map<String, dynamic>>();
-
-    data.map<Date>((json) => Date.fromJson(json)).toList().forEach((element) async {
-      dateDao.findById(element.id).then((value) async {
-        if (value == null) {
-          await dateDao.insertDate(element);
-        }
-      });
-    });
-    return dateDao;
+    return database.dateDao;
   }
 
+  //Network Calls
   Future<List<Date>> getDates(String category) async {
     //get response
     final response = await http.get(Uri.parse('$baseUrl/$category.json'));

@@ -28,21 +28,6 @@ class HomeViewModel extends ChangeNotifier {
 
   int get categoryIndex => _categoryIndex;
 
-  List<Date> _initialShuffleDate = List.empty();
-
-  List<Date> get initialShuffleDate => _initialShuffleDate;
-
-  List<Date> _initialFavoritesDate = List.empty();
-
-  List<Date> get initialFavoritesDate => _initialFavoritesDate;
-
-  final StreamController<List<Date>> _streamControllerShuffle = StreamController<List<Date>>.broadcast();
-
-  StreamController<List<Date>> get streamControllerShuffle => _streamControllerShuffle;
-
-  final StreamController<List<Date>> _streamControllerFavorites = StreamController<List<Date>>.broadcast();
-
-  StreamController<List<Date>> get streamControllerFavorites => _streamControllerFavorites;
 
   //Graphics Logic
   //Replace img_default with illustrations
@@ -85,7 +70,6 @@ class HomeViewModel extends ChangeNotifier {
   //Methods
   void init() async {
     _dao = await _HomeRepo.buildDatabase();
-    initFavorites();
     notifyListeners();
   }
 
@@ -94,35 +78,18 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void initFavorites() async {
-    _initialFavoritesDate = await _dao.getFavorites();
-  }
-
-  void updateDate(Date date) {
-    _dao.updateDate(date);
+  void deleteDate(Date date) {
+    _dao.deleteDate(date);
     notifyListeners();
   }
 
-  void changeStreamDataCategory(Category category) {
-    _dao.getAllByCategoryAsStream(category).then((data) {
-      data.shuffle();
-      _streamControllerShuffle.sink.add(data);
-      _initialShuffleDate = data;
-    });
+  void insertDate(Date date) {
+    _dao.insertDate(date);
     notifyListeners();
   }
 
-  void changeStreamDataFavorites() {
-    _dao.getAllByCategoryAsStream(Category.values[_categoryIndex]).then((data) {
-      data.shuffle();
-      _initialShuffleDate = data;
-    });
-
-    _dao.getFavorites().then((data) {
-      _streamControllerFavorites.sink.add(data);
-      _initialFavoritesDate = data;
-    });
-    notifyListeners();
+  Future<List<Date>> getFavorites() {
+    return _dao.getAllDates();
   }
 
   Future<List<Date>> getCategory(int index) {

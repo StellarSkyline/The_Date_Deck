@@ -30,12 +30,7 @@ class _ShufflePageState extends State<ShufflePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: 8),
-        Container(
-          height: 42,
-          child: HorizontalList(
-            onPressed: (index) =>vm.setCategoryIndex(index),
-          ),
-        ),
+        Container(height: 42, child: HorizontalList(onPressed: (index) => vm.setCategoryIndex(index))),
         Expanded(
           child: Padding(
             padding: EdgeInsetsGeometry.all(10),
@@ -56,12 +51,10 @@ class _ShufflePageState extends State<ShufflePage> {
                       switch (direction) {
                         case CardSwiperDirection.right:
                           dates![pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
-                          vm.updateDate(dates[pIndex]);
-                          vm.changeStreamDataFavorites();
+                          vm.insertDate(dates[pIndex]);
                         case CardSwiperDirection.top:
                           dates![pIndex].favorite = false;
-                          vm.updateDate(dates[pIndex]);
-                          vm.changeStreamDataFavorites();
+                          vm.insertDate(dates[pIndex]);
                         default:
                           break;
                       }
@@ -74,10 +67,8 @@ class _ShufflePageState extends State<ShufflePage> {
                         favorite: dates[index].favorite,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
-                        onPress: () =>
-                        {
-                          if (dates[index].favorite) {controller.swipe(CardSwiperDirection.top)} else
-                            {controller.swipe(CardSwiperDirection.right)},
+                        onPress: () => {
+                          if (dates[index].favorite) {controller.swipe(CardSwiperDirection.top)} else {controller.swipe(CardSwiperDirection.right)},
                         },
                       );
                     },
@@ -92,7 +83,7 @@ class _ShufflePageState extends State<ShufflePage> {
             width: 228,
             height: 55,
             child: ElevatedButton(
-              onPressed: () => {vm.changeStreamDataCategory(Category.values[vm.categoryIndex])},
+              onPressed: () => {vm.getCategory(vm.categoryIndex)},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFE06F7C),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
