@@ -7,40 +7,32 @@ import 'package:flutter/material.dart';
 import '../components/EmptyHandler.dart';
 
 class HomeScreen extends StatefulWidget {
-
-    @override
-    State<StatefulWidget> createState() => _HomeScreenState();
-
+  @override
+  State<StatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var _currentPage = 0;
 
-    var _currentPage = 0;
+  @override
+  Widget build(BuildContext context) {
+    final List pages = [ShufflePage(), FavoritesPage()];
 
-    @override
-    Widget build(BuildContext context) {
-
-        final List pages = [
-            ShufflePage(),
-            FavoritesPage()
-        ];
-
-        return Container(
-            color: Color(0xFFFBF8F0),
-            child: SafeArea(
-                child: Scaffold(
-                  backgroundColor: Color(0xFFFBF8F0),
-                    bottomNavigationBar: BottomNav(onPressed: (index) => {
-                            setState(() {
-                                    _currentPage = index;
-                                }
-                            )
-                        }
-                    ),
-                    body: pages[_currentPage]
-                )
-            )
-        );
-    }
-
+    return Container(
+      color: Color(0xFFFBF8F0),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Color(0xFFFBF8F0),
+          bottomNavigationBar: BottomNav(
+            onPressed: (index) => {
+              setState(() {
+                _currentPage = index;
+              }),
+            },
+          ),
+          body: pages[_currentPage],
+        ),
+      ),
+    );
+  }
 }

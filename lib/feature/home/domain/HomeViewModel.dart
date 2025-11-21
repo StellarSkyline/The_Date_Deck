@@ -1,11 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:date_deck/feature/home/core/database/Constants.dart';
 import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../feature/home/core/database/date_dao.dart';
 import '../data/model/category.dart';
@@ -85,6 +88,7 @@ class HomeViewModel extends ChangeNotifier {
     initShuffle();
     initFavorites();
     notifyListeners();
+    getActiveDates();
   }
 
   void initShuffle() async {
@@ -132,4 +136,39 @@ class HomeViewModel extends ChangeNotifier {
     });
     notifyListeners();
   }
+
+  Future<List<Date>> getDates(String category) async {
+    //get response
+    final response = await http.get(Uri.parse('$baseUrl/$category.json'));
+    if(response.statusCode == 200) {
+
+      final List<dynamic> decodedJson = jsonDecode(response.body);
+      final List<Date> dates = decodedJson.map((e) => Date.fromJson(e)).toList();
+
+      dates.shuffle();
+
+      return dates;
+
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<List<Date>> getActiveDates() => getDates('active');
+  Future<List<Date>> getCookingDates() => getDates('cooking');
+  Future<List<Date>> getCreativeDates() => getDates('creative');
+  Future<List<Date>> getGamesDates() => getDates('games');
+
+  Future<List<Date>> getCategory(int index) {
+    switch(index) {
+      case 0: return getActiveDates();
+      case 1: return getCreativeDates();
+      case 2: return getGamesDates();
+      case 3: return getCookingDates();
+      default: return getActiveDates();
+    }
+  }
+
+
+
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:date_deck/feature/home/data/model/category.dart';
+import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -24,10 +25,6 @@ class _ShufflePageState extends State<ShufflePage> {
     final vm = context.watch<HomeViewModel>();
     final controller = vm.controller;
 
-    setState(() {
-      streamController = vm.streamControllerShuffle;
-    });
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -36,36 +33,33 @@ class _ShufflePageState extends State<ShufflePage> {
         Container(
           height: 42,
           child: HorizontalList(
-            onPressed: (index) => {
-              vm.setCategoryIndex(index),
-              vm.changeStreamDataCategory(Category.values[vm.categoryIndex]),
-              vm.setInitialShuffleDate(Category.values[vm.categoryIndex]),
-            },
+            onPressed: (index) =>vm.setCategoryIndex(index),
           ),
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(10),
-            child: StreamBuilder(
-              stream: streamController.stream,
-              initialData: vm.initialShuffleDate,
-              builder: (_, asyncSnapshot) {
-                final dates = asyncSnapshot.data ?? List.empty();
-                if (dates.isEmpty) {
+            padding: EdgeInsetsGeometry.all(10),
+            child: FutureBuilder(
+              future: vm.getCategory(vm.categoryIndex),
+              builder: (context, snapshot) {
+                final dates = snapshot.data;
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
                   return EmptyHandler(textTitle: "Please Shuffle Cards");
                 } else {
                   return CardSwiper(
                     controller: controller,
-                    cardsCount: dates.length,
+                    cardsCount: snapshot.data!.length,
                     allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                     onSwipe: (pIndex, cIndex, direction) {
                       switch (direction) {
                         case CardSwiperDirection.right:
-                          dates[pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
+                          dates![pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
                           vm.updateDate(dates[pIndex]);
                           vm.changeStreamDataFavorites();
                         case CardSwiperDirection.top:
-                          dates[pIndex].favorite = false;
+                          dates![pIndex].favorite = false;
                           vm.updateDate(dates[pIndex]);
                           vm.changeStreamDataFavorites();
                         default:
@@ -75,17 +69,15 @@ class _ShufflePageState extends State<ShufflePage> {
                     },
                     cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
                       return CardComponent(
-                        name: dates[index].fullDescription,
+                        name: dates![index].fullDescription,
                         suit: dates[index].suit,
                         favorite: dates[index].favorite,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
-                        onPress: () =>{
-                          if(dates[index].favorite) {
-                            controller.swipe(CardSwiperDirection.top)
-                          } else {
-                            controller.swipe(CardSwiperDirection.right)
-                          }
+                        onPress: () =>
+                        {
+                          if (dates[index].favorite) {controller.swipe(CardSwiperDirection.top)} else
+                            {controller.swipe(CardSwiperDirection.right)},
                         },
                       );
                     },
