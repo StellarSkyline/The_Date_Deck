@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-import '../../core/database/Constants.dart';
+import '../../core/Constants.dart';
 import '../../core/database/database.dart';
 import '../../core/database/date_dao.dart';
 import '../model/date.dart';
@@ -22,8 +22,9 @@ class HomeRepository {
     //get response
     final response = await http.get(Uri.parse('$baseUrl/$category.json'));
     if (response.statusCode == 200) {
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      final List<Date> dates = decodedJson.map((e) => Date.fromJson(e)).toList();
+
+      //decode json response and model
+      final List<Date> dates = (jsonDecode(response.body) as List<dynamic>).map((e)=>Date.fromJson(e)).toList();
 
       dates.shuffle();
 
@@ -34,10 +35,7 @@ class HomeRepository {
   }
 
   Future<List<Date>> getActiveDates() => getDates('active');
-
   Future<List<Date>> getCookingDates() => getDates('cooking');
-
   Future<List<Date>> getCreativeDates() => getDates('creative');
-
   Future<List<Date>> getGamesDates() => getDates('games');
 }

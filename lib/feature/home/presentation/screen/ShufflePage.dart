@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:date_deck/feature/home/data/model/category.dart';
-import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -17,7 +15,6 @@ class ShufflePage extends StatefulWidget {
 }
 
 class _ShufflePageState extends State<ShufflePage> {
-  var streamController = StreamController();
   var databaseState = true;
 
   @override
@@ -50,8 +47,7 @@ class _ShufflePageState extends State<ShufflePage> {
                     onSwipe: (pIndex, cIndex, direction) {
                       switch (direction) {
                         case CardSwiperDirection.right:
-                          dates![pIndex].favorite ? dates[pIndex].favorite = false : dates[pIndex].favorite = true;
-                          vm.insertDate(dates[pIndex]);
+                          vm.insertDate(dates![pIndex]);
                         case CardSwiperDirection.top:
                           dates![pIndex].favorite = false;
                           vm.insertDate(dates[pIndex]);
@@ -75,20 +71,6 @@ class _ShufflePageState extends State<ShufflePage> {
                   );
                 }
               },
-            ),
-          ),
-        ),
-        Center(
-          child: SizedBox(
-            width: 228,
-            height: 55,
-            child: ElevatedButton(
-              onPressed: () => {vm.getCategory(vm.categoryIndex)},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFE06F7C),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              child: Text("Shuffle Deck", style: TextStyle(color: Colors.white, fontSize: 16)),
             ),
           ),
         ),

@@ -15,7 +15,6 @@ class FavoritesPage extends StatefulWidget {
 
 class _FavoritesPageState extends State<FavoritesPage> {
   //Widget State
-  var streamController = StreamController();
   var databaseState = true;
 
   @override
@@ -32,8 +31,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
             padding: EdgeInsets.all(10),
             child: FutureBuilder(
               future: vm.getFavorites(),
-              builder: (_, asyncSnapshot) {
-                final dates = asyncSnapshot.data ?? List.empty();
+              builder: (context, snapShot) {
+                final dates = snapShot.data ?? List.empty();
                 if (dates.isEmpty) {
                   return EmptyHandler(textTitle: "Favorites is Empty");
                 } else {

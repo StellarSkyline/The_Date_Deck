@@ -1,17 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:date_deck/feature/home/core/database/Constants.dart';
 import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../feature/home/core/database/date_dao.dart';
-import '../data/model/category.dart';
 
 class HomeViewModel extends ChangeNotifier {
   //Repo
@@ -28,9 +23,16 @@ class HomeViewModel extends ChangeNotifier {
 
   int get categoryIndex => _categoryIndex;
 
+  get graphics => _graphics;
+
+  final _cardNumbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+  get cardNumbers => _cardNumbers;
+
+  get suitGraphics => _suitGraphics;
+
 
   //Graphics Logic
-  //Replace img_default with illustrations
   final _graphics = [
     Image.asset('assets/images/img_1.png', fit: BoxFit.contain),
     Image.asset('assets/images/img_2.png', fit: BoxFit.contain),
@@ -47,12 +49,6 @@ class HomeViewModel extends ChangeNotifier {
     Image.asset('assets/images/img_13.png', fit: BoxFit.contain),
   ];
 
-  get graphics => _graphics;
-
-  final _cardNumbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
-  get cardNumbers => _cardNumbers;
-
   final _suitGraphics = [
     {'suit': SvgPicture.asset('assets/icons/icn_club.svg', fit: BoxFit.fill), 'color': Colors.black},
     {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', fit: BoxFit.fill), 'color': Colors.black},
@@ -60,7 +56,6 @@ class HomeViewModel extends ChangeNotifier {
     {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill), 'color': Color(0xFFE06F7C)},
   ];
 
-  get suitGraphics => _suitGraphics;
 
   //Constructor
   HomeViewModel() {
@@ -73,18 +68,25 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //UI Methods
   void setCategoryIndex(int index) {
     _categoryIndex = index;
     notifyListeners();
   }
 
+  //Database Methods
   void deleteDate(Date date) {
     _dao.deleteDate(date);
     notifyListeners();
   }
 
-  void insertDate(Date date) {
-    _dao.insertDate(date);
+  void insertDate(Date date) async {
+    //Verify if the date exits
+    final savedDate = await _dao.findById(date.id);
+
+    if(savedDate == null) {
+      _dao.insertDate(date);
+    }
     notifyListeners();
   }
 
@@ -92,6 +94,16 @@ class HomeViewModel extends ChangeNotifier {
     return _dao.getAllDates();
   }
 
+  Future<bool> checkDate(int id) async {
+    final savedDate = await _dao.findById(id);
+    if(savedDate == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //Network Methods
   Future<List<Date>> getCategory(int index) {
     switch(index) {
       case 0: return _HomeRepo.getActiveDates();
@@ -100,6 +112,7 @@ class HomeViewModel extends ChangeNotifier {
       case 3: return _HomeRepo.getCookingDates();
       default: return _HomeRepo.getActiveDates();
     }
+
   }
 
 
