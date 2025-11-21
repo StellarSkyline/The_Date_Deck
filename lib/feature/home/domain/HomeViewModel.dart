@@ -83,9 +83,7 @@ class HomeViewModel extends ChangeNotifier {
   void insertDate(Date date) async {
     //Verify if the date exits
     final savedDate = await _dao.findById(date.id);
-    if(savedDate == null) {
-      _dao.insertDate(date);
-    }
+    if(savedDate == null) _dao.insertDate(date);
   }
 
   Future<List<Date>> getFavorites() {
@@ -112,7 +110,4 @@ class HomeViewModel extends ChangeNotifier {
     }
 
   }
-
-
-
 }
