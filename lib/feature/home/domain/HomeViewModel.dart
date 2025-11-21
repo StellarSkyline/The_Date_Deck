@@ -85,24 +85,12 @@ class HomeViewModel extends ChangeNotifier {
   //Methods
   void init() async {
     _dao = await _HomeRepo.buildDatabase();
-    initShuffle();
     initFavorites();
     notifyListeners();
-    getActiveDates();
-  }
-
-  void initShuffle() async {
-    _initialShuffleDate = await _dao.getAllByCategoryAsStream(Category.Active);
-    _initialShuffleDate.shuffle();
   }
 
   void setCategoryIndex(int index) {
     _categoryIndex = index;
-    notifyListeners();
-  }
-
-  Future<void> setInitialShuffleDate(Category category) async {
-    _initialShuffleDate = await _dao.getAllByCategoryAsStream(category);
     notifyListeners();
   }
 
@@ -137,35 +125,13 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<Date>> getDates(String category) async {
-    //get response
-    final response = await http.get(Uri.parse('$baseUrl/$category.json'));
-    if(response.statusCode == 200) {
-
-      final List<dynamic> decodedJson = jsonDecode(response.body);
-      final List<Date> dates = decodedJson.map((e) => Date.fromJson(e)).toList();
-
-      dates.shuffle();
-
-      return dates;
-
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  Future<List<Date>> getActiveDates() => getDates('active');
-  Future<List<Date>> getCookingDates() => getDates('cooking');
-  Future<List<Date>> getCreativeDates() => getDates('creative');
-  Future<List<Date>> getGamesDates() => getDates('games');
-
   Future<List<Date>> getCategory(int index) {
     switch(index) {
-      case 0: return getActiveDates();
-      case 1: return getCreativeDates();
-      case 2: return getGamesDates();
-      case 3: return getCookingDates();
-      default: return getActiveDates();
+      case 0: return _HomeRepo.getActiveDates();
+      case 1: return _HomeRepo.getCreativeDates();
+      case 2: return _HomeRepo.getGamesDates();
+      case 3: return _HomeRepo.getCookingDates();
+      default: return _HomeRepo.getActiveDates();
     }
   }
 
