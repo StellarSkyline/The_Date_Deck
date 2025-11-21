@@ -46,9 +46,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
                         onPress: (value) => {
-                          dates[index].favorite ? dates[index].favorite = false : dates[index].favorite = true,
                           vm.deleteDate(dates[index]),
-                          //vm.changeStreamDataFavorites()
                         },
                       );
                     },

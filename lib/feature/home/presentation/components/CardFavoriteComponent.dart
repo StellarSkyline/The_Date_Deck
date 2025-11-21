@@ -79,9 +79,11 @@ class CardFavoriteComponent extends StatelessWidget {
                             onPressed: () => {onPress(0)},
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
+                              backgroundColor: (Color(0xFFE06F7C)),
                             ),
-                            child: Text(favorite ? "Remove" : "Favorite", style: TextStyle(color: Colors.white, fontSize: 15.0)),
+                            child: Text("Remove",
+                                style: TextStyle(color: Colors.white, fontSize: 15.0)
+                            ),
                           ),
                         ),
                       ),

@@ -60,7 +60,6 @@ class _ShufflePageState extends State<ShufflePage> {
                       return CardComponent(
                         name: dates![index].fullDescription,
                         suit: dates[index].suit,
-                        favorite: dates[index].favorite,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
                         onPress: () => {

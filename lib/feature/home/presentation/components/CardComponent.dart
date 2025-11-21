@@ -10,12 +10,11 @@ import '../../domain/HomeViewModel.dart';
 class CardComponent extends StatelessWidget {
   final String name;
   final Suit suit;
-  final bool favorite;
   final VoidCallback onPress;
   final String categoryName;
   final int effortValue;
 
-  const CardComponent({super.key, required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName, required this.effortValue});
+  const CardComponent({super.key, required this.name, required this.suit, required this.onPress, required this.categoryName, required this.effortValue});
 
   @override
   Widget build(BuildContext context) {
@@ -61,22 +60,6 @@ class CardComponent extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: Center(
-                      child: SizedBox(
-                        width: 150,
-                        height: 35,
-                        child: ElevatedButton(
-                          onPressed: () => {onPress()},
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            backgroundColor: (favorite ? Color(0xFFE06F7C) : Color(0xFF5E4E81)),
-                          ),
-                          child: Text(favorite ? "Remove" : "Favorite", style: TextStyle(color: Colors.white, fontSize: 15.0)),
-                        ),
-                      ),
-                    ),
-                  ),
                   Column(
                     children: [
                       Transform.rotate(angle: Math.pi, child: SizedBox(width: 20, height: 20, child:vm.suitGraphics[suit.index]['suit'])),
