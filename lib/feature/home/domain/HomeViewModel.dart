@@ -16,21 +16,15 @@ class HomeViewModel extends ChangeNotifier {
   late DateDao _dao;
 
   final CardSwiperController _controller = CardSwiperController();
-
   CardSwiperController get controller => _controller;
 
   int _categoryIndex = 0;
-
   int get categoryIndex => _categoryIndex;
 
   get graphics => _graphics;
-
   final _cardNumbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
   get cardNumbers => _cardNumbers;
-
   get suitGraphics => _suitGraphics;
-
 
   //Graphics Logic
   final _graphics = [
@@ -55,8 +49,7 @@ class HomeViewModel extends ChangeNotifier {
     {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', fit: BoxFit.fill), 'color': Color(0xFFE06F7C)},
     {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill), 'color': Color(0xFFE06F7C)},
   ];
-
-
+  
   //Constructor
   HomeViewModel() {
     init();
