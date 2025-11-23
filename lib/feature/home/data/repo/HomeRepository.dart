@@ -19,8 +19,6 @@ class HomeRepository {
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
-    //get response
-
     //model uri
     final uri = Uri.https(baseUrl,'/$category.json');
     //response
