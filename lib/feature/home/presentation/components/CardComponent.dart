@@ -10,11 +10,10 @@ import '../../domain/HomeViewModel.dart';
 class CardComponent extends StatelessWidget {
   final String name;
   final Suit suit;
-  final VoidCallback onPress;
   final String categoryName;
   final int effortValue;
 
-  const CardComponent({super.key, required this.name, required this.suit, required this.onPress, required this.categoryName, required this.effortValue});
+  const CardComponent({super.key, required this.name, required this.suit, required this.categoryName, required this.effortValue});
 
   @override
   Widget build(BuildContext context) {

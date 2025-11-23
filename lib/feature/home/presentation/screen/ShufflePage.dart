@@ -49,14 +49,8 @@ class _ShufflePageState extends State<ShufflePage> {
                     cardsCount: snapshot.data!.length,
                     allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                     onSwipe: (pIndex, cIndex, direction) {
-                      switch (direction) {
-                        case CardSwiperDirection.right:
-                          vm.insertDate(dates![pIndex]);
-                        case CardSwiperDirection.top:
-                          dates![pIndex].favorite = false;
-                          vm.insertDate(dates[pIndex]);
-                        default:
-                          break;
+                      if(direction == CardSwiperDirection.right) {
+                        vm.insertDate(dates![pIndex]);
                       }
                       return true;
                     },
@@ -66,9 +60,6 @@ class _ShufflePageState extends State<ShufflePage> {
                         suit: dates[index].suit,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
-                        onPress: () => {
-                          if (dates[index].favorite) {controller.swipe(CardSwiperDirection.top)} else {controller.swipe(CardSwiperDirection.right)},
-                        },
                       );
                     },
                   );
