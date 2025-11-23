@@ -20,17 +20,18 @@ class HomeRepository {
   //Network Calls
   Future<List<Date>> getDates(String category) async {
     //get response
-    final response = await http.get(Uri.parse('$baseUrl/$category.json'));
-    if (response.statusCode == 200) {
 
-      //decode json response and model
-      final List<Date> dates = (jsonDecode(response.body) as List<dynamic>).map((e)=>Date.fromJson(e)).toList();
+    //model uri
+    final uri = Uri.https(baseUrl,'/$category.json');
+    //response
+    final response = await http.get(uri);
 
+    try{
+      final List<Date> dates = (jsonDecode(response.body) as List<dynamic>).map((e) => Date.fromJson(e)).toList();
       dates.shuffle();
-
       return dates;
-    } else {
-      throw Exception('Failed to load data');
+   } catch(e) {
+      throw Exception(e);
     }
   }
 

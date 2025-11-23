@@ -42,7 +42,7 @@ class _ShufflePageState extends State<ShufflePage> {
                     )
                   );
                 } else if (snapshot.hasError) {
-                  return EmptyHandler(textTitle: "Please Shuffle Cards");
+                  return EmptyHandler(textTitle: "Please select a different category");
                 } else {
                   return CardSwiper(
                     controller: controller,
