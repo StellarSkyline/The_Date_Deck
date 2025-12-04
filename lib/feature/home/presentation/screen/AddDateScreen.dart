@@ -1,4 +1,6 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
+import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
+import 'package:date_deck/feature/home/presentation/screen/SaveScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../data/model/category.dart' show Category;
@@ -106,6 +108,9 @@ class _AddDateScreen extends State<AddDateScreen> {
                     favorite:true,
                     effortValue: selectedEffortValue
                   )
+                ),
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SaveScreen())
                 )
               },
               style: ElevatedButton.styleFrom(

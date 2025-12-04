@@ -21,11 +21,6 @@ class HomeRepository {
     return database.dateDao;
   }
 
-  var activeLength = 0;
-  var cookingLength = 0;
-  var creativeLength = 0;
-  var gamesLength = 0;
-
   //Network Calls
   Future<List<Date>> getDates(String category) async {
     //model uri
@@ -36,48 +31,28 @@ class HomeRepository {
     try{
       final List<Date> dates = (jsonDecode(response.body) as List<dynamic>).map((e) => Date.fromJson(e)).toList();
       dates.shuffle();
-      
-      //save current category list length
-      switch(category) {
-        case 'active':
-          activeLength = dates.length;
-        case 'cooking':
-          cookingLength = dates.length;
-        case 'creative':
-          creativeLength = dates.length;
-        case 'games':
-          gamesLength = dates.length;
-      }
       return dates;
    } catch(e) {
       throw Exception(e);
     }
   }
 
-  void postDate(String body, Category category) async {
+  Future<bool> postDate(String body, Category category) async {
 
     //get the length of the current database list
     var length = (await getDates(category.displayName.toLowerCase())).length;
     final uri = Uri.https(baseUrl,'/${category.displayName.toLowerCase()}/$length.json');
 
-    try {
-      final response = await http.patch(
-          uri,
+    final response = await http.patch(
+        uri,
         body: body
-      );
+    );
 
-      if (response.statusCode == 200) {
-        print('Data sent successfully: ${response.body}');
-      } else {
-        print('Failed to send data. Status code: ${response.statusCode}');
-        print('Response body: ${response.body}');
-      }
-
-    } catch(e) {
-      print(e);
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
-
-
   }
 
   Future<List<Date>> getActiveDates() => getDates('active');

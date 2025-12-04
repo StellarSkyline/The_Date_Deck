@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:date_deck/feature/home/data/model/date.dart';
@@ -79,7 +80,7 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  void setDate(Date date) {
+  Future<bool> setDate(Date date) {
     //generate data
     var generatedId = Random().nextInt(9999);
     final Map<String, dynamic> requestBody = {
@@ -91,6 +92,6 @@ class HomeViewModel extends ChangeNotifier {
     };
 
     final body = jsonEncode(requestBody);
-    _HomeRepo.postDate(body, date.category);
+    return _HomeRepo.postDate(body, date.category);
   }
 }
