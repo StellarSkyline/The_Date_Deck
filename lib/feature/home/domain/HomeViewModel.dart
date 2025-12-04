@@ -89,7 +89,7 @@ class HomeViewModel extends ChangeNotifier {
       "Suit": date.suit.name,
       "id": generatedId
     };
-    
+
     final body = jsonEncode(requestBody);
     _HomeRepo.postDate(body, date.category);
   }

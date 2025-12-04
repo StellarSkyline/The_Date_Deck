@@ -5,6 +5,8 @@ import '../../data/model/category.dart' show Category;
 import '../../data/model/date.dart';
 import '../../data/model/suit.dart';
 
+
+//TODO: Add screen for when successfully added a new data idea
 class AddDateScreen extends StatefulWidget {
   const AddDateScreen({super.key});
 
