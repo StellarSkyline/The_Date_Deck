@@ -1,5 +1,8 @@
+import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../data/model/category.dart' show Category;
+import '../../data/model/date.dart';
 import '../../data/model/suit.dart';
 
 class AddDateScreen extends StatefulWidget {
@@ -13,13 +16,14 @@ class _AddDateScreen extends State<AddDateScreen> {
   //Default State
   var selectedSuit = Suit.Club;
   var selectedCategory = Category.Active;
-  var selectedEffotValue = 8;
+  var selectedEffortValue = 8;
   var selectedDate = '';
   final controller = TextEditingController();
   final List<int> numbers = List<int>.generate(13, (i) => i + 1);
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<HomeViewModel>();
     return (Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -52,7 +56,22 @@ class _AddDateScreen extends State<AddDateScreen> {
                 ),
                 onChanged: (p) {
                   setState(() {
-                    selectedEffotValue = p!;
+                    selectedEffortValue = p!;
+                  });
+                },
+              ),
+              SizedBox(height: 10),
+              DropdownButtonFormField(
+                items: Suit.values
+                    .map((p) => DropdownMenuItem(value: p, child: Text(p.name)))
+                    .toList(),
+                decoration: InputDecoration(
+                  labelText: 'Select a Suit',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (p) {
+                  setState(() {
+                    selectedSuit = p!;
                   });
                 },
               ),
@@ -75,9 +94,17 @@ class _AddDateScreen extends State<AddDateScreen> {
             height: 55,
             child: ElevatedButton(
               onPressed: () => {
-                print(selectedEffotValue.toString()),
-                print(selectedCategory.toString()),
-                print(controller.text),
+                vm.setDate(
+                  Date(
+                    id: 0,
+                    shortName: '',
+                    fullDescription: controller.text,
+                    category: selectedCategory,
+                    suit: selectedSuit,
+                    favorite:true,
+                    effortValue: selectedEffortValue
+                  )
+                )
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFE06F7C),

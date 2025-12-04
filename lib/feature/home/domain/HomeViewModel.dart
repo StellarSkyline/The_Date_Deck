@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
 import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
@@ -75,5 +77,20 @@ class HomeViewModel extends ChangeNotifier {
       default:
         return _HomeRepo.getActiveDates();
     }
+  }
+
+  void setDate(Date date) {
+    //generate data
+    var generatedId = Random().nextInt(9999);
+    final Map<String, dynamic> requestBody = {
+      "Category": date.category.displayName,
+      "Effort Value": date.effortValue,
+      "Name": date.fullDescription,
+      "Suit": date.suit.name,
+      "id": generatedId
+    };
+    
+    final body = jsonEncode(requestBody);
+    _HomeRepo.postDate(body, date.category);
   }
 }
