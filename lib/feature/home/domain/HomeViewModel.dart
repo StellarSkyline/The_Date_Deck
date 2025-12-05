@@ -86,7 +86,7 @@ class HomeViewModel extends ChangeNotifier {
     final Map<String, dynamic> requestBody = {
       "Category": date.category.displayName,
       "Effort Value": date.effortValue,
-      "Name": date.fullDescription,
+      "Name": date.name,
       "Suit": date.suit.name,
       "id": generatedId
     };

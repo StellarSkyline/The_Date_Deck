@@ -1,8 +1,8 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
-import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
 import 'package:date_deck/feature/home/presentation/screen/SaveScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../data/model/category.dart' show Category;
 import '../../data/model/date.dart';
 import '../../data/model/suit.dart';
@@ -101,11 +101,9 @@ class _AddDateScreen extends State<AddDateScreen> {
                 vm.setDate(
                   Date(
                     id: 0,
-                    shortName: '',
-                    fullDescription: controller.text,
+                    name: controller.text,
                     category: selectedCategory,
                     suit: selectedSuit,
-                    favorite:true,
                     effortValue: selectedEffortValue
                   )
                 ),
@@ -123,5 +121,12 @@ class _AddDateScreen extends State<AddDateScreen> {
         ),
       ],
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
   }
 }

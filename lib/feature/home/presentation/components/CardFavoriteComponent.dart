@@ -7,12 +7,12 @@ import '../../domain/HomeViewModel.dart';
 class CardFavoriteComponent extends StatelessWidget {
   final String name;
   final Suit suit;
-  final bool favorite;
+
   final ValueChanged onPress;
   final String categoryName;
   final int effortValue;
 
-  const CardFavoriteComponent({super.key, required this.name, required this.suit, required this.favorite, required this.onPress, required this.categoryName, required this.effortValue});
+  const CardFavoriteComponent({super.key, required this.name, required this.suit, required this.onPress, required this.categoryName, required this.effortValue});
 
   @override
   Widget build(BuildContext context) {

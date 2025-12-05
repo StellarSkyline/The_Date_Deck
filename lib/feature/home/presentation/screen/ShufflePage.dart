@@ -56,7 +56,7 @@ class _ShufflePageState extends State<ShufflePage> {
                     },
                     cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
                       return CardComponent(
-                        name: dates![index].fullDescription,
+                        name: dates![index].name,
                         suit: dates[index].suit,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,

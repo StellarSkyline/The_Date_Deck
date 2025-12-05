@@ -40,9 +40,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     itemCount: dates.length,
                     itemBuilder: (context, index) {
                       return CardFavoriteComponent(
-                        name: dates[index].fullDescription,
+                        name: dates[index].name,
                         suit: dates[index].suit,
-                        favorite: dates[index].favorite,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
                         onPress: (value) => {
