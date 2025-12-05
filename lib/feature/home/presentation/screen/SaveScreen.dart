@@ -1,9 +1,7 @@
-import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SaveScreen extends StatelessWidget{
+class SaveScreen extends StatelessWidget {
   const SaveScreen({super.key});
 
   @override
@@ -17,13 +15,10 @@ class SaveScreen extends StatelessWidget{
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-             EmptyHandler(textTitle: 'Date Idea successfully saved to server')
-            ],
+            children: [EmptyHandler(textTitle: 'Date Idea successfully saved to server')],
           ),
         ),
       ),
     );
   }
-
 }
