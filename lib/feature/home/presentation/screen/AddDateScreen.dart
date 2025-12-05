@@ -98,18 +98,16 @@ class _AddDateScreen extends State<AddDateScreen> {
             height: 55,
             child: ElevatedButton(
               onPressed: () => {
-                vm.setDate(
-                  Date(
-                    id: 0,
-                    name: controller.text,
-                    category: selectedCategory,
-                    suit: selectedSuit,
-                    effortValue: selectedEffortValue
-                  )
+                vm.setDateIdea(
+                    Date(
+                        id: 0,
+                        name: controller.text,
+                        category: selectedCategory,
+                        suit: selectedSuit,
+                        effortValue: selectedEffortValue
+                    )
                 ),
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SaveScreen())
-                )
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SaveScreen()))
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFE06F7C),
@@ -125,8 +123,7 @@ class _AddDateScreen extends State<AddDateScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 }

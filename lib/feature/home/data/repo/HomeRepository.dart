@@ -38,7 +38,6 @@ class HomeRepository {
   }
 
   Future<bool> postDate(String body, Category category) async {
-
     //get the length of the current database list
     var length = (await getDates(category.displayName.toLowerCase())).length;
     final uri = Uri.https(baseUrl,'/${category.displayName.toLowerCase()}/$length.json');

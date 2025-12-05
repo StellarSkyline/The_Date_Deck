@@ -25,11 +25,16 @@ class HomeViewModel extends ChangeNotifier {
 
   int get categoryIndex => _categoryIndex;
 
+  late Date _dateIdea;
+
+  get dateIdea => _dateIdea;
+
   get graphics => _HomeRepo.graphicsList;
 
   get cardNumbers => _HomeRepo.cardNumber;
 
   get suitGraphics => _HomeRepo.suitList;
+
 
   //Constructor
   HomeViewModel() {
@@ -39,6 +44,11 @@ class HomeViewModel extends ChangeNotifier {
   //Methods
   void init() async {
     _dao = await _HomeRepo.buildDatabase();
+    notifyListeners();
+  }
+
+  void setDateIdea(Date date) {
+    _dateIdea = date;
     notifyListeners();
   }
 
@@ -80,18 +90,19 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  Future<bool> setDate(Date date) {
+  Future<bool> saveDate() {
     //generate data
     var generatedId = Random().nextInt(9999);
     final Map<String, dynamic> requestBody = {
-      "Category": date.category.displayName,
-      "Effort Value": date.effortValue,
-      "Name": date.name,
-      "Suit": date.suit.name,
+      "Category": _dateIdea.category.displayName,
+      "Effort Value": _dateIdea.effortValue,
+      "Name": _dateIdea.name,
+      "Suit": _dateIdea.suit.name,
       "id": generatedId
     };
 
     final body = jsonEncode(requestBody);
-    return _HomeRepo.postDate(body, date.category);
+    return _HomeRepo.postDate(body, _dateIdea.category);
+
   }
 }
