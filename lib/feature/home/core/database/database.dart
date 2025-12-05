@@ -16,4 +16,9 @@ abstract class AppDatabase extends FloorDatabase {
   DateDao get dateDao;
 }
 
+/*
+Run script in terminal to generate floor data
+dart run build_runner build
+* */
+
 
