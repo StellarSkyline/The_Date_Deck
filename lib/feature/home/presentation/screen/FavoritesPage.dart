@@ -8,14 +8,8 @@ import 'package:provider/provider.dart';
 
 import '../../domain/HomeViewModel.dart';
 
-class FavoritesPage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _FavoritesPageState();
-}
-
-class _FavoritesPageState extends State<FavoritesPage> {
-  //Widget State
-  var databaseState = true;
+class FavoritesPage extends StatelessWidget {
+  const FavoritesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +38,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         suit: dates[index].suit,
                         categoryName: dates[index].category.displayName,
                         effortValue: dates[index].effortValue,
-                        onPress: (value) => {
-                          vm.deleteDate(dates[index]),
-                        },
+                        onPress: (value) => {vm.deleteDate(dates[index])},
                       );
                     },
                   );

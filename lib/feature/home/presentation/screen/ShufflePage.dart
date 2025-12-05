@@ -6,13 +6,8 @@ import '../../domain/HomeViewModel.dart';
 import '../components/CardComponent.dart';
 import '../components/EmptyHandler.dart';
 
-class ShufflePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _ShufflePageState();
-}
-
-class _ShufflePageState extends State<ShufflePage> {
-  var databaseState = true;
+class ShufflePage extends StatelessWidget {
+  const ShufflePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +19,10 @@ class _ShufflePageState extends State<ShufflePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: 8),
-        Container(height: 42, child: HorizontalList(onPressed: (index) => vm.setCategoryIndex(index))),
+        Container(
+          height: 42,
+          child: HorizontalList(onPressed: (index) => vm.setCategoryIndex(index)),
+        ),
         Expanded(
           child: Padding(
             padding: EdgeInsetsGeometry.all(10),
@@ -35,11 +33,7 @@ class _ShufflePageState extends State<ShufflePage> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Align(
                     alignment: Alignment.center,
-                    child: Container(
-                      width: 100,
-                      height:100,
-                      child: CircularProgressIndicator(),
-                    )
+                    child: Container(width: 100, height: 100, child: CircularProgressIndicator()),
                   );
                 } else if (snapshot.hasError) {
                   return EmptyHandler(textTitle: "Please select a different category");
@@ -47,21 +41,30 @@ class _ShufflePageState extends State<ShufflePage> {
                   return CardSwiper(
                     controller: controller,
                     cardsCount: snapshot.data!.length,
-                    allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
+                    allowedSwipeDirection: AllowedSwipeDirection.symmetric(
+                      horizontal: true,
+                      vertical: false,
+                    ),
                     onSwipe: (pIndex, cIndex, direction) {
-                      if(direction == CardSwiperDirection.right) {
+                      if (direction == CardSwiperDirection.right) {
                         vm.insertDate(dates![pIndex]);
                       }
                       return true;
                     },
-                    cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
-                      return CardComponent(
-                        name: dates![index].name,
-                        suit: dates[index].suit,
-                        categoryName: dates[index].category.displayName,
-                        effortValue: dates[index].effortValue,
-                      );
-                    },
+                    cardBuilder:
+                        (
+                          context,
+                          index,
+                          horizontalThresholdPercentage,
+                          verticalThresholdPercentage,
+                        ) {
+                          return CardComponent(
+                            name: dates![index].name,
+                            suit: dates[index].suit,
+                            categoryName: dates[index].category.displayName,
+                            effortValue: dates[index].effortValue,
+                          );
+                        },
                   );
                 }
               },
