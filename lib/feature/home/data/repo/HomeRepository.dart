@@ -1,19 +1,16 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:math';
-
+import 'package:date_deck/feature/home/core/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/model/category.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:http/http.dart' as http;
-
-import '../../core/Constants.dart';
 import '../../core/database/database.dart';
 import '../../core/database/date_dao.dart';
 import '../model/date.dart';
 
 class HomeRepository {
+  //Network Helper
+  final networkClient = NetworkClient();
+
   //Database Initialization
   Future<DateDao> buildDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -23,31 +20,23 @@ class HomeRepository {
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
-    //model uri
-    final uri = Uri.https(baseUrl,'/$category.json');
-    //response
-    final response = await http.get(uri);
-
-    try{
-      final List<Date> dates = (jsonDecode(response.body) as List<dynamic>).map((e) => Date.fromJson(e)).toList();
-      dates.shuffle();
-      return dates;
-   } catch(e) {
-      throw Exception(e);
-    }
+    final response = await networkClient.get(category);
+    final List<Date> dates = (jsonDecode(response.body) as List<dynamic>)
+        .map((e) => Date.fromJson(e))
+        .toList();
+    dates.shuffle();
+    return dates;
   }
 
   Future<bool> postDate(String body, Category category) async {
-    //get the length of the current database list
+    //get the length of the current database list needed for patching data on network
     var length = (await getDates(category.displayName.toLowerCase())).length;
-    final uri = Uri.https(baseUrl,'/${category.displayName.toLowerCase()}/$length.json');
-
-    final response = await http.patch(
-        uri,
-        body: body
+    final response = await networkClient.patch(
+      body,
+      category.displayName.toLowerCase(),
+      length.toString(),
     );
-
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       return true;
     } else {
       return false;
@@ -55,10 +44,12 @@ class HomeRepository {
   }
 
   Future<List<Date>> getActiveDates() => getDates('active');
-  Future<List<Date>> getCookingDates() => getDates('cooking');
-  Future<List<Date>> getCreativeDates() => getDates('creative');
-  Future<List<Date>> getGamesDates() => getDates('games');
 
+  Future<List<Date>> getCookingDates() => getDates('cooking');
+
+  Future<List<Date>> getCreativeDates() => getDates('creative');
+
+  Future<List<Date>> getGamesDates() => getDates('games');
 
   //Graphics Assets
   final graphicsList = [
@@ -78,12 +69,23 @@ class HomeRepository {
   ];
 
   final suitList = [
-    {'suit': SvgPicture.asset('assets/icons/icn_club.svg', fit: BoxFit.fill), 'color': Colors.black},
-    {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', fit: BoxFit.fill), 'color': Colors.black},
-    {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', fit: BoxFit.fill), 'color': Color(0xFFE06F7C)},
-    {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill), 'color': Color(0xFFE06F7C)},
+    {
+      'suit': SvgPicture.asset('assets/icons/icn_club.svg', fit: BoxFit.fill),
+      'color': Colors.black,
+    },
+    {
+      'suit': SvgPicture.asset('assets/icons/icn_spade.svg', fit: BoxFit.fill),
+      'color': Colors.black,
+    },
+    {
+      'suit': SvgPicture.asset('assets/icons/icn_heart.svg', fit: BoxFit.fill),
+      'color': Color(0xFFE06F7C),
+    },
+    {
+      'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill),
+      'color': Color(0xFFE06F7C),
+    },
   ];
 
   final cardNumber = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
 }

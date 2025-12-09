@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:math';
-
 import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-
 import '../../../feature/home/core/database/date_dao.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -93,6 +90,7 @@ class HomeViewModel extends ChangeNotifier {
   Future<bool> saveDate() {
     //generate data
     var generatedId = Random().nextInt(9999);
+    //build request body
     final Map<String, dynamic> requestBody = {
       "Category": _dateIdea.category.displayName,
       "Effort Value": _dateIdea.effortValue,
@@ -101,8 +99,8 @@ class HomeViewModel extends ChangeNotifier {
       "id": generatedId
     };
 
+    //encode request body
     final body = jsonEncode(requestBody);
     return _HomeRepo.postDate(body, _dateIdea.category);
-
   }
 }
