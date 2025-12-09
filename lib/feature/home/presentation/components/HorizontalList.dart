@@ -21,7 +21,7 @@ class HorizontalList extends StatelessWidget {
         return Padding(
           padding: EdgeInsetsGeometry.all(5.0),
           child: ElevatedButton(
-            onPressed: () => {onPressed(index), vm.setCategoryIndex(index)},
+            onPressed: () => {onPressed(index)},
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               backgroundColor: vm.categoryIndex == index ? Color(0xFFE06F7C) : Color(0xFF5E4E81),
