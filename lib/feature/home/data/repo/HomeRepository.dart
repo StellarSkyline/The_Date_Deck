@@ -10,7 +10,7 @@ import '../model/date.dart';
 class HomeRepository {
   //Network Helper injection
   final NetworkClient _networkClient;
-  HomeRepository({required NetworkClient myNetworkClient}): _networkClient = myNetworkClient;
+  HomeRepository({required NetworkClient networkClient}): _networkClient = networkClient;
 
   //Database Initialization
   Future<DateDao> buildDatabase() async {

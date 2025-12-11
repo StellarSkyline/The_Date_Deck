@@ -15,7 +15,7 @@ void main() {
       when(client.get(Uri.https(baseUrl,'/active.json')))
           .thenAnswer((_) async => http.Response(mockData, 200));
 
-      expect(await HomeRepository(myNetworkClient: NetworkClient(client: client)).getActiveDates(), isA<List<Date>>());
+      expect(await HomeRepository(networkClient: NetworkClient(client: client)).getActiveDates(), isA<List<Date>>());
     });
 
     test('Repo Get Active Dates Fail', () {
@@ -23,7 +23,7 @@ void main() {
       when(client.get(Uri.https(baseUrl,'/active.json')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
-      expect(HomeRepository(myNetworkClient: NetworkClient(client: client)).getActiveDates(), throwsException);
+      expect(HomeRepository(networkClient: NetworkClient(client: client)).getActiveDates(), throwsException);
     });
   });
 }

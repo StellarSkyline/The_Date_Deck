@@ -10,7 +10,7 @@ import 'TestHelper.dart';
 @GenerateMocks([], customMocks: [MockSpec<http.Client>(as: #MockHttpClient)])
 void main() {
 
-  group('Network Client Test', () {
+  group('Network Client Test GET', () {
     test('get Date Success', () async {
       final client = MockHttpClient();
       when(client.get(Uri.https(baseUrl,'/active.json')))
@@ -28,4 +28,5 @@ void main() {
     });
 
   });
+
 }

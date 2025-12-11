@@ -11,7 +11,7 @@ void main() {
     runApp(
         MultiProvider(providers:[
           Provider(create:(context) => NetworkClient(client: Client())),
-          Provider(create: (context) => HomeRepository(myNetworkClient: Provider.of<NetworkClient>(context, listen:false))),
+          Provider(create: (context) => HomeRepository(networkClient: Provider.of<NetworkClient>(context, listen:false))),
           ChangeNotifierProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)))
         ],
           child: MyApp()
