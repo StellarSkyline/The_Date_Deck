@@ -1,6 +1,7 @@
 import 'package:date_deck/feature/home/core/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'feature/home/domain/HomeViewModel.dart';
 import 'feature/home/presentation/screen/SplashPage.dart';
@@ -9,7 +10,7 @@ void main() {
   //Dependency injection - Dependencies are created here and injected into HomeViewModel which is then injected to the main App
     runApp(
         MultiProvider(providers:[
-          Provider(create:(context) => NetworkClient()),
+          Provider(create:(context) => NetworkClient(client: Client())),
           Provider(create: (context) => HomeRepository(myNetworkClient: Provider.of<NetworkClient>(context, listen:false))),
           ChangeNotifierProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)))
         ],

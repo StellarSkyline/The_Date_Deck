@@ -50,7 +50,7 @@ dev_dependencies:
     sdk: flutter
   #Floor database Generator
   floor_generator: ^1.4.2
-  build_runner: ^2.1.2
+  build_runner: ^2.4.13
   #Multi Provider
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -59,6 +59,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
