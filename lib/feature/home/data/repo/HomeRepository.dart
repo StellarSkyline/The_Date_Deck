@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:date_deck/feature/home/core/network/NetworkClient.dart';
+import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../core/database/database.dart';
-import '../../core/database/date_dao.dart';
+import '../../data/database/database.dart';
+import '../../data/database/date_dao.dart';
 import '../model/date.dart';
 
 class HomeRepository {

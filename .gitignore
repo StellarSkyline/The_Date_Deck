@@ -51,5 +51,5 @@ app.*.map.json
 /linux/flutter/generated_plugins.cmake
 /windows/flutter/generated_plugins.cmake
 /macos/Flutter/GeneratedPluginRegistrant.swift
-/lib/feature/home/core/database/database.g.dart
+/lib/feature/home/data/database/database.g.dart
 /assets/images/img_main.png

@@ -1,5 +1,5 @@
 
-import 'package:date_deck/feature/home/core/network/NetworkClient.dart';
+import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter_test/flutter_test.dart';

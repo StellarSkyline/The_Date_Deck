@@ -5,7 +5,7 @@ import 'package:date_deck/feature/home/data/model/date.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import '../../../feature/home/core/database/date_dao.dart';
+import '../../../feature/home/data/database/date_dao.dart';
 
 class HomeViewModel extends ChangeNotifier {
 

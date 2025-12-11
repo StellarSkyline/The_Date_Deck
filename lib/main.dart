@@ -1,4 +1,4 @@
-import 'package:date_deck/feature/home/core/network/NetworkClient.dart';
+import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
