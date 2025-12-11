@@ -14,7 +14,7 @@ void main() {
       '{"0:{"Category": Active", "Effort Value": 7, "Name": "TEST TEST", "Suit": Club, "id": 2271"}"}';
 
   group('Network Client Test', () {
-    
+
     test('get Date Success', () async {
       final client = MockHttpClient();
       when(client.get(Uri.https(baseUrl, '/active.json')))
