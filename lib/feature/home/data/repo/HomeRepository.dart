@@ -8,8 +8,9 @@ import '../../core/database/date_dao.dart';
 import '../model/date.dart';
 
 class HomeRepository {
-  //Network Helper
-  final networkClient = NetworkClient();
+  //Network Helper injection
+  final NetworkClient _networkClient;
+  HomeRepository({required NetworkClient myNetworkClient}): _networkClient = myNetworkClient;
 
   //Database Initialization
   Future<DateDao> buildDatabase() async {
@@ -20,7 +21,7 @@ class HomeRepository {
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
-    final response = await networkClient.get(category);
+    final response = await _networkClient.get(category);
     final List<Date> dates = (jsonDecode(response.body) as List<dynamic>)
         .map((e) => Date.fromJson(e))
         .toList();
@@ -31,7 +32,7 @@ class HomeRepository {
   Future<bool> postDate(String body, Category category) async {
     //get the length of the current database list needed for patching data on network
     var length = (await getDates(category.displayName.toLowerCase())).length;
-    final response = await networkClient.patch(
+    final response = await _networkClient.patch(
       body,
       category.displayName.toLowerCase(),
       length.toString(),

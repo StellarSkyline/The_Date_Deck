@@ -8,9 +8,15 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../../../feature/home/core/database/date_dao.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  //Repo
-  final _HomeRepo = HomeRepository();
 
+  //Repo injection
+  late HomeRepository _homeRepo;
+  
+  HomeViewModel({required HomeRepository homeRepo}) {
+    _homeRepo = homeRepo;
+    init();
+  }
+  
   //State
   late DateDao _dao;
 
@@ -26,21 +32,18 @@ class HomeViewModel extends ChangeNotifier {
 
   get dateIdea => _dateIdea;
 
-  get graphics => _HomeRepo.graphicsList;
+  get graphics => _homeRepo.graphicsList;
 
-  get cardNumbers => _HomeRepo.cardNumber;
+  get cardNumbers => _homeRepo.cardNumber;
 
-  get suitGraphics => _HomeRepo.suitList;
+  get suitGraphics => _homeRepo.suitList;
 
 
   //Constructor
-  HomeViewModel() {
-    init();
-  }
 
   //Methods
   void init() async {
-    _dao = await _HomeRepo.buildDatabase();
+    _dao = await _homeRepo.buildDatabase();
     notifyListeners();
   }
 
@@ -75,15 +78,15 @@ class HomeViewModel extends ChangeNotifier {
   Future<List<Date>> getCategory(int index) {
     switch (index) {
       case 0:
-        return _HomeRepo.getActiveDates();
+        return _homeRepo.getActiveDates();
       case 1:
-        return _HomeRepo.getCreativeDates();
+        return _homeRepo.getCreativeDates();
       case 2:
-        return _HomeRepo.getGamesDates();
+        return _homeRepo.getGamesDates();
       case 3:
-        return _HomeRepo.getCookingDates();
+        return _homeRepo.getCookingDates();
       default:
-        return _HomeRepo.getActiveDates();
+        return _homeRepo.getActiveDates();
     }
   }
 
@@ -101,6 +104,6 @@ class HomeViewModel extends ChangeNotifier {
 
     //encode request body
     final body = jsonEncode(requestBody);
-    return _HomeRepo.postDate(body, _dateIdea.category);
+    return _homeRepo.postDate(body, _dateIdea.category);
   }
 }
