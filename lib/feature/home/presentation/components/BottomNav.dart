@@ -21,7 +21,6 @@ class _BottomNavState extends State<BottomNav> {
 
     @override
     Widget build(BuildContext context) {
-        final vm = context.watch<HomeViewModel>();
 
         return BottomNavigationBar(
             elevation: 0,

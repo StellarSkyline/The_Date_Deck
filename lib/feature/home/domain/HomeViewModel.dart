@@ -32,13 +32,6 @@ class HomeViewModel extends ChangeNotifier {
 
   get dateIdea => _dateIdea;
 
-  get graphics => _homeRepo.graphicsList;
-
-  get cardNumbers => _homeRepo.cardNumber;
-
-  get suitGraphics => _homeRepo.suitList;
-
-
   //Constructor
 
   //Methods

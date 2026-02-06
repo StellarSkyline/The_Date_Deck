@@ -3,18 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/database/date_dao.dart';
 import '../../data/model/date.dart';
 import '../../data/repo/HomeRepository.dart';
-import 'HomeState.dart';
+import 'ShuffleState.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class ShuffleViewModel extends Cubit<ShuffleState> {
   //Repo injection
   late DateDao _dao;
   final HomeRepository homeRepo;
 
   //Constructor and Home Repo injection
-  HomeCubit({required this.homeRepo}) : super(HomeState()) {
+  ShuffleViewModel({required this.homeRepo}) : super(ShuffleState()) {
     init();
   }
-
 
   void init() async {
     _dao = await homeRepo.buildDatabase();
@@ -22,23 +21,16 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   //Update State Events
-  void setDateIdea(Date date) => emit(state.copyWith(dateIdea: date));
+  //void setDateIdea(Date date) => emit(state.copyWith(dateIdea: date));
 
   void setCategoryIndex(int index) => emit(state.copyWith(categoryIndex: index));
 
   //Database Methods
-  void deleteDate(Date date) {
-    _dao.deleteDate(date);
-  }
 
   void insertDate(Date date) async {
     //Verify if the date exits
     final savedDate = await _dao.findById(date.id);
     if (savedDate == null) _dao.insertDate(date);
-  }
-
-  Future<List<Date>> getFavorites() {
-    return _dao.getAllDates();
   }
 
   void getCategory() async {

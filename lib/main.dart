@@ -1,11 +1,12 @@
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
+import 'package:date_deck/feature/home/domain/bloc/FavoriteViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'feature/home/domain/HomeViewModel.dart';
-import 'feature/home/domain/bloc/HomeCubit.dart';
+import 'feature/home/domain/bloc/ShuffleViewModel.dart';
 import 'feature/home/presentation/screen/SplashPage.dart';
 
 void main() {
@@ -16,7 +17,8 @@ void main() {
       Provider(create:(context) => NetworkClient(client: Client())),
       Provider(create: (context) => HomeRepository(networkClient: Provider.of<NetworkClient>(context, listen:false))),
       ChangeNotifierProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
-      BlocProvider(create: (context) => HomeCubit(homeRepo: Provider.of<HomeRepository>(context, listen: false)))
+      BlocProvider(create: (context) => ShuffleViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
+      BlocProvider(create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)))
     ], child: MyApp())
   );
 }
