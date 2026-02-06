@@ -1,12 +1,12 @@
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
-import 'package:date_deck/feature/home/domain/bloc/FavoriteViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
 import 'feature/home/domain/HomeViewModel.dart';
-import 'feature/home/domain/bloc/ShuffleViewModel.dart';
+import 'feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
 import 'feature/home/presentation/screen/SplashPage.dart';
 
 void main() {

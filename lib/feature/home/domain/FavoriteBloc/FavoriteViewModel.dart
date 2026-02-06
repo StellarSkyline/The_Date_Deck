@@ -1,9 +1,8 @@
-import 'package:date_deck/feature/home/domain/bloc/FavoriteState.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/database/date_dao.dart';
 import '../../data/model/date.dart';
 import '../../data/repo/HomeRepository.dart';
+import 'FavoriteState.dart';
 
 class FavoriteViewModel extends Cubit<FavoriteState>{
 

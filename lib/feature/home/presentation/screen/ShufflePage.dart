@@ -1,10 +1,10 @@
-import 'package:date_deck/feature/home/domain/bloc/ShuffleViewModel.dart';
+import 'package:date_deck/feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
-import '../../domain/bloc/ShuffleState.dart';
+import '../../domain/ShuffleBloc/ShuffleState.dart';
 import '../components/CardComponent.dart';
 
 class ShufflePage extends StatelessWidget {
