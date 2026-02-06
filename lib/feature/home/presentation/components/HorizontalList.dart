@@ -6,14 +6,14 @@ import '../../domain/HomeViewModel.dart';
 
 class HorizontalList extends StatelessWidget {
   final ValueChanged<int> onPressed;
+  final int selectedIndex;
 
-  HorizontalList({super.key, required this.onPressed});
+  HorizontalList({super.key, required this.onPressed, required this.selectedIndex});
 
   final List items = ["Active", "Creative", "Games", "Cooking"];
 
   @override
   Widget build(BuildContext context) {
-    final vm = context.watch<HomeViewModel>();
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
@@ -24,7 +24,7 @@ class HorizontalList extends StatelessWidget {
             onPressed: () => {onPressed(index)},
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              backgroundColor: vm.categoryIndex == index ? Color(0xFFE06F7C) : Color(0xFF5E4E81),
+              backgroundColor: selectedIndex == index ? Color(0xFFE06F7C) : Color(0xFF5E4E81),
             ),
             child: Text(items[index], style: TextStyle(color: Colors.white, fontSize: 15.0)),
           ),

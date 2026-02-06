@@ -21,7 +21,7 @@ class ShufflePage extends StatelessWidget {
         SizedBox(height: 8),
         Container(
           height: 42,
-          child: HorizontalList(onPressed: (index) => vm.setCategoryIndex(index)),
+          child: HorizontalList(onPressed: (index) => vm.setCategoryIndex(index), selectedIndex: vm.categoryIndex,),
         ),
         Expanded(
           child: Padding(

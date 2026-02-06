@@ -44,6 +44,7 @@ class HomeViewModel extends ChangeNotifier {
   //Methods
   void init() async {
     _dao = await _homeRepo.buildDatabase();
+
     notifyListeners();
   }
 
