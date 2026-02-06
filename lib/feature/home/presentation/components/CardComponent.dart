@@ -1,10 +1,7 @@
-import 'package:date_deck/feature/home/data/repo/CardGraphics.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'dart:math' as Math;
 
+import 'package:date_deck/feature/home/data/repo/CardGraphics.dart';
+import 'package:flutter/material.dart';
 import '../../data/model/suit.dart';
 
 

@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
-
-import '../../domain/HomeViewModel.dart';
 
 class BottomNav extends StatefulWidget {
-
     final ValueChanged<int> onPressed;
-
     const BottomNav({super.key, required this.onPressed});
 
     @override
     State<StatefulWidget> createState() => _BottomNavState();
-
 }
 
 class _BottomNavState extends State<BottomNav> {

@@ -1,15 +1,9 @@
-import 'dart:async';
-
 import 'package:date_deck/feature/home/domain/FavoriteBloc/FavoriteState.dart';
 import 'package:date_deck/feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/CardFavoriteComponent.dart';
 import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-
-import '../../domain/HomeViewModel.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});

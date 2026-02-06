@@ -1,6 +1,5 @@
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
-import 'package:date_deck/feature/home/presentation/screen/AddDateScreen.dart';
-import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
+import 'package:date_deck/feature/home/presentation/screen/AddDatePage.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List pages = [ShufflePage(), FavoritesPage(), AddDateScreen()];
+    final List pages = [ShufflePage(), FavoritesPage(), AddDatePage()];
 
     return Container(
       color: Color(0xFFFBF8F0),

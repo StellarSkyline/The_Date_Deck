@@ -1,14 +1,12 @@
 import 'dart:math' as Math;
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../data/model/suit.dart';
 import '../../data/repo/CardGraphics.dart';
-import '../../domain/HomeViewModel.dart';
 
 class CardFavoriteComponent extends StatelessWidget {
   final String name;
   final Suit suit;
-
   final ValueChanged onPress;
   final String categoryName;
   final int effortValue;

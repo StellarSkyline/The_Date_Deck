@@ -14,6 +14,7 @@ class ShufflePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.read<ShuffleViewModel>();
     final controller = CardSwiperController();
+    vm.getCategory();
 
     return BlocBuilder<ShuffleViewModel, ShuffleState>(
       builder: (context, state) {
