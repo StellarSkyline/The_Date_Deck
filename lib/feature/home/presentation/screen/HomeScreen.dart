@@ -1,6 +1,7 @@
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/AddDateScreen.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
+import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
 

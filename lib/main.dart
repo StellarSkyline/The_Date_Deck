@@ -4,18 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'feature/home/data/database/database.dart';
+import 'feature/home/data/database/date_dao.dart';
 import 'feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
 import 'feature/home/domain/HomeViewModel.dart';
 import 'feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
 import 'feature/home/presentation/screen/SplashPage.dart';
 
-void main() {
-  //Dependency injection - Dependencies are created here and injected into HomeViewModel which is then injected to the main App
 
+void main() async{
+
+  //TODO: Find a better way to Create Database Instance
+  DateDao dao = await buildDatabase();
+
+  //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
   runApp(
     MultiBlocProvider(providers: [
       Provider(create:(context) => NetworkClient(client: Client())),
-      Provider(create: (context) => HomeRepository(networkClient: Provider.of<NetworkClient>(context, listen:false))),
+      Provider(create: (context) => HomeRepository(dao: dao, networkClient: Provider.of<NetworkClient>(context, listen:false))),
       ChangeNotifierProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       BlocProvider(create: (context) => ShuffleViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       BlocProvider(create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)))
@@ -34,4 +40,11 @@ class MyApp extends StatelessWidget {
       home: SplashPage(),
     );
   }
+}
+
+//Database Initialization
+Future<DateDao> buildDatabase() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
+  return database.dateDao;
 }

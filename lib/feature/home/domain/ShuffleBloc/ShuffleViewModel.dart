@@ -7,7 +7,6 @@ import 'ShuffleState.dart';
 
 class ShuffleViewModel extends Cubit<ShuffleState> {
   //Repo injection
-  late DateDao _dao;
   final HomeRepository homeRepo;
 
   //Constructor and Home Repo injection
@@ -16,21 +15,15 @@ class ShuffleViewModel extends Cubit<ShuffleState> {
   }
 
   void init() async {
-    _dao = await homeRepo.buildDatabase();
     getCategory();
   }
 
   //Update State Events
-  //void setDateIdea(Date date) => emit(state.copyWith(dateIdea: date));
-
   void setCategoryIndex(int index) => emit(state.copyWith(categoryIndex: index));
 
   //Database Methods
-
-  void insertDate(Date date) async {
-    //Verify if the date exits
-    final savedDate = await _dao.findById(date.id);
-    if (savedDate == null) _dao.insertDate(date);
+  void insertDate(Date date) {
+    homeRepo.insertDate(date);
   }
 
   void getCategory() async {
@@ -39,13 +32,21 @@ class ShuffleViewModel extends Cubit<ShuffleState> {
 
     switch (index) {
       case 0:
-        await homeRepo.getActiveDates().then((dates) => emit(state.copyWith(dateList: dates, isLoading: false)));
+        await homeRepo.getActiveDates().then(
+          (dates) => emit(state.copyWith(dateList: dates, isLoading: false)),
+        );
       case 1:
-        await homeRepo.getCreativeDates().then((dates) => emit(state.copyWith(dateList: dates, isLoading: false)));
+        await homeRepo.getCreativeDates().then(
+          (dates) => emit(state.copyWith(dateList: dates, isLoading: false)),
+        );
       case 2:
-        await homeRepo.getGamesDates().then((dates) => emit(state.copyWith(dateList: dates, isLoading: false)));
+        await homeRepo.getGamesDates().then(
+          (dates) => emit(state.copyWith(dateList: dates, isLoading: false)),
+        );
       case 3:
-        await homeRepo.getCookingDates().then((dates) => emit(state.copyWith(dateList: dates, isLoading: false)));
+        await homeRepo.getCookingDates().then(
+          (dates) => emit(state.copyWith(dateList: dates, isLoading: false)),
+        );
     }
   }
 }

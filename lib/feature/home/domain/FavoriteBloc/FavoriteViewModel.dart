@@ -1,32 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/database/date_dao.dart';
 import '../../data/model/date.dart';
 import '../../data/repo/HomeRepository.dart';
 import 'FavoriteState.dart';
 
-class FavoriteViewModel extends Cubit<FavoriteState>{
-
-  late DateDao _dao;
+class FavoriteViewModel extends Cubit<FavoriteState> {
   final HomeRepository homeRepo;
 
-  //constructor
-//Constructor and Home Repo injection
-  FavoriteViewModel({required this.homeRepo}) : super(FavoriteState()) {
-    init();
-  }
+  //Constructor and Home Repo injection
+  FavoriteViewModel({required this.homeRepo}) : super(FavoriteState());
 
-  void init() async {
-    _dao = await homeRepo.buildDatabase();
-  }
-
-  void deleteDate(Date date) {
-    _dao.deleteDate(date);
-  }
-
-  void getFavorites() async  {
+  void getFavorites() async {
     emit(state.copyWith(isEmpty: true));
-    final favorites =  await _dao.getAllDates();
+    final favorites = await homeRepo.getFavorites();
     emit(state.copyWith(favoriteList: favorites, isEmpty: false));
   }
 
+  void deleteDate(Date date) {
+    homeRepo.deleteDate(date);
+    getFavorites();
+  }
 }

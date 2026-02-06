@@ -25,10 +25,7 @@ class ShufflePage extends StatelessWidget {
             SizedBox(
               height: 42,
               child: HorizontalList(
-                onPressed: (index) => {
-                  vm.setCategoryIndex(index),
-                  vm.getCategory()
-                },
+                onPressed: (index) => {vm.setCategoryIndex(index), vm.getCategory()},
                 selectedIndex: state.categoryIndex,
               ),
             ),

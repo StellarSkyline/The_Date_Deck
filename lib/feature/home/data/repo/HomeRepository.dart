@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import '../../data/database/database.dart';
 import '../../data/database/date_dao.dart';
 import '../model/date.dart';
@@ -10,7 +10,8 @@ import '../model/date.dart';
 class HomeRepository {
   //Network Helper injection
   final NetworkClient _networkClient;
-  HomeRepository({required NetworkClient networkClient}): _networkClient = networkClient;
+  final DateDao dao;
+  HomeRepository({required NetworkClient networkClient, required this.dao}): _networkClient = networkClient;
 
   //Database Initialization
   Future<DateDao> buildDatabase() async {
@@ -18,6 +19,22 @@ class HomeRepository {
     final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
     return database.dateDao;
   }
+
+  //Database calls
+  void insertDate(Date date) async {
+    //Verify if the date exits
+    final savedDate = await dao.findById(date.id);
+    if (savedDate == null) dao.insertDate(date);
+  }
+
+  void deleteDate(Date date) {
+    dao.deleteDate(date);
+  }
+
+  Future<List<Date>> getFavorites() {
+    return dao.getAllDates();
+  }
+
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
