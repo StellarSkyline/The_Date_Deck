@@ -1,13 +1,12 @@
 import 'dart:math' as Math;
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../data/model/suit.dart';
-import '../../domain/HomeViewModel.dart';
+import '../../data/repo/CardGraphics.dart';
 
 class CardFavoriteComponent extends StatelessWidget {
   final String name;
   final Suit suit;
-
   final ValueChanged onPress;
   final String categoryName;
   final int effortValue;
@@ -16,7 +15,9 @@ class CardFavoriteComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vm = context.watch<HomeViewModel>();
+    final graphics = CardGraphics();
+    final suitColor = graphics.suitList[suit.index]['color'] as Color;
+    final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
 
     return SizedBox(
       width: 397,
@@ -35,8 +36,8 @@ class CardFavoriteComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(vm.cardNumbers[effortValue - 1], style: TextStyle(fontSize: 15, color: vm.suitGraphics[suit.index]['color'])),
-                      vm.suitGraphics[suit.index]['suit'],
+                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
+                      suitGraphic,
                     ],
                   ),
                 ],
@@ -49,7 +50,7 @@ class CardFavoriteComponent extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    SizedBox(width: 100, height:100, child:vm.graphics[effortValue - 1]),
+                    SizedBox(width: 100, height:100, child:graphics.graphicsList[effortValue - 1]),
                     Expanded(
                       child: Text(
                         name,
@@ -87,10 +88,10 @@ class CardFavoriteComponent extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Transform.rotate(angle: Math.pi, child: vm.suitGraphics[suit.index]['suit']),
+                      Transform.rotate(angle: Math.pi, child: suitGraphic),
                       Transform.rotate(
                         angle: Math.pi,
-                        child: Text(vm.cardNumbers[effortValue - 1], style: TextStyle(fontSize: 15, color: vm.suitGraphics[suit.index]['color'])),
+                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
                       ),
                     ],
                   ),

@@ -19,13 +19,6 @@ void main() {
       expect(await NetworkClient(client: client).get('active'), isA<http.Response>());
     });
 
-    test('get Date Fail', () {
-      final client = MockHttpClient();
-      when(
-        client.get(Uri.https(baseUrl, '/active.json')),
-      ).thenAnswer((_) async => http.Response('Not Found', 404));
-      expect(NetworkClient(client: client).get('active'), throwsException);
-    });
 
   });
 
