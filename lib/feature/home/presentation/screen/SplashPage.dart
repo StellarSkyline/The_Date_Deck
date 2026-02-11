@@ -31,7 +31,12 @@ class _SplashPageState extends State<SplashPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset('assets/images/img_splash.png', width: 350, height: 500, fit: BoxFit.contain),
+              Image.asset(
+                'assets/images/img_splash.png',
+                width: 350,
+                height: 500,
+                fit: BoxFit.contain,
+              ),
               Text(
                 "The Random Date Idea Generator",
                 textAlign: TextAlign.center,

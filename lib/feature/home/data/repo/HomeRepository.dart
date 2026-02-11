@@ -1,34 +1,71 @@
-
 import 'dart:convert';
+import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
+import 'package:date_deck/feature/home/data/model/category.dart';
+import 'package:flutter/material.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
-import '../../core/database/database.dart';
-import '../../core/database/date_dao.dart';
+import '../../data/database/database.dart';
+import '../../data/database/date_dao.dart';
 import '../model/date.dart';
 
 class HomeRepository {
-    Future<DateDao> buildDatabase() async {
-        WidgetsFlutterBinding.ensureInitialized();
-        final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
+  //Network Helper injection
+  final NetworkClient _networkClient;
+  final DateDao dao;
+  HomeRepository({required NetworkClient networkClient, required this.dao}): _networkClient = networkClient;
 
-        final dateDao = database.dateDao;
+  //Database Initialization
+  Future<DateDao> buildDatabase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
+    return database.dateDao;
+  }
 
-        final String response = await rootBundle.loadString('assets/json/date_idea_database.json');
+  //Database calls
+  void insertDate(Date date) async {
+    //Verify if the date exits
+    final savedDate = await dao.findById(date.id);
+    if (savedDate == null) dao.insertDate(date);
+  }
 
-        final data = (jsonDecode(response) as List)
-            .cast<Map<String, dynamic>>();
+  void deleteDate(Date date) {
+    dao.deleteDate(date);
+  }
 
-        data.map<Date>((json) => Date.fromJson(json)).toList().forEach((element) async {
-                dateDao.findById(element.id).then((value) async {
-                        if (value == null) {
-                            await dateDao.insertDate(element);
-                        }
-                    }
-                );
-            }
-        );
-        return dateDao;
+  Future<List<Date>> getFavorites() {
+    return dao.getAllDates();
+  }
+
+
+  //Network Calls
+  Future<List<Date>> getDates(String category) async {
+    final response = await _networkClient.get(category);
+    final List<Date> dates = (jsonDecode(response.body) as List<dynamic>)
+        .map((e) => Date.fromJson(e))
+        .toList();
+    dates.shuffle();
+    return dates;
+  }
+
+  Future<bool> postDate(String body, Category category) async {
+    //get the length of the current database list needed for patching data on network
+    var length = (await getDates(category.displayName.toLowerCase())).length;
+    final response = await _networkClient.patch(
+      body,
+      category.displayName.toLowerCase(),
+      length.toString(),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
+  }
+
+  Future<List<Date>> getActiveDates() => getDates('active');
+
+  Future<List<Date>> getCookingDates() => getDates('cooking');
+
+  Future<List<Date>> getCreativeDates() => getDates('creative');
+
+  Future<List<Date>> getGamesDates() => getDates('games');
 }

@@ -34,13 +34,17 @@ dependencies:
   floor: ^1.4.2
   #SVG Loader
   flutter_svg: ^2.0.0 # Or the latest version
+  #Flutter Bloc
+  flutter_bloc: ^9.1.0
+
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   sqflite: ^2.4.2
   flutter_json: ^0.0.4
-  http: ^1.4.0
+  http: ^1.6.0
   flutter_launcher_icons: ^0.14.4
   provider: ^6.1.5
   flutter_card_swiper: ^7.0.2
@@ -50,7 +54,7 @@ dev_dependencies:
     sdk: flutter
   #Floor database Generator
   floor_generator: ^1.4.2
-  build_runner: ^2.1.2
+  build_runner: ^2.4.13
   #Multi Provider
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -59,6 +63,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,7 +73,6 @@ flutter:
   assets:
   - assets/images/
   - assets/icons/
-  - assets/json/date_idea_database.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

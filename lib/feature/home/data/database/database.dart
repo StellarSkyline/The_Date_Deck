@@ -11,9 +11,14 @@ import '../../data/model/suit.dart';
 
 part 'database.g.dart';
 
-@Database(version: 1, entities: [Date])
+@Database(version: 2, entities: [Date])
 abstract class AppDatabase extends FloorDatabase {
   DateDao get dateDao;
 }
+
+/*
+Run script in terminal to generate floor data
+dart run build_runner build
+* */
 
 

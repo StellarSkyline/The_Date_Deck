@@ -1,0 +1,2 @@
+final baseUrl = 'the-date-deck-5bd88-default-rtdb.firebaseio.com';
+final mockData ='[{"Category": "Active","Effort Value": 8,"Name": "Do a fun science experiment from online tutorials.","Suit": "Club","id": 2762},{"Category": "Active","Effort Value": 9,"Name": "Write and perform a short skit.","Suit": "Club","id": 30}]';

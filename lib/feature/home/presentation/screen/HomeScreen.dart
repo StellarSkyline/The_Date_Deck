@@ -1,46 +1,34 @@
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
+import 'package:date_deck/feature/home/presentation/screen/AddDatePage.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
-import 'package:date_deck/feature/home/presentation/screen/SplashPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
 
-import '../components/EmptyHandler.dart';
-
 class HomeScreen extends StatefulWidget {
-
-    @override
-    State<StatefulWidget> createState() => _HomeScreenState();
-
+  @override
+  State<StatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var _currentPage = 0;
 
-    var _currentPage = 0;
+  @override
+  Widget build(BuildContext context) {
+    final List pages = [ShufflePage(), FavoritesPage(), AddDatePage()];
+    final colorScheme = Theme.of(context).colorScheme;
 
-    @override
-    Widget build(BuildContext context) {
-
-        final List pages = [
-            ShufflePage(),
-            FavoritesPage()
-        ];
-
-        return Container(
-            color: Color(0xFFFBF8F0),
-            child: SafeArea(
-                child: Scaffold(
-                  backgroundColor: Color(0xFFFBF8F0),
-                    bottomNavigationBar: BottomNav(onPressed: (index) => {
-                            setState(() {
-                                    _currentPage = index;
-                                }
-                            )
-                        }
-                    ),
-                    body: pages[_currentPage]
-                )
-            )
-        );
-    }
-
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      bottomNavigationBar: BottomNav(
+        onPressed: (index) => {
+          setState(() {
+            _currentPage = index;
+          }),
+        },
+      ),
+      body: SafeArea(
+        child: pages[_currentPage],
+      ),
+    );
+  }
 }
