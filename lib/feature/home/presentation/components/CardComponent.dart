@@ -16,8 +16,9 @@ class CardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final graphics = CardGraphics();
-    final suitColor = graphics.suitList[suit.index]['color'] as Color;
-    final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
+    //final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
+
+    final suitGraphic = graphics.getSuitGraphic(suit.index, colorScheme.onSurface);
 
     return SizedBox(
       width: 483,
@@ -42,7 +43,7 @@ class CardComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
+                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: colorScheme.onSurface)),
                       SizedBox(width: 20, height: 20, child: suitGraphic),
                     ],
                   ),
@@ -51,7 +52,7 @@ class CardComponent extends StatelessWidget {
               Text(
                 "Category: $categoryName",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: colorScheme.shadow),
+                style: TextStyle(fontSize: 17, color: colorScheme.onSurface),
               ),
               Expanded(child: graphics.graphicsList[effortValue - 1]),
               Padding(
@@ -59,7 +60,7 @@ class CardComponent extends StatelessWidget {
                 child: Text(
                   name,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: colorScheme.shadow),
+                  style: TextStyle(fontSize: 15, color: colorScheme.onSurface),
                 ),
               ),
               Row(
@@ -73,7 +74,7 @@ class CardComponent extends StatelessWidget {
                       ),
                       Transform.rotate(
                         angle: Math.pi,
-                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
+                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: colorScheme.onSurface)),
                       ),
                     ],
                   ),

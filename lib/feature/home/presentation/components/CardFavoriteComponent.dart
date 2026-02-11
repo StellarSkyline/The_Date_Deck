@@ -15,10 +15,9 @@ class CardFavoriteComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final graphics = CardGraphics();
-    final suitColor = graphics.suitList[suit.index]['color'] as Color;
-    final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
     final colorScheme = Theme.of(context).colorScheme;
+    final graphics = CardGraphics();
+    final suitGraphic = graphics.getSuitGraphic(suit.index, colorScheme.onSurface);
 
     return SizedBox(
       width: 397,
@@ -43,7 +42,7 @@ class CardFavoriteComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
+                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: colorScheme.onSurface)),
                       suitGraphic,
                     ],
                   ),
@@ -63,13 +62,13 @@ class CardFavoriteComponent extends StatelessWidget {
                               Text(
                                 "Category: $categoryName",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 17, color: colorScheme.shadow),
+                                style: TextStyle(fontSize: 17, color: colorScheme.onSurface),
                               ),
                               Text(
                                 name,
                                 softWrap: true,
                                 textAlign: TextAlign.left,
-                                style: TextStyle(fontSize: 15, color: colorScheme.shadow),
+                                style: TextStyle(fontSize: 15, color: colorScheme.onSurface),
                               ),
                             ],
                           ),
@@ -106,7 +105,7 @@ class CardFavoriteComponent extends StatelessWidget {
                       Transform.rotate(angle: Math.pi, child: suitGraphic),
                       Transform.rotate(
                         angle: Math.pi,
-                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
+                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: colorScheme.onSurface)),
                       ),
                     ],
                   ),

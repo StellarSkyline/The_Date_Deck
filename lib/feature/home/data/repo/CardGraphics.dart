@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CardGraphics{
-
+class CardGraphics {
   CardGraphics();
 
   //Graphics Assets
@@ -25,24 +24,16 @@ class CardGraphics{
     Image.asset('assets/images/img_13.png', fit: BoxFit.contain),
   ];
 
-  final suitList = [
-    {
-      'suit': SvgPicture.asset('assets/icons/icn_club.svg', fit: BoxFit.fill),
-      'color': Colors.black,
-    },
-    {
-      'suit': SvgPicture.asset('assets/icons/icn_spade.svg', fit: BoxFit.fill),
-      'color': Colors.black,
-    },
-    {
-      'suit': SvgPicture.asset('assets/icons/icn_heart.svg', fit: BoxFit.fill),
-      'color': Color(0xFFE06F7C),
-    },
-    {
-      'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', fit: BoxFit.fill),
-      'color': Color(0xFFE06F7C),
-    },
-  ];
+  Widget getSuitGraphic(int index, Color color) {
+    final suitList = [
+      {'suit': SvgPicture.asset('assets/icons/icn_club.svg', color: color, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', color: color, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', color: color, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', color: color, fit: BoxFit.fill)},
+    ];
+
+    return suitList[index]['suit'] as Widget;
+  }
 
   final cardNumber = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 }
