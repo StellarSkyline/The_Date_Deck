@@ -36,39 +36,26 @@ class ShufflePage extends StatelessWidget {
                 child: state.isLoading
                     ? Align(
                         alignment: Alignment.center,
-                        child: SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: CircularProgressIndicator(),
-                        ),
+                        child: SizedBox(width: 100, height: 100, child: CircularProgressIndicator()),
                       )
                     : CardSwiper(
                         controller: controller,
                         cardsCount: state.dateList.length,
-                        allowedSwipeDirection: AllowedSwipeDirection.symmetric(
-                          horizontal: true,
-                          vertical: false,
-                        ),
+                        allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                         onSwipe: (pIndex, cIndex, direction) {
                           if (direction == CardSwiperDirection.right) {
                             vm.insertDate(state.dateList[pIndex]);
                           }
                           return true;
                         },
-                        cardBuilder:
-                            (
-                              context,
-                              index,
-                              horizontalThresholdPercentage,
-                              verticalThresholdPercentage,
-                            ) {
-                              return CardComponent(
-                                name: state.dateList[index].name,
-                                suit: state.dateList[index].suit,
-                                categoryName: state.dateList[index].category.displayName,
-                                effortValue: state.dateList[index].effortValue,
-                              );
-                            },
+                        cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
+                          return CardComponent(
+                            name: state.dateList[index].name,
+                            suit: state.dateList[index].suit,
+                            categoryName: state.dateList[index].category.displayName,
+                            effortValue: state.dateList[index].effortValue,
+                          );
+                        },
                       ),
               ),
             ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/model/category.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/database/database.dart';
@@ -11,14 +12,8 @@ class HomeRepository {
   //Network Helper injection
   final NetworkClient _networkClient;
   final DateDao dao;
-  HomeRepository({required NetworkClient networkClient, required this.dao}): _networkClient = networkClient;
 
-  //Database Initialization
-  Future<DateDao> buildDatabase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
-    return database.dateDao;
-  }
+  HomeRepository({required NetworkClient networkClient, required this.dao}) : _networkClient = networkClient;
 
   //Database calls
   void insertDate(Date date) async {
@@ -35,13 +30,10 @@ class HomeRepository {
     return dao.getAllDates();
   }
 
-
   //Network Calls
   Future<List<Date>> getDates(String category) async {
     final response = await _networkClient.get(category);
-    final List<Date> dates = (jsonDecode(response.body) as List<dynamic>)
-        .map((e) => Date.fromJson(e))
-        .toList();
+    final List<Date> dates = (jsonDecode(response.body) as List<dynamic>).map((e) => Date.fromJson(e)).toList();
     dates.shuffle();
     return dates;
   }
@@ -49,11 +41,7 @@ class HomeRepository {
   Future<bool> postDate(String body, Category category) async {
     //get the length of the current database list needed for patching data on network
     var length = (await getDates(category.displayName.toLowerCase())).length;
-    final response = await _networkClient.patch(
-      body,
-      category.displayName.toLowerCase(),
-      length.toString(),
-    );
+    final response = await _networkClient.patch(body, category.displayName.toLowerCase(), length.toString());
     if (response.statusCode == 200) {
       return true;
     } else {
