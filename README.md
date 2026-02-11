@@ -20,7 +20,7 @@ It gamifies the decision-making process by presenting date ideas as a deck of ca
 
 *   **Framework**: [Flutter](https://flutter.dev/) (Dart)
 *   **Architecture**: Clean Architecture (Data, Domain, Presentation layers)
-*   **State Management**: [Provider](https://pub.dev/packages/provider)
+*   **State Management**: [Provider](https://pub.dev/packages/provider) and [Bloc](https://pub.dev/packages/bloc)
 *   **Local Database**: [Floor](https://pub.dev/packages/floor) (SQLite abstraction)
 *   **Networking**: `http` package for API calls.
 *   **Database**: `Firebase Real-time Database` Online Database
@@ -41,6 +41,6 @@ lib/
 ```
 
 ### Key Components
-*   **HomeViewModel**: The brain of the application. It manages the state (current category, swipes) and acts as the bridge between the UI and the Data layer.
+*   **Cubit**: The brain of the application. It manages the state (current category, swipes) and acts as the bridge between the UI and the Data layer.
 *   **DateDao**: Handles all local database operations (Insert, Delete, Query Favorites).
 *   **HomeRepository**: Abstract the data sources. It decides whether to fetch data from the network or the local database.
