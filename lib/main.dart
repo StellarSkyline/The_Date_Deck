@@ -1,6 +1,8 @@
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AddBloc/AddViewModel.dart';
+import 'package:date_deck/feature/login/domain/LoginBloc/LoginState.dart';
+import 'package:date_deck/feature/login/domain/LoginBloc/LoginViewModel.dart';
 import 'package:date_deck/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +12,7 @@ import 'feature/home/data/database/database.dart';
 import 'feature/home/data/database/date_dao.dart';
 import 'feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
 import 'feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
-import 'feature/home/presentation/screen/SplashPage.dart';
+import 'SplashPage.dart';
 
 
 void main() async{
@@ -24,6 +26,7 @@ void main() async{
       Provider(create:(context) => NetworkClient(client: Client())),
       Provider(create: (context) => HomeRepository(dao: dao, networkClient: Provider.of<NetworkClient>(context, listen:false))),
       BlocProvider(create: (context) => ShuffleViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
+      BlocProvider(create: (context) => LoginViewModel(LoginState())),
       BlocProvider(create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       BlocProvider(create: (context) => AddViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)))
     ], child: MyApp())
