@@ -18,14 +18,21 @@ class CardFavoriteComponent extends StatelessWidget {
     final graphics = CardGraphics();
     final suitColor = graphics.suitList[suit.index]['color'] as Color;
     final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SizedBox(
       width: 397,
       height: 200,
       child: Card(
-        elevation: 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: Color(0xFFFBF8F0),
+        elevation: 15,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: colorScheme.outline,
+              width: 2,
+            )
+        ),
+        color: colorScheme.surface,
         child: Padding(
           padding: EdgeInsetsGeometry.all(8.0),
           child: Column(
@@ -42,22 +49,30 @@ class CardFavoriteComponent extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                "Category: $categoryName",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: Colors.black),
-              ),
+
               Expanded(
                 child: Row(
                   children: [
                     SizedBox(width: 100, height:100, child:graphics.graphicsList[effortValue - 1]),
+                    SizedBox(width:10),
                     Expanded(
-                      child: Text(
-                        name,
-                        softWrap: true,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontSize: 15, color: Colors.black),
-                      ),
+                      child:
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Category: $categoryName",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 17, color: colorScheme.shadow),
+                              ),
+                              Text(
+                                name,
+                                softWrap: true,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(fontSize: 15, color: colorScheme.shadow),
+                              ),
+                            ],
+                          ),
                     ),
                   ],
                 ),

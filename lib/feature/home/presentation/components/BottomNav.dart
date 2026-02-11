@@ -10,21 +10,20 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-
     var _currentSelection = 0;
-
     @override
     Widget build(BuildContext context) {
+      var colorScheme = Theme.of(context).colorScheme;
 
-        return BottomNavigationBar(
+
+      return BottomNavigationBar(
             elevation: 0,
             items: [
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_shuffle.svg', color: _currentSelection == 0 ? Color(0xFFE06F7C) : Color(0xFF5E4E81)), label: 'Shuffle'),
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_favorites.svg', color: _currentSelection == 1 ? Color(0xFFE06F7C) : Color(0xFF5E4E81)), label: 'Favorites'),
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_edit.svg', color: _currentSelection == 2 ? Color(0xFFE06F7C) : Color(0xFF5E4E81)), label: 'Add Date')
+                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_shuffle.svg', color: _currentSelection == 0 ? colorScheme.primary : colorScheme.secondary), label: 'Shuffle'),
+                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_favorites.svg', color: _currentSelection == 1 ? colorScheme.primary: colorScheme.secondary), label: 'Favorites'),
+                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_edit.svg', color: _currentSelection == 2 ? colorScheme.primary: colorScheme.secondary), label: 'Add Date')
             ],
             currentIndex: _currentSelection,
-            backgroundColor: Color(0xFFFBF8F0),
             type: BottomNavigationBarType.fixed,
             onTap: (index) => {
                 widget.onPressed(index),
@@ -33,8 +32,8 @@ class _BottomNavState extends State<BottomNav> {
                     }
                 )
             },
-            unselectedItemColor: Color(0xFF5E4E81),
-            selectedItemColor: Color(0xFFE06F7C)
+            unselectedItemColor: colorScheme.secondary,
+            selectedItemColor: colorScheme.primary
         );
     }
 }

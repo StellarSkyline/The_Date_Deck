@@ -10,19 +10,20 @@ class HorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: EdgeInsetsGeometry.all(5.0),
-          child: ElevatedButton(
-            onPressed: () => {onPressed(index)},
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              backgroundColor: selectedIndex == index ? Color(0xFFE06F7C) : Color(0xFF5E4E81),
+          padding: EdgeInsets.only(left: 15, right: 5),
+          child: InputChip(
+            label: Text(
+              items[index],
+              style: TextStyle(color: colorScheme.onPrimary, fontSize: 15.0),
             ),
-            child: Text(items[index], style: TextStyle(color: Colors.white, fontSize: 15.0)),
+            backgroundColor: selectedIndex == index ? colorScheme.primary : colorScheme.secondary,
+            onPressed: () => {onPressed(index)},
           ),
         );
       },

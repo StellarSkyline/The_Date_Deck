@@ -15,21 +15,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List pages = [ShufflePage(), FavoritesPage(), AddDatePage()];
+    final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      color: Color(0xFFFBF8F0),
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Color(0xFFFBF8F0),
-          bottomNavigationBar: BottomNav(
-            onPressed: (index) => {
-              setState(() {
-                _currentPage = index;
-              }),
-            },
-          ),
-          body: pages[_currentPage],
-        ),
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      bottomNavigationBar: BottomNav(
+        onPressed: (index) => {
+          setState(() {
+            _currentPage = index;
+          }),
+        },
+      ),
+      body: SafeArea(
+        child: pages[_currentPage],
       ),
     );
   }
