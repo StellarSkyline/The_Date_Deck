@@ -4,7 +4,6 @@ import 'package:date_deck/feature/home/data/repo/CardGraphics.dart';
 import 'package:flutter/material.dart';
 import '../../data/model/suit.dart';
 
-
 class CardComponent extends StatelessWidget {
   final String name;
   final Suit suit;
@@ -15,17 +14,24 @@ class CardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final graphics = CardGraphics();
-  final suitColor = graphics.suitList[suit.index]['color'] as Color;
-  final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
+    final colorScheme = Theme.of(context).colorScheme;
+    final graphics = CardGraphics();
+    final suitColor = graphics.suitList[suit.index]['color'] as Color;
+    final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
 
     return SizedBox(
       width: 483,
       height: 609,
       child: Card(
-        elevation: 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: Color(0xFFFBF8F0),
+        elevation: 15,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          side: BorderSide(
+            color: colorScheme.outline,
+            width: 2,
+          )
+        ),
+        color: colorScheme.surface,
         child: Padding(
           padding: EdgeInsetsGeometry.all(8.0),
           child: Column(
@@ -37,7 +43,7 @@ class CardComponent extends StatelessWidget {
                   Column(
                     children: [
                       Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
-                      SizedBox(width: 20, height: 20, child:suitGraphic),
+                      SizedBox(width: 20, height: 20, child: suitGraphic),
                     ],
                   ),
                 ],
@@ -45,7 +51,7 @@ class CardComponent extends StatelessWidget {
               Text(
                 "Category: $categoryName",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: Colors.black),
+                style: TextStyle(fontSize: 17, color: colorScheme.shadow),
               ),
               Expanded(child: graphics.graphicsList[effortValue - 1]),
               Padding(
@@ -53,7 +59,7 @@ class CardComponent extends StatelessWidget {
                 child: Text(
                   name,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                  style: TextStyle(fontSize: 15, color: colorScheme.shadow),
                 ),
               ),
               Row(
@@ -61,7 +67,10 @@ class CardComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Transform.rotate(angle: Math.pi, child: SizedBox(width: 20, height: 20, child:suitGraphic)),
+                      Transform.rotate(
+                        angle: Math.pi,
+                        child: SizedBox(width: 20, height: 20, child: suitGraphic),
+                      ),
                       Transform.rotate(
                         angle: Math.pi,
                         child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
