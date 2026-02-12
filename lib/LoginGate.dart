@@ -7,8 +7,6 @@ import 'feature/home/presentation/screen/HomeScreen.dart';
 class LoginGate extends StatelessWidget {
   const LoginGate({super.key});
 
-  final clientId = "675705772951-0mlnlt62f2desin9jchvufemgtsp6m79.apps.googleusercontent.com";
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -20,7 +18,6 @@ class LoginGate extends StatelessWidget {
           return SignInScreen(
             providers: [
               EmailAuthProvider(),
-              GoogleProvider(clientId: clientId),
             ],
             headerBuilder: (context, constraints, shrinkOffset) {
               return Image.asset('assets/images/img_splash.png', width: 350, height: 500, fit: BoxFit.contain);
