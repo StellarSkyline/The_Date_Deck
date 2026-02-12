@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
-import 'LoginGate.dart';
+import 'feature/login/LoginGate.dart';
 import 'feature/home/data/database/database.dart';
 import 'feature/home/data/database/date_dao.dart';
 import 'feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
@@ -19,8 +19,8 @@ import 'firebase_options.dart';
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  DateDao dao = await DateDeckApp().buildDatabase();
-  await DateDeckApp().initFirebaseAuth();
+  DateDao dao = await DateDeckApp.buildDatabase();
+  await DateDeckApp.initFirebaseAuth();
 
   //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
   runApp(

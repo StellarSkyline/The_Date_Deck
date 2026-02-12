@@ -1,7 +1,5 @@
-import 'package:date_deck/LoginGate.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:date_deck/feature/login/AuthHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 //TODO: Update Settings with User Data
 
@@ -16,21 +14,8 @@ class SettingsPage extends StatelessWidget {
       children: [
         Text("Settings", textAlign: TextAlign.center),
         SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: _signOut,
-          child: Text("Sign Out"),
-        )
+        ElevatedButton(onPressed: AuthHelper.signOut, child: Text("Sign Out")),
       ],
     );
-  }
-
-  Future<bool> _signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      await GoogleSignIn().signOut();
-      return true;
-    } on FirebaseAuthException catch (e) {
-      return false;
-    }
   }
 }

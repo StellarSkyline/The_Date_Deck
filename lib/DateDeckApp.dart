@@ -9,14 +9,13 @@ class DateDeckApp {
   //Init App Dependencies
 
   //Database Initialization
-  Future<DateDao> buildDatabase() async {
+  static Future<DateDao> buildDatabase() async {
     final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
     return database.dateDao;
   }
 
   //Firebase Init
-  Future<void> initFirebaseAuth() async {
+  static Future<void> initFirebaseAuth() async {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   }
-
 }
