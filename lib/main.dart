@@ -1,3 +1,4 @@
+import 'package:date_deck/DateDeckApp.dart';
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AddBloc/AddViewModel.dart';
@@ -16,11 +17,10 @@ import 'feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  //TODO: Find a better way to Create Database Instance
-  DateDao dao = await buildDatabase();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  DateDao dao = await DateDeckApp().buildDatabase();
+  await DateDeckApp().initFirebaseAuth();
 
   //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
   runApp(
@@ -57,9 +57,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//Database Initialization
-Future<DateDao> buildDatabase() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final database = await $FloorAppDatabase.databaseBuilder('flutter_database.db').build();
-  return database.dateDao;
-}
