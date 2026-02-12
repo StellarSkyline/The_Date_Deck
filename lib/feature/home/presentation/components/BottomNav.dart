@@ -21,7 +21,9 @@ class _BottomNavState extends State<BottomNav> {
             items: [
                 BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_shuffle.svg', color: _currentSelection == 0 ? colorScheme.primary : colorScheme.secondary), label: 'Shuffle'),
                 BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_favorites.svg', color: _currentSelection == 1 ? colorScheme.primary: colorScheme.secondary), label: 'Favorites'),
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_edit.svg', color: _currentSelection == 2 ? colorScheme.primary: colorScheme.secondary), label: 'Add Date')
+                BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icn_edit.svg', color: _currentSelection == 2 ? colorScheme.primary: colorScheme.secondary), label: 'Add Date Idea'),
+                BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'Settings')
+
             ],
             currentIndex: _currentSelection,
             type: BottomNavigationBarType.fixed,
