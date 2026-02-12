@@ -17,19 +17,7 @@ class SettingsPage extends StatelessWidget {
         Text("Settings", textAlign: TextAlign.center),
         SizedBox(height: 16),
         ElevatedButton(
-          onPressed: () {
-            _signOut().then((success) {
-              if (success) {
-                if (context.mounted) {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginGate()));
-                }
-              } else {
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sign out failed")));
-                }
-              }
-            });
-          },
+          onPressed: _signOut,
           child: Text("Sign Out"),
         )
       ],
