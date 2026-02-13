@@ -3,21 +3,17 @@ import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AddBloc/AddViewModel.dart';
 import 'package:date_deck/theme.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
-import 'feature/login/LoginGate.dart';
-import 'feature/home/data/database/database.dart';
 import 'feature/home/data/database/date_dao.dart';
 import 'feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
 import 'feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
-import 'firebase_options.dart';
+import 'feature/login/LoginGate.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   DateDao dao = await DateDeckApp.buildDatabase();
   await DateDeckApp.initFirebaseAuth();
@@ -50,10 +46,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Date Deck',
-      theme: MaterialTheme(TextTheme()).light(),
-      home: LoginGate(),
+        title: 'Date Deck',
+        theme: MaterialTheme(TextTheme()).light(),
+        home: LoginGate()
     );
   }
 }
-

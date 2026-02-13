@@ -1,3 +1,4 @@
+import 'package:date_deck/feature/login/AuthHelper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart';
 
@@ -9,10 +10,10 @@ class NetworkClient {
   final baseUrl = 'the-date-deck-5bd88-default-rtdb.firebaseio.com';
 
   Future<Response> get(String category) async {
-    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
-    final querey = {'auth': idToken};
+    final idToken = await AuthHelper.user?.getIdToken();
+    final query = {'auth': idToken};
 
-    final uri = Uri.https(baseUrl, '/$category.json', querey);
+    final uri = Uri.https(baseUrl, '/$category.json', query);
     final response = await _client.get(uri);
 
     //handle error here
@@ -24,11 +25,11 @@ class NetworkClient {
   }
 
   Future<Response> patch(String body, String category, String length) async {
-    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    final idToken = await AuthHelper.user?.getIdToken();
 
-    final querey = {'auth': idToken};
+    final query = {'auth': idToken};
 
-    final uri = Uri.https(baseUrl, '/$category/$length.json', querey);
+    final uri = Uri.https(baseUrl, '/$category/$length.json', query);
     final response = await _client.patch(uri, body: body);
 
     if (response.statusCode == 200) {

@@ -23,7 +23,7 @@ class _BottomNavState extends State<BottomNav> {
         BottomNavigationBarItem(icon: Icon(Icons.shuffle), label: "Shuffle"),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
         BottomNavigationBarItem(icon: Icon(Icons.edit), label: "Add Date Idea"),
-        BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'Settings'),
+        BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'Account'),
       ],
       currentIndex: _currentSelection,
       type: BottomNavigationBarType.fixed,

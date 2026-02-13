@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import '../../data/model/date.dart';
 
 class FavoriteState{
-
   final bool isEmpty;
   final List<Widget> graphicsList;
   final List<Map<String, Object>> suitList;
