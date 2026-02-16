@@ -6,6 +6,8 @@ import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }

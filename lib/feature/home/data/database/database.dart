@@ -1,11 +1,12 @@
 import 'dart:async';
+
 import 'package:floor/floor.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../../data/model/date.dart';
+import '../model/category.dart';
+import '../model/suit.dart';
 import 'date_dao.dart';
-import '../../data/model/category.dart';
-import '../../data/model/suit.dart';
 
 
 

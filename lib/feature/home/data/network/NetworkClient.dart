@@ -1,5 +1,4 @@
 import 'package:date_deck/feature/login/AuthHelper.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart';
 
 class NetworkClient {

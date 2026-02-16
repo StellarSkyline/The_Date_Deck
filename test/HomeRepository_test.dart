@@ -1,12 +1,4 @@
 
-import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
-import 'package:date_deck/feature/home/data/model/date.dart';
-import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
-import 'package:mockito/mockito.dart';
-import 'NetworkClient_test.mocks.dart';
-import 'TestHelper.dart';
 
 void main() {
   // group('Repo getActive Test', () {
