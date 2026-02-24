@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'feature/home/data/database/database.dart';
 import 'feature/home/data/database/date_dao.dart';
