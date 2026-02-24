@@ -7,7 +7,6 @@ import '../../data/model/date.dart';
 import '../../data/model/suit.dart';
 import 'SavePage.dart';
 
-//TODO: Add screen for when successfully added a new data idea
 class AddDatePage extends StatefulWidget {
   const AddDatePage({super.key});
 

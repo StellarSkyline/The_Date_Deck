@@ -1,6 +1,5 @@
 import 'package:floor/floor.dart';
 
-import '../../data/model/category.dart';
 import '../../data/model/date.dart';
 
 @dao

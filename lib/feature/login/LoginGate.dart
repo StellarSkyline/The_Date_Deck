@@ -1,15 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:date_deck/feature/login/AuthHelper.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'feature/home/presentation/screen/HomeScreen.dart';
+
+import '../home/presentation/screen/HomeScreen.dart';
 
 class LoginGate extends StatelessWidget {
   const LoginGate({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
+    return StreamBuilder(
+      stream: AuthHelper.auth.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return HomeScreen();

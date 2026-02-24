@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class EmptyHandler extends StatelessWidget {
   final String textTitle;
@@ -7,6 +7,7 @@ class EmptyHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -17,7 +18,7 @@ class EmptyHandler extends StatelessWidget {
             child: Text(
               textTitle,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Color(0xFF5E4E81), fontSize: 30),
+              style: TextStyle(color: colorScheme.onSurface, fontSize: 30),
             ),
           ),
         ),
