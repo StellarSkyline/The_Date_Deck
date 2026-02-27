@@ -9,16 +9,15 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  final controller = TextEditingController();
-  var email = '';
-
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFF4F4F4),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.surface),
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+          ),
           backgroundColor: Theme.of(context).colorScheme.surface,
           body: Padding(
             padding: EdgeInsetsGeometry.all(32),
@@ -31,33 +30,28 @@ class _AccountPageState extends State<AccountPage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-
                 SizedBox(height: 20),
-
-                TextField(
-                  minLines: 1,
-                  controller: controller,
-                  decoration: InputDecoration(labelText: 'Reset Password Email', border: OutlineInputBorder()),
-                  textInputAction: TextInputAction.go,
-                  onSubmitted: (value ){
-                    AuthHelper.resetPassword(controller.text);
-                  },
-                ),
                 ElevatedButton(
                   onPressed: () async {
-                    var success = await AuthHelper.resetPassword(controller.text);
+                    var success = await AuthHelper.resetPassword(
+                      AuthHelper.user!.email!,
+                    );
                     if (success) {
                       if (context.mounted) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(const SnackBar(content: Text('Password reset email sent. Check your email.')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Password reset email sent. Check your email.',
+                            ),
+                          ),
+                        );
                       }
                     } else {
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                              'Error sending password reset email. Please check the email address and try again.',
+                              'Error sending password reset email.',
                             ),
                           ),
                         );
@@ -66,7 +60,10 @@ class _AccountPageState extends State<AccountPage> {
                   },
                   child: Text('Reset Password'),
                 ),
-                ElevatedButton(onPressed: () => AuthHelper.signOut(), child: Text('Sign Out')),
+                ElevatedButton(
+                  onPressed: () => AuthHelper.signOut(),
+                  child: Text('Sign Out'),
+                ),
               ],
             ),
           ),
