@@ -44,21 +44,46 @@ class _AccountPageState extends State<AccountPage> {
                               var success = await AuthHelper.resetPassword(AuthHelper.user!.email!);
                               if (success) {
                                 if (context.mounted) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Password reset email sent. Check your email.')),
-                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password reset email sent. Check your email.')));
                                 }
                               } else {
                                 if (context.mounted) {
-                                  ScaffoldMessenger.of(
-                                    context,
-                                  ).showSnackBar(const SnackBar(content: Text('Error sending password reset email.')));
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error sending password reset email.')));
                                 }
                               }
                             },
                             child: Text('Reset Password'),
                           ),
-                          ElevatedButton(onPressed: () => vm.clearDatabase(), child: Text('Sign Out')),
+                          ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Confirm Sign out'),
+                                    content: Text('All locally saved dates will be lost when signed out'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          vm.clearDatabase();
+                                          AuthHelper.signOut();
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Confirm!'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Text('Sign Out'),
+                          ),
                         ],
                       );
               },

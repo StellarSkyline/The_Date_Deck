@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../login/AuthHelper.dart';
 import '../data/repo/HomeRepository.dart';
 
 class AccountState {
@@ -28,6 +27,5 @@ class AccountViewModel extends Cubit<AccountState> {
     emit(state.copyWith(isLoading: true));
     await homeRepo.clearDatabase();
     emit(state.copyWith(isLoading: false));
-    await AuthHelper.signOut();
   }
 }

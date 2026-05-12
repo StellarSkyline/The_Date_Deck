@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/model/date.dart';
 import '../data/repo/HomeRepository.dart';
 
-class FavoriteState{
+class FavoriteState {
   final bool isEmpty;
   final List<Widget> graphicsList;
   final List<Map<String, Object>> suitList;
@@ -15,7 +15,7 @@ class FavoriteState{
     this.graphicsList = const [],
     this.suitList = const [],
     this.cardNumber = const [],
-    this.favoriteList = const []
+    this.favoriteList = const [],
   });
 
   FavoriteState copyWith({
