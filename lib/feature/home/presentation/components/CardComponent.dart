@@ -2,6 +2,7 @@ import 'dart:math' as Math;
 
 import 'package:date_deck/feature/home/data/repo/CardGraphics.dart';
 import 'package:flutter/material.dart';
+
 import '../../data/model/suit.dart';
 
 class CardComponent extends StatelessWidget {
@@ -16,9 +17,8 @@ class CardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final graphics = CardGraphics();
-    //final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
-
-    final suitGraphic = graphics.getSuitGraphic(suit.index, colorScheme.onSurface);
+    final suitGraphic = graphics.getSuitGraphic(suit.index);
+    final suitColor = graphics.getCardColor(suit.index);
 
     return SizedBox(
       width: 483,
@@ -43,7 +43,7 @@ class CardComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: colorScheme.onSurface)),
+                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
                       SizedBox(width: 20, height: 20, child: suitGraphic),
                     ],
                   ),
@@ -74,7 +74,7 @@ class CardComponent extends StatelessWidget {
                       ),
                       Transform.rotate(
                         angle: Math.pi,
-                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: colorScheme.onSurface)),
+                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
                       ),
                     ],
                   ),

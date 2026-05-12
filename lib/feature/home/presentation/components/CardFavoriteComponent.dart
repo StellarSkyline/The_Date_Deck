@@ -1,6 +1,7 @@
 import 'dart:math' as Math;
 
 import 'package:flutter/material.dart';
+
 import '../../data/model/suit.dart';
 import '../../data/repo/CardGraphics.dart';
 
@@ -17,7 +18,8 @@ class CardFavoriteComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final graphics = CardGraphics();
-    final suitGraphic = graphics.getSuitGraphic(suit.index, colorScheme.onSurface);
+    final suitGraphic = graphics.getSuitGraphic(suit.index);
+    final suitColor = graphics.getCardColor(suit.index);
 
     return SizedBox(
       width: 397,
@@ -42,7 +44,7 @@ class CardFavoriteComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: colorScheme.onSurface)),
+                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
                       suitGraphic,
                     ],
                   ),
@@ -105,7 +107,7 @@ class CardFavoriteComponent extends StatelessWidget {
                       Transform.rotate(angle: Math.pi, child: suitGraphic),
                       Transform.rotate(
                         angle: Math.pi,
-                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: colorScheme.onSurface)),
+                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
                       ),
                     ],
                   ),
