@@ -21,6 +21,10 @@ abstract class DateDao {
   @Query('SELECT * FROM Date WHERE id = :id')
   Future<Date?> findById(int id);
 
+  //Clear Table
+  @Query('DELETE FROM Date')
+  Future<void> clearTable();
+
   @Query('SELECT DISTINCT(id) FROM Date')
   Stream<int?> getTotalDateCount();
 }

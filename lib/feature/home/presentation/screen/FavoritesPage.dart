@@ -1,5 +1,4 @@
-import 'package:date_deck/feature/home/domain/FavoriteBloc/FavoriteState.dart';
-import 'package:date_deck/feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
+import 'package:date_deck/feature/home/domain/FavoriteViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/CardFavoriteComponent.dart';
 import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,9 @@ class FavoritesPage extends StatelessWidget {
                             suit: state.favoriteList[index].suit,
                             categoryName: state.favoriteList[index].category.displayName,
                             effortValue: state.favoriteList[index].effortValue,
-                            onPress: (value) => {vm.deleteDate(state.favoriteList[index])},
+                            onPress: (value) => {
+                              vm.deleteDate(state.favoriteList[index])
+                            },
                           );
                         },
                       ),

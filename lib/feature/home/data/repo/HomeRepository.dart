@@ -53,4 +53,8 @@ class HomeRepository {
   Future<List<Date>> getCreativeDates() => getDates('creative');
 
   Future<List<Date>> getGamesDates() => getDates('games');
+
+  Future<void> clearDatabase() async {
+    await dao.clearTable();
+  }
 }

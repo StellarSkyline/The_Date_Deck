@@ -1,5 +1,5 @@
-import 'package:date_deck/feature/home/domain/AddBloc/AddState.dart';
-import 'package:date_deck/feature/home/domain/AddBloc/AddViewModel.dart';
+
+import 'package:date_deck/feature/home/domain/AddViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/model/category.dart' show Category;
