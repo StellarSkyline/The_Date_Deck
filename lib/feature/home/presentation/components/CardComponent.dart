@@ -49,7 +49,7 @@ class CardComponent extends StatelessWidget {
               Text(
                 "Category: $categoryName",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: colorScheme.onSurface),
+                style: TextStyle(fontSize: 17, color: colorScheme.onSurface, fontWeight: FontWeight.bold),
               ),
               Expanded(child: graphics.graphicsList[effortValue - 1]),
               Padding(

@@ -23,7 +23,7 @@ class CardFavoriteComponent extends StatelessWidget {
 
     return SizedBox(
       width: 397,
-      height: 200,
+      height: 220,
       child: Card(
         elevation: 15,
         shape: RoundedRectangleBorder(
@@ -60,12 +60,13 @@ class CardFavoriteComponent extends StatelessWidget {
                       child:
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                               Text(
                                 "Category: $categoryName",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 17, color: colorScheme.onSurface),
-                              ),
+                            textAlign: TextAlign.left,
+                            style: TextStyle(fontSize: 17, color: colorScheme.onSurface, fontWeight: FontWeight.bold),
+                          ),
                               Text(
                                 name,
                                 softWrap: true,
