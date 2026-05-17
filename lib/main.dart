@@ -25,19 +25,12 @@ void main() async {
       providers: [
         Provider(create: (context) => NetworkClient(client: Client())),
         Provider(
-          create: (context) =>
-              HomeRepository(dao: dao, networkClient: Provider.of<NetworkClient>(context, listen: false)),
+          create: (context) => HomeRepository(dao: dao, networkClient: Provider.of<NetworkClient>(context, listen: false)),
         ),
-        BlocProvider(
-          create: (context) => ShuffleViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)),
-        ),
-        BlocProvider(
-          create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)),
-        ),
+        BlocProvider(create: (context) => ShuffleViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
+        BlocProvider(create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => AddViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
-        BlocProvider(
-          create: (context) => AccountViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false)),
-        ),
+        BlocProvider(create: (context) => AccountViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       ],
       child: MyApp(),
     ),
@@ -49,6 +42,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Date Deck', theme: MaterialTheme(TextTheme()).light(), home: LoginGate());
+    return MaterialApp(title: 'Date Deck',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: MaterialTheme.lightScheme(),
+        ),
+        darkTheme: ThemeData(
+          useMaterial3: true,
+          colorScheme: MaterialTheme.darkScheme(),
+        ),
+        themeMode: ThemeMode.light,
+        //theme: MaterialTheme(TextTheme()).light(),
+        home: LoginGate());
   }
 }
