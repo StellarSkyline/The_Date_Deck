@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
+
 import 'package:date_deck/feature/home/data/model/category.dart';
+import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 
 import '../../data/database/date_dao.dart';
 import '../model/date.dart';
@@ -13,10 +14,10 @@ class HomeRepository {
   HomeRepository({required NetworkClient networkClient, required this.dao}) : _networkClient = networkClient;
 
   //Database calls
-  void insertDate(Date date) async {
+  Future<void> insertDate(Date date) async {
     //Verify if the date exits
     final savedDate = await dao.findById(date.id);
-    if (savedDate == null) dao.insertDate(date);
+    if (savedDate == null) await dao.insertDate(date);
   }
 
   void deleteDate(Date date) {
@@ -46,15 +47,24 @@ class HomeRepository {
     }
   }
 
-  Future<List<Date>> getActiveDates() => getDates('active');
+  Future<List<Date>> getActiveDates() => getDatesByCategory(0);
 
-  Future<List<Date>> getCookingDates() => getDates('cooking');
+  Future<List<Date>> getCookingDates() => getDatesByCategory(1);
 
-  Future<List<Date>> getCreativeDates() => getDates('creative');
+  Future<List<Date>> getCreativeDates() => getDatesByCategory(2);
 
-  Future<List<Date>> getGamesDates() => getDates('games');
+  Future<List<Date>> getGamesDates() => getDatesByCategory(3);
 
   Future<void> clearDatabase() async {
     await dao.clearTable();
+  }
+
+  //version 2 stuff
+  Future<List<Date>> getDatesByCategory(int category) {
+    return dao.findByCategory(category);
+  }
+
+  Future<List<Date>> getAllDates() async {
+    return getDates('dates');
   }
 }

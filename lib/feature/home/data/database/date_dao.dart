@@ -21,6 +21,10 @@ abstract class DateDao {
   @Query('SELECT * FROM Date WHERE id = :id')
   Future<Date?> findById(int id);
 
+  //find date by category
+  @Query('SELECT * FROM Date WHERE category = :category')
+  Future<List<Date>> findByCategory(int category);
+
   //Clear Table
   @Query('DELETE FROM Date')
   Future<void> clearTable();

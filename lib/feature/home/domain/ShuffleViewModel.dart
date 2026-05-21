@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../data/model/date.dart';
 import '../data/repo/HomeRepository.dart';
 class ShuffleState {
@@ -85,4 +86,6 @@ class ShuffleViewModel extends Cubit<ShuffleState> {
         );
     }
   }
+
+
 }
