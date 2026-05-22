@@ -1,6 +1,5 @@
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
 import 'package:date_deck/feature/login/AuthHelper.dart';
-import 'package:date_deck/feature/login/LoginGate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,7 +73,8 @@ class _AccountPageState extends State<AccountPage> {
                                         onPressed: () {
                                           vm.clearDatabase();
                                           AuthHelper.signOut();
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginGate()));
+                                          Navigator.pop(context);
+                                          //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginGate()));
                                         },
                                         child: Text('Confirm!'),
                                       ),

@@ -17,9 +17,9 @@ class AddDatePage extends StatefulWidget {
 
 class _AddDatePage extends State<AddDatePage> {
   //Default State
-  var selectedSuit = Suit.Club;
-  var selectedCategory = Category.Active;
-  var selectedEffortValue = 8;
+  Suit? selectedSuit;
+  Category? selectedCategory;
+  int? selectedEffortValue;
   var selectedDate = '';
   final controller = TextEditingController();
   final List<int> numbers = List<int>.generate(13, (i) => i + 1);
@@ -37,6 +37,8 @@ class _AddDatePage extends State<AddDatePage> {
               child: Column(
                 children: [
                   DropdownButtonFormField(
+                    key: ValueKey(selectedCategory),
+                    value: selectedCategory,
                     items: Category.values
                         .map((p) => DropdownMenuItem(value: p, child: Text(p.displayName)))
                         .toList(),
@@ -46,12 +48,14 @@ class _AddDatePage extends State<AddDatePage> {
                     ),
                     onChanged: (p) {
                       setState(() {
-                        selectedCategory = p!;
+                        selectedCategory = p;
                       });
                     },
                   ),
                   SizedBox(height: 10),
                   DropdownButtonFormField(
+                    key: ValueKey(selectedEffortValue),
+                    value: selectedEffortValue,
                     items: numbers
                         .map((p) => DropdownMenuItem(value: p, child: Text(p.toString())))
                         .toList(),
@@ -61,12 +65,14 @@ class _AddDatePage extends State<AddDatePage> {
                     ),
                     onChanged: (p) {
                       setState(() {
-                        selectedEffortValue = p!;
+                        selectedEffortValue = p;
                       });
                     },
                   ),
                   SizedBox(height: 10),
                   DropdownButtonFormField(
+                    key: ValueKey(selectedSuit),
+                    value: selectedSuit,
                     items: Suit.values
                         .map((p) => DropdownMenuItem(value: p, child: Text(p.name)))
                         .toList(),
@@ -76,7 +82,7 @@ class _AddDatePage extends State<AddDatePage> {
                     ),
                     onChanged: (p) {
                       setState(() {
-                        selectedSuit = p!;
+                        selectedSuit = p;
                       });
                     },
                   ),
@@ -89,6 +95,9 @@ class _AddDatePage extends State<AddDatePage> {
                       labelText: 'Enter your Date Idea',
                       border: OutlineInputBorder(),
                     ),
+                    onChanged: (value) {
+                      setState(() {}); // Trigger rebuild to update button state
+                    },
                   ),
                 ],
               ),
@@ -98,18 +107,32 @@ class _AddDatePage extends State<AddDatePage> {
                 width: 228,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () => {
+                  onPressed: (controller.text.isEmpty ||
+                      selectedCategory == null ||
+                      selectedEffortValue == null ||
+                      selectedSuit == null)
+                      ? null // Disable button when fields are empty
+                      : () {
                     vm.updateDate(
                       Date(
                         id: 0,
                         name: controller.text,
-                        category: selectedCategory,
-                        suit: selectedSuit,
-                        effortValue: selectedEffortValue,
+                        category: selectedCategory!,
+                        suit: selectedSuit!,
+                        effortValue: selectedEffortValue!,
                         favorite: 0,
                       ),
-                    ),
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SavePage())),
+                    );
+
+                    // Reset all form fields
+                    setState(() {
+                      controller.clear();
+                      selectedCategory = null;
+                      selectedEffortValue = null;
+                      selectedSuit = null;
+                    });
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SavePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE06F7C),

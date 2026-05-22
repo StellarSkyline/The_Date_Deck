@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../data/model/date.dart';
 import '../data/repo/HomeRepository.dart';
 
 class LoginState {
@@ -19,7 +20,8 @@ class LoginViewModel extends Cubit<LoginState> {
 
   Future<void> getAllDates() async {
     emit(state.copyWith(isLoading: true));
-    var dates = await homeRepo.getAllDates();
+    List<Date> dates = await homeRepo.getAllDates();
+    dates.shuffle();
     for (var date in dates) {
       await homeRepo.insertDate(date);
     }

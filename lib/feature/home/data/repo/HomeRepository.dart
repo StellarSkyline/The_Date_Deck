@@ -23,8 +23,10 @@ class HomeRepository {
     await dao.clearTable();
   }
 
-  Future<List<Date>> getDatesByCategory(int category) {
-    return dao.findByCategory(category);
+  Future<List<Date>> getDatesByCategory(int category) async {
+    List<Date> dates = await dao.findByCategory(category);
+    dates.shuffle();
+    return dates;
   }
 
   Future<List<Date>> getAllDates() async {
