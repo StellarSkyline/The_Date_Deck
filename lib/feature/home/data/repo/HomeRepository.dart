@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 
 import '../../data/database/date_dao.dart';
@@ -60,10 +59,10 @@ class HomeRepository {
     return dates;
   }
 
-  Future<bool> postDate(String body, Category category) async {
+  Future<bool> postDate(String body) async {
     //get the length of the current database list needed for patching data on network
-    var length = (await getDates(category.displayName.toLowerCase())).length;
-    final response = await _networkClient.patch(body, category.displayName.toLowerCase(), length.toString());
+    var length = (await getDates('dates')).length;
+    final response = await _networkClient.patch(body, 'dates', length.toString());
     if (response.statusCode == 200) {
       return true;
     } else {

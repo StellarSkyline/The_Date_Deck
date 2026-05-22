@@ -60,11 +60,12 @@ class AddViewModel extends Cubit<AddState> {
       "Effort Value":  state.saveDate.effortValue,
       "Name": state.saveDate.name,
       "Suit": state.saveDate.suit.name,
-      "id": generatedId
+      "id": generatedId,
+      "Favorite": 0
     };
 
     final body = jsonEncode(requestBody);
-    var response = await homeRepo.postDate(body, state.saveDate.category);
+    var response = await homeRepo.postDate(body);
 
     if(response) {
       emit(state.copyWith(isLoading: false));
