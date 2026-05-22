@@ -2,6 +2,7 @@
 import 'package:date_deck/feature/home/domain/AddViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../data/model/category.dart' show Category;
 import '../../data/model/date.dart';
 import '../../data/model/suit.dart';
@@ -105,6 +106,7 @@ class _AddDatePage extends State<AddDatePage> {
                         category: selectedCategory,
                         suit: selectedSuit,
                         effortValue: selectedEffortValue,
+                        favorite: 0,
                       ),
                     ),
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SavePage())),

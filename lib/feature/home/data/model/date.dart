@@ -17,8 +17,9 @@ class Date {
 
   final int effortValue;
 
+  final int favorite;
 
-  Date ({required this.id, required this.name, required this.category, required this.suit, required this.effortValue});
+  Date({required this.id, required this.name, required this.category, required this.suit, required this.effortValue, required this.favorite});
 
   factory Date.fromJson(Map<String, dynamic> json) {
     return Date(
@@ -27,6 +28,7 @@ class Date {
       category: Category.values.byName(json['Category']),
       suit: Suit.values.byName(json['Suit']),
       effortValue: json['EffortValue'],
+      favorite: json['Favorite'] as int,
     );
   }
 }

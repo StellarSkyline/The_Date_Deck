@@ -5,6 +5,7 @@ import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/data/model/suit.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../data/model/date.dart';
 
 
@@ -41,6 +42,7 @@ class AddViewModel extends Cubit<AddState> {
             category: Category.Active,
             suit: Suit.Club,
             effortValue: 0,
+            favorite: 0,
           ),
         ),
       );

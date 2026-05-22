@@ -8,11 +8,9 @@ import '../model/category.dart';
 import '../model/suit.dart';
 import 'date_dao.dart';
 
-
-
 part 'database.g.dart';
 
-@Database(version: 2, entities: [Date])
+@Database(version: 3, entities: [Date])
 abstract class AppDatabase extends FloorDatabase {
   DateDao get dateDao;
 }
