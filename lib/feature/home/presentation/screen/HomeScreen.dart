@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List pages = [ShufflePage(), FavoritesPage(), AddDatePage(), AccountPage()];
     final colorScheme = Theme.of(context).colorScheme;
+    //TODO: Create a new ViewModel for the HomeScreen and move the getAllDates() function there. Then call that function in the initState() of the HomeScreen.
     final vm = context.read<LoginViewModel>();
 
     return Scaffold(
