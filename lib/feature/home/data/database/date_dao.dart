@@ -4,7 +4,7 @@ import '../../data/model/date.dart';
 
 @dao
 abstract class DateDao {
-  @insert
+  @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertDate(Date date);
 
   @update

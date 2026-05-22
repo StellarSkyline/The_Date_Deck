@@ -45,11 +45,11 @@ class HomeRepository {
 
   Future<List<Date>> getActiveDates() => getDatesByCategory(0);
 
-  Future<List<Date>> getCookingDates() => getDatesByCategory(1);
+  Future<List<Date>> getCreativeDates() => getDatesByCategory(1);
 
-  Future<List<Date>> getCreativeDates() => getDatesByCategory(2);
+  Future<List<Date>> getGamesDates() => getDatesByCategory(2);
 
-  Future<List<Date>> getGamesDates() => getDatesByCategory(3);
+  Future<List<Date>> getCookingDates() => getDatesByCategory(3);
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
