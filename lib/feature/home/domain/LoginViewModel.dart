@@ -20,6 +20,7 @@ class LoginViewModel extends Cubit<LoginState> {
 
   Future<void> getAllDates() async {
     emit(state.copyWith(isLoading: true));
+    await homeRepo.clearDatabase();
     List<Date> dates = await homeRepo.getAllDates();
     dates.shuffle();
     for (var date in dates) {

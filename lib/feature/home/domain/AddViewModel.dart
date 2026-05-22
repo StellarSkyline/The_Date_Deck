@@ -57,7 +57,7 @@ class AddViewModel extends Cubit<AddState> {
     var generatedId = Random().nextInt(9999);
     final Map<String, dynamic> requestBody = {
       "Category": state.saveDate.category.displayName,
-      "Effort Value":  state.saveDate.effortValue,
+      "EffortValue": state.saveDate.effortValue,
       "Name": state.saveDate.name,
       "Suit": state.saveDate.suit.name,
       "id": generatedId,

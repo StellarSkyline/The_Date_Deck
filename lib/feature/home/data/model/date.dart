@@ -26,7 +26,7 @@ class Date {
       name: json['Name'] as String,
       category: Category.values.byName(json['Category']),
       suit: Suit.values.byName(json['Suit']),
-      effortValue: json['EffortValue'],
+      effortValue: json['EffortValue'] as int,
       favorite: json['Favorite'] as int,
     );
   }

@@ -14,9 +14,7 @@ class HomeRepository {
 
   //Database calls
   Future<void> insertDate(Date date) async {
-    //Verify if the date exits
-    final savedDate = await dao.findById(date.id);
-    if (savedDate == null) await dao.insertDate(date);
+    await dao.insertDate(date);
   }
 
   Future<void> clearDatabase() async {
