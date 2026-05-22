@@ -20,13 +20,37 @@ class HomeRepository {
     if (savedDate == null) await dao.insertDate(date);
   }
 
+  Future<void> clearDatabase() async {
+    await dao.clearTable();
+  }
+
+  Future<List<Date>> getDatesByCategory(int category) {
+    return dao.findByCategory(category);
+  }
+
+  Future<List<Date>> getAllDates() async {
+    return getDates('dates');
+  }
+
+  Future<void> updateDate(Date date) async {
+    await dao.updateFavorite(date);
+  }
+
+  Future<List<Date>> getAllFavoriteDates() async {
+    return dao.getAllFavoriteDates();
+  }
+
   void deleteDate(Date date) {
     dao.deleteDate(date);
   }
 
-  Future<List<Date>> getFavorites() {
-    return dao.getAllDates();
-  }
+  Future<List<Date>> getActiveDates() => getDatesByCategory(0);
+
+  Future<List<Date>> getCookingDates() => getDatesByCategory(1);
+
+  Future<List<Date>> getCreativeDates() => getDatesByCategory(2);
+
+  Future<List<Date>> getGamesDates() => getDatesByCategory(3);
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
@@ -45,26 +69,5 @@ class HomeRepository {
     } else {
       return false;
     }
-  }
-
-  Future<List<Date>> getActiveDates() => getDatesByCategory(0);
-
-  Future<List<Date>> getCookingDates() => getDatesByCategory(1);
-
-  Future<List<Date>> getCreativeDates() => getDatesByCategory(2);
-
-  Future<List<Date>> getGamesDates() => getDatesByCategory(3);
-
-  Future<void> clearDatabase() async {
-    await dao.clearTable();
-  }
-
-  //version 2 stuff
-  Future<List<Date>> getDatesByCategory(int category) {
-    return dao.findByCategory(category);
-  }
-
-  Future<List<Date>> getAllDates() async {
-    return getDates('dates');
   }
 }

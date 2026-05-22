@@ -43,7 +43,7 @@ class ShufflePage extends StatelessWidget {
                         allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                         onSwipe: (pIndex, cIndex, direction) {
                           if (direction == CardSwiperDirection.right) {
-                            vm.insertDate(state.dateList[pIndex]);
+                            vm.updateDate(state.dateList[pIndex]);
                           }
                           return true;
                         },

@@ -58,9 +58,10 @@ class ShuffleViewModel extends Cubit<ShuffleState> {
   //Update State Events
   void setCategoryIndex(int index) => emit(state.copyWith(categoryIndex: index));
 
-  //Database Methods
-  void insertDate(Date date) {
-    homeRepo.insertDate(date);
+  //Update Date to add Favorite
+  void updateDate(Date date) {
+    date.favorite = 1;
+    homeRepo.updateDate(date);
   }
 
   void getCategory() async {
@@ -86,6 +87,4 @@ class ShuffleViewModel extends Cubit<ShuffleState> {
         );
     }
   }
-
-
 }

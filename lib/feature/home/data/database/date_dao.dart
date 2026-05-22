@@ -25,6 +25,14 @@ abstract class DateDao {
   @Query('SELECT * FROM Date WHERE category = :category')
   Future<List<Date>> findByCategory(int category);
 
+  //insert favorite
+  @update
+  Future<void> updateFavorite(Date date);
+
+  //Get All Favorite Dates
+  @Query('SELECT * FROM Date WHERE favorite = 1')
+  Future<List<Date>> getAllFavoriteDates();
+
   //Clear Table
   @Query('DELETE FROM Date')
   Future<void> clearTable();

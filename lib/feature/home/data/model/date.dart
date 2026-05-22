@@ -3,7 +3,6 @@ import 'package:floor/floor.dart';
 import 'category.dart';
 import 'suit.dart';
 
-
 @entity
 class Date {
   @primaryKey
@@ -17,7 +16,7 @@ class Date {
 
   final int effortValue;
 
-  final int favorite;
+  int favorite;
 
   Date({required this.id, required this.name, required this.category, required this.suit, required this.effortValue, required this.favorite});
 
@@ -32,4 +31,3 @@ class Date {
     );
   }
 }
-

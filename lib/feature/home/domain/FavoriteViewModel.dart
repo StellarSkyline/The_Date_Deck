@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../data/model/date.dart';
 import '../data/repo/HomeRepository.dart';
 
@@ -43,7 +44,7 @@ class FavoriteViewModel extends Cubit<FavoriteState> {
 
   void getFavorites() async {
     emit(state.copyWith(isEmpty: true));
-    final favorites = await homeRepo.getFavorites();
+    final favorites = await homeRepo.getAllFavoriteDates();
     emit(state.copyWith(favoriteList: favorites, isEmpty: false));
   }
 
