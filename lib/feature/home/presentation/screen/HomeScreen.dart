@@ -1,3 +1,4 @@
+import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/AccountPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/AddDatePage.dart';
@@ -5,8 +6,6 @@ import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../domain/LoginViewModel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,13 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List pages = [ShufflePage(), FavoritesPage(), AddDatePage(), AccountPage()];
     final colorScheme = Theme.of(context).colorScheme;
-    //TODO: Create a new ViewModel for the HomeScreen and move the getAllDates() function there. Then call that function in the initState() of the HomeScreen.
-    final vm = context.read<LoginViewModel>();
+    final vm = context.read<HomeViewModel>();
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
         appBar: AppBar(
-          actions: [IconButton(onPressed: () => vm.getAllDates(), icon: const Icon(Icons.refresh))],
+          actions: [IconButton(onPressed: () => vm.refreshAllDates(), icon: const Icon(Icons.refresh))],
         ),
       bottomNavigationBar: BottomNav(
         onPressed: (index) => {
@@ -38,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
         body:
-        BlocBuilder<LoginViewModel, LoginState>(
+        BlocBuilder<HomeViewModel, HomeState>(
             builder: (context, state) {
               if (state.isLoading) {
                 return const Center(child: CircularProgressIndicator());

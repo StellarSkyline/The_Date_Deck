@@ -3,22 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/model/date.dart';
 import '../data/repo/HomeRepository.dart';
 
-class LoginState {
+class HomeState {
   final bool isLoading;
 
-  LoginState({this.isLoading = false});
+  HomeState({this.isLoading = false});
 
-  LoginState copyWith({bool? isLoading}) {
-    return LoginState(isLoading: isLoading ?? this.isLoading);
+  HomeState copyWith({bool? isLoading}) {
+    return HomeState(isLoading: isLoading ?? this.isLoading);
   }
 }
 
-class LoginViewModel extends Cubit<LoginState> {
+class HomeViewModel extends Cubit<HomeState> {
   final HomeRepository homeRepo;
 
-  LoginViewModel({required this.homeRepo}) : super(LoginState());
+  HomeViewModel({required this.homeRepo}) : super(HomeState());
 
-  Future<void> getAllDates() async {
+  Future<void> refreshAllDates() async {
     emit(state.copyWith(isLoading: true));
     await homeRepo.clearDatabase();
     List<Date> dates = await homeRepo.getAllDates();
