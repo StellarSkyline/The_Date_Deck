@@ -2,7 +2,7 @@
 
 Date Deck is a Flutter application designed to solve the age-old problem: *"What should we do for date night?"*
 
-It gamifies the decision-making process by presenting date ideas as a deck of cards that users can swipe through. It features multiple categories, local storage for favorites, and a clean, extensible architecture.
+It gamifies the decision-making process by presenting date ideas as a deck of cards that users can swipe through. It features multiple categories, local database storage to save on api calls, and a clean, extensible architecture.
 
 
 ## 🚀 Key Features
@@ -19,7 +19,7 @@ It gamifies the decision-making process by presenting date ideas as a deck of ca
 ## 🛠 Tech Stack
 
 *   **Framework**: [Flutter](https://flutter.dev/) (Dart)
-*   **Architecture**: Clean Architecture (Data, Domain, Presentation layers)
+*   **Architecture**: Clean Architecture (MVI, Data, Domain, Presentation layers)
 *   **State Management**: [Provider](https://pub.dev/packages/provider) and [Bloc](https://pub.dev/packages/bloc)
 *   **Local Database**: [Floor](https://pub.dev/packages/floor) (SQLite abstraction)
 *   **Networking**: `http` package for API calls.
