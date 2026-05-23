@@ -1,6 +1,6 @@
 import 'dart:convert';
+
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
-import 'package:date_deck/feature/home/data/model/category.dart';
 
 import '../../data/database/date_dao.dart';
 import '../model/date.dart';
@@ -13,19 +13,43 @@ class HomeRepository {
   HomeRepository({required NetworkClient networkClient, required this.dao}) : _networkClient = networkClient;
 
   //Database calls
-  void insertDate(Date date) async {
-    //Verify if the date exits
-    final savedDate = await dao.findById(date.id);
-    if (savedDate == null) dao.insertDate(date);
+  Future<void> insertDate(Date date) async {
+    await dao.insertDate(date);
+  }
+
+  Future<void> clearDatabase() async {
+    await dao.clearTable();
+  }
+
+  Future<List<Date>> getDatesByCategory(int category) async {
+    List<Date> dates = await dao.findByCategory(category);
+    dates.shuffle();
+    return dates;
+  }
+
+  Future<List<Date>> getAllDates() async {
+    return getDates('dates');
+  }
+
+  Future<void> updateDate(Date date) async {
+    await dao.updateFavorite(date);
+  }
+
+  Future<List<Date>> getAllFavoriteDates() async {
+    return dao.getAllFavoriteDates();
   }
 
   void deleteDate(Date date) {
     dao.deleteDate(date);
   }
 
-  Future<List<Date>> getFavorites() {
-    return dao.getAllDates();
-  }
+  Future<List<Date>> getActiveDates() => getDatesByCategory(0);
+
+  Future<List<Date>> getCreativeDates() => getDatesByCategory(1);
+
+  Future<List<Date>> getGamesDates() => getDatesByCategory(2);
+
+  Future<List<Date>> getCookingDates() => getDatesByCategory(3);
 
   //Network Calls
   Future<List<Date>> getDates(String category) async {
@@ -35,26 +59,14 @@ class HomeRepository {
     return dates;
   }
 
-  Future<bool> postDate(String body, Category category) async {
+  Future<bool> postDate(String body) async {
     //get the length of the current database list needed for patching data on network
-    var length = (await getDates(category.displayName.toLowerCase())).length;
-    final response = await _networkClient.patch(body, category.displayName.toLowerCase(), length.toString());
+    var length = (await getDates('dates')).length;
+    final response = await _networkClient.patch(body, 'dates', length.toString());
     if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
-  }
-
-  Future<List<Date>> getActiveDates() => getDates('active');
-
-  Future<List<Date>> getCookingDates() => getDates('cooking');
-
-  Future<List<Date>> getCreativeDates() => getDates('creative');
-
-  Future<List<Date>> getGamesDates() => getDates('games');
-
-  Future<void> clearDatabase() async {
-    await dao.clearTable();
   }
 }

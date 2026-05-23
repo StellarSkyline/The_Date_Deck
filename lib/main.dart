@@ -3,6 +3,7 @@ import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
 import 'package:date_deck/feature/home/domain/AddViewModel.dart';
+import 'package:date_deck/feature/home/domain/LoginViewModel.dart';
 import 'package:date_deck/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ void main() async {
         BlocProvider(create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => AddViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => AccountViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
+        BlocProvider(create: (context) => LoginViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       ],
       child: MyApp(),
     ),

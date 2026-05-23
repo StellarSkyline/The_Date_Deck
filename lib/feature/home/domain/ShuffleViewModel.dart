@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../data/model/date.dart';
 import '../data/repo/HomeRepository.dart';
 class ShuffleState {
@@ -57,9 +58,10 @@ class ShuffleViewModel extends Cubit<ShuffleState> {
   //Update State Events
   void setCategoryIndex(int index) => emit(state.copyWith(categoryIndex: index));
 
-  //Database Methods
-  void insertDate(Date date) {
-    homeRepo.insertDate(date);
+  //Update Date to add Favorite
+  void updateDate(Date date) {
+    date.favorite = 1;
+    homeRepo.updateDate(date);
   }
 
   void getCategory() async {

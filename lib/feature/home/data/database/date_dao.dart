@@ -4,7 +4,7 @@ import '../../data/model/date.dart';
 
 @dao
 abstract class DateDao {
-  @insert
+  @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertDate(Date date);
 
   @update
@@ -20,6 +20,18 @@ abstract class DateDao {
   // find by ID (future)
   @Query('SELECT * FROM Date WHERE id = :id')
   Future<Date?> findById(int id);
+
+  //find date by category
+  @Query('SELECT * FROM Date WHERE category = :category')
+  Future<List<Date>> findByCategory(int category);
+
+  //insert favorite
+  @update
+  Future<void> updateFavorite(Date date);
+
+  //Get All Favorite Dates
+  @Query('SELECT * FROM Date WHERE favorite = 1')
+  Future<List<Date>> getAllFavoriteDates();
 
   //Clear Table
   @Query('DELETE FROM Date')

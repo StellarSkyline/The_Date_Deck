@@ -73,7 +73,8 @@ class _AccountPageState extends State<AccountPage> {
                                         onPressed: () {
                                           vm.clearDatabase();
                                           AuthHelper.signOut();
-                                          Navigator.of(context).pop();
+                                          Navigator.pop(context);
+                                          //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginGate()));
                                         },
                                         child: Text('Confirm!'),
                                       ),

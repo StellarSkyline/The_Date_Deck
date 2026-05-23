@@ -3,6 +3,7 @@ import 'package:date_deck/feature/home/presentation/components/HorizontalList.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+
 import '../components/CardComponent.dart';
 
 class ShufflePage extends StatelessWidget {
@@ -12,7 +13,7 @@ class ShufflePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.read<ShuffleViewModel>();
     final controller = CardSwiperController();
-    vm.getCategory();
+
 
     return BlocBuilder<ShuffleViewModel, ShuffleState>(
       builder: (context, state) {
@@ -42,7 +43,7 @@ class ShufflePage extends StatelessWidget {
                         allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                         onSwipe: (pIndex, cIndex, direction) {
                           if (direction == CardSwiperDirection.right) {
-                            vm.insertDate(state.dateList[pIndex]);
+                            vm.updateDate(state.dateList[pIndex]);
                           }
                           return true;
                         },
