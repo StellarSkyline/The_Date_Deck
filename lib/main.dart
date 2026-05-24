@@ -1,11 +1,11 @@
 import 'package:date_deck/DateDeckApp.dart';
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
-import 'package:date_deck/feature/home/data/repo/ConnectivityHelper.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
 import 'package:date_deck/feature/home/domain/AddViewModel.dart';
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
-import 'package:date_deck/feature/login/AuthHelper.dart';
+import 'package:date_deck/helper/AuthHelper.dart';
+import 'package:date_deck/helpers/ConnectivityHelper.dart';
 import 'package:date_deck/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

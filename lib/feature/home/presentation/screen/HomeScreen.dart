@@ -1,10 +1,10 @@
-import 'package:date_deck/feature/home/data/repo/ConnectivityHelper.dart';
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/AccountPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/AddDatePage.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/ShufflePage.dart';
+import 'package:date_deck/helpers/ConnectivityHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

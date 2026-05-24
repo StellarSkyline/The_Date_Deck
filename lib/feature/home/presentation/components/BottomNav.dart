@@ -1,4 +1,4 @@
-import 'package:date_deck/feature/home/data/repo/ConnectivityHelper.dart';
+import 'package:date_deck/helpers/ConnectivityHelper.dart';
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
