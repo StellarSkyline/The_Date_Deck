@@ -1,5 +1,6 @@
 import 'package:date_deck/DateDeckApp.dart';
 import 'package:date_deck/feature/home/data/network/NetworkClient.dart';
+import 'package:date_deck/feature/home/data/repo/ConnectivityHelper.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
 import 'package:date_deck/feature/home/domain/AddViewModel.dart';
@@ -25,6 +26,7 @@ void main() async {
   AuthHelper.listenToAuthChanges();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+  await ConnectivityHelper.initialize();
 
   //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
   runApp(
@@ -50,8 +52,6 @@ class MyApp extends StatelessWidget {
 
   const MyApp({super.key, required this.isLoggedIn});
 
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,4 +63,5 @@ class MyApp extends StatelessWidget {
       home: isLoggedIn ? HomeScreen() : LoginGate(),
     );
   }
+
 }

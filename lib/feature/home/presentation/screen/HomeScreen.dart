@@ -1,3 +1,4 @@
+import 'package:date_deck/feature/home/data/repo/ConnectivityHelper.dart';
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/screen/AccountPage.dart';
@@ -18,10 +19,22 @@ class _HomeScreenState extends State<HomeScreen> {
   var _currentPage = 0;
 
   @override
+  void initState() {
+    super.initState();
+    ConnectivityHelper.onConnectivityChanged.listen((isOnline) {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final List pages = [ShufflePage(), FavoritesPage(), AddDatePage(), AccountPage()];
     final colorScheme = Theme.of(context).colorScheme;
     final vm = context.read<HomeViewModel>();
+
+    if (!ConnectivityHelper.isOnline) {
+      pages.removeAt(2);
+    }
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
