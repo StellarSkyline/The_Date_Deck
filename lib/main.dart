@@ -4,21 +4,27 @@ import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
 import 'package:date_deck/feature/home/domain/AddViewModel.dart';
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
+import 'package:date_deck/feature/login/AuthHelper.dart';
 import 'package:date_deck/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'feature/home/data/database/date_dao.dart';
 import 'feature/home/domain/FavoriteViewModel.dart';
 import 'feature/home/domain/ShuffleViewModel.dart';
+import 'feature/home/presentation/screen/HomeScreen.dart';
 import 'feature/login/LoginGate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DateDao dao = await DateDeckApp.buildDatabase();
   await DateDeckApp.initFirebaseAuth();
+  AuthHelper.listenToAuthChanges();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
 
   //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
   runApp(
@@ -34,13 +40,17 @@ void main() async {
         BlocProvider(create: (context) => AccountViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       ],
-      child: MyApp(),
+      child: MyApp(isLoggedIn: isLoggedIn,),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+
+  const MyApp({super.key, required this.isLoggedIn});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +60,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.darkScheme()),
       themeMode: ThemeMode.light,
       //theme: MaterialTheme(TextTheme()).light(),
-      home: LoginGate(),
+      home: isLoggedIn ? HomeScreen() : LoginGate(),
     );
   }
 }
