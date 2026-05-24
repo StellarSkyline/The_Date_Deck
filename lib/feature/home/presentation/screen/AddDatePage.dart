@@ -1,4 +1,3 @@
-
 import 'package:date_deck/feature/home/domain/AddViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,13 +38,8 @@ class _AddDatePage extends State<AddDatePage> {
                   DropdownButtonFormField(
                     key: ValueKey(selectedCategory),
                     value: selectedCategory,
-                    items: Category.values
-                        .map((p) => DropdownMenuItem(value: p, child: Text(p.displayName)))
-                        .toList(),
-                    decoration: InputDecoration(
-                      labelText: 'Select a Category',
-                      border: OutlineInputBorder(),
-                    ),
+                    items: Category.values.map((p) => DropdownMenuItem(value: p, child: Text(p.displayName))).toList(),
+                    decoration: InputDecoration(labelText: 'Select a Category', border: OutlineInputBorder()),
                     onChanged: (p) {
                       setState(() {
                         selectedCategory = p;
@@ -56,13 +50,8 @@ class _AddDatePage extends State<AddDatePage> {
                   DropdownButtonFormField(
                     key: ValueKey(selectedEffortValue),
                     value: selectedEffortValue,
-                    items: numbers
-                        .map((p) => DropdownMenuItem(value: p, child: Text(p.toString())))
-                        .toList(),
-                    decoration: InputDecoration(
-                      labelText: 'Select a Effort Value',
-                      border: OutlineInputBorder(),
-                    ),
+                    items: numbers.map((p) => DropdownMenuItem(value: p, child: Text(p.toString()))).toList(),
+                    decoration: InputDecoration(labelText: 'Select a Effort Value', border: OutlineInputBorder()),
                     onChanged: (p) {
                       setState(() {
                         selectedEffortValue = p;
@@ -73,13 +62,8 @@ class _AddDatePage extends State<AddDatePage> {
                   DropdownButtonFormField(
                     key: ValueKey(selectedSuit),
                     value: selectedSuit,
-                    items: Suit.values
-                        .map((p) => DropdownMenuItem(value: p, child: Text(p.name)))
-                        .toList(),
-                    decoration: InputDecoration(
-                      labelText: 'Select a Suit',
-                      border: OutlineInputBorder(),
-                    ),
+                    items: Suit.values.map((p) => DropdownMenuItem(value: p, child: Text(p.name))).toList(),
+                    decoration: InputDecoration(labelText: 'Select a Suit', border: OutlineInputBorder()),
                     onChanged: (p) {
                       setState(() {
                         selectedSuit = p;
@@ -91,10 +75,7 @@ class _AddDatePage extends State<AddDatePage> {
                     minLines: 3,
                     maxLines: 10,
                     controller: controller,
-                    decoration: InputDecoration(
-                      labelText: 'Enter your Date Idea',
-                      border: OutlineInputBorder(),
-                    ),
+                    decoration: InputDecoration(labelText: 'Enter your Date Idea', border: OutlineInputBorder()),
                     onChanged: (value) {
                       setState(() {}); // Trigger rebuild to update button state
                     },
@@ -107,24 +88,12 @@ class _AddDatePage extends State<AddDatePage> {
                 width: 228,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: (controller.text.isEmpty ||
-                      selectedCategory == null ||
-                      selectedEffortValue == null ||
-                      selectedSuit == null)
+                  onPressed: (controller.text.isEmpty || selectedCategory == null || selectedEffortValue == null || selectedSuit == null)
                       ? null // Disable button when fields are empty
                       : () {
-                    vm.updateDate(
-                      Date(
-                        id: 0,
-                        name: controller.text,
-                        category: selectedCategory!,
-                        suit: selectedSuit!,
-                        effortValue: selectedEffortValue!,
-                        favorite: 0,
-                      ),
-                    );
+                          vm.updateDate(Date(id: 0, name: controller.text, category: selectedCategory!, suit: selectedSuit!, effortValue: selectedEffortValue!, favorite: 0));
 
-                    // Reset all form fields
+                          // Reset all form fields
                     setState(() {
                       controller.clear();
                       selectedCategory = null;
@@ -132,16 +101,13 @@ class _AddDatePage extends State<AddDatePage> {
                       selectedSuit = null;
                     });
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SavePage()));
-                  },
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SavePage()));
+                        },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE06F7C),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                  child: Text(
-                    "Submit Date Idea",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
+                  child: Text("Submit Date Idea", style: TextStyle(color: Colors.white, fontSize: 16)),
                 ),
               ),
             ),
