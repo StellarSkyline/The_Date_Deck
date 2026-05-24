@@ -15,6 +15,8 @@ It gamifies the decision-making process by presenting date ideas as a deck of ca
     *   🍳 **Cooking**: Baking, trying new recipes, etc.
 *   **Favorites System**: Save your favorite ideas locally using a Room-like database (Floor).
 *   **Add Your Own**: Submit new date ideas (simulated network request).
+*   **Offline Support**: Once the user is logged in and data has been downloaded locally. Users are still able to use the app (shuffle/favorite) even with no internet connection.
+
 
 ## 🛠 Tech Stack
 
