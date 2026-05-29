@@ -1,5 +1,6 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/helper/AuthHelper.dart';
+import 'package:date_deck/theme.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,7 @@ class LoginGate extends StatelessWidget {
         return SignInScreen(
           providers: [EmailAuthProvider()],
           headerBuilder: (context, constraints, shrinkOffset) {
-            return Image.asset('assets/images/img_splash.png', width: 350, height: 500, fit: BoxFit.contain);
+            return MaterialTheme.logo;
           },
           actions: [
             AuthStateChangeAction<SignedIn>((context, state) async {

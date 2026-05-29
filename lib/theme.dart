@@ -139,6 +139,12 @@ class MaterialTheme {
     return brightness == Brightness.dark ? darkScheme() : lightScheme();
   }
 
+  static Widget get logo {
+    final brightness = PlatformDispatcher.instance.platformBrightness;
+    return brightness == Brightness.dark ? Image.asset('assets/images/img_dark_mode_logo.png', width: 350, height: 500, fit: BoxFit.contain) :
+    Image.asset('assets/images/img_light_mode_logo.png', width: 350, height: 500, fit: BoxFit.contain);
+  }
+
 }
 
 class ExtendedColor {
