@@ -7,6 +7,9 @@ class AuthHelper {
   static final user = auth.currentUser;
 
   static Future<void> signOut() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('is_logged_in', false);
+    await prefs.remove('user_id');
     await auth.signOut();
   }
 

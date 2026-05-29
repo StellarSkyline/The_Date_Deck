@@ -1,4 +1,5 @@
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
+import 'package:date_deck/feature/login/LoginGate.dart';
 import 'package:date_deck/helper/AuthHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,24 +59,28 @@ class _AccountPageState extends State<AccountPage> {
                             onPressed: () {
                               showDialog(
                                 context: context,
-                                builder: (BuildContext context) {
+                                builder: (BuildContext dialogContext) {
+                                  final colorScheme = Theme.of(dialogContext).colorScheme;
                                   return AlertDialog(
-                                    title: Text('Confirm Sign out'),
-                                    content: Text('All locally saved dates will be lost when signed out'),
+                                    backgroundColor: colorScheme.surface,
+                                    title: Text('Confirm Sign out', style: TextStyle(color: colorScheme.onSurface)),
+                                    content: Text('All locally saved dates will be lost when signed out', style: TextStyle(color: colorScheme.onSurface)),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
-                                          Navigator.of(context).pop();
+                                          Navigator.of(dialogContext).pop();
                                         },
-                                        child: Text('Cancel'),
+                                        child: Text('Cancel', style: TextStyle(color: colorScheme.primary)),
                                       ),
                                       TextButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           vm.clearDatabase();
-                                          AuthHelper.signOut();
-                                          Navigator.pop(context);
+                                          await AuthHelper.signOut();
+                                          if (context.mounted) {
+                                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginGate()));
+                                          }
                                         },
-                                        child: Text('Confirm!'),
+                                        child: Text('Confirm!', style: TextStyle(color: colorScheme.error)),
                                       ),
                                     ],
                                   );

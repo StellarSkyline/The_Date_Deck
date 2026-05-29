@@ -37,7 +37,7 @@ class _AddDatePage extends State<AddDatePage> {
                 children: [
                   DropdownButtonFormField(
                     key: ValueKey(selectedCategory),
-                    value: selectedCategory,
+                    initialValue: selectedCategory,
                     items: Category.values.map((p) => DropdownMenuItem(value: p, child: Text(p.displayName))).toList(),
                     decoration: InputDecoration(labelText: 'Select a Category', border: OutlineInputBorder()),
                     onChanged: (p) {
@@ -49,7 +49,7 @@ class _AddDatePage extends State<AddDatePage> {
                   SizedBox(height: 10),
                   DropdownButtonFormField(
                     key: ValueKey(selectedEffortValue),
-                    value: selectedEffortValue,
+                    initialValue: selectedEffortValue,
                     items: numbers.map((p) => DropdownMenuItem(value: p, child: Text(p.toString()))).toList(),
                     decoration: InputDecoration(labelText: 'Select a Effort Value', border: OutlineInputBorder()),
                     onChanged: (p) {
@@ -61,7 +61,7 @@ class _AddDatePage extends State<AddDatePage> {
                   SizedBox(height: 10),
                   DropdownButtonFormField(
                     key: ValueKey(selectedSuit),
-                    value: selectedSuit,
+                    initialValue: selectedSuit,
                     items: Suit.values.map((p) => DropdownMenuItem(value: p, child: Text(p.name))).toList(),
                     decoration: InputDecoration(labelText: 'Select a Suit', border: OutlineInputBorder()),
                     onChanged: (p) {
