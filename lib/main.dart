@@ -58,8 +58,7 @@ class MyApp extends StatelessWidget {
       title: 'Date Deck',
       theme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.lightScheme()),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.darkScheme()),
-      themeMode: ThemeMode.light,
-      //theme: MaterialTheme(TextTheme()).light(),
+      themeMode: ThemeMode.system,
       home: isLoggedIn ? HomeScreen() : LoginGate(),
     );
   }

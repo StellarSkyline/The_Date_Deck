@@ -1,7 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../../theme.dart';
 
 class CardGraphics {
   CardGraphics();
@@ -25,10 +26,10 @@ class CardGraphics {
 
   Widget getSuitGraphic(int index) {
     final suitList = [
-      {'suit': SvgPicture.asset('assets/icons/icn_club.svg', color: Color(0xFF000000), fit: BoxFit.fill)},
-      {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', color: Color(0xFF000000), fit: BoxFit.fill)},
-      {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', color: Color(0xFFE06F7C), fit: BoxFit.fill)},
-      {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', color: Color(0xFFE06F7C), fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_club.svg', color: MaterialTheme.colors.surfaceContainerHigh, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', color: MaterialTheme.colors.surfaceContainerHigh, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', color: MaterialTheme.colors.surfaceContainerHighest, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', color: MaterialTheme.colors.surfaceContainerHighest, fit: BoxFit.fill)},
     ];
 
     return suitList[index]['suit'] as Widget;
@@ -38,9 +39,9 @@ class CardGraphics {
 
   Color getCardColor(int suitIndex) {
     if (suitIndex == 0 || suitIndex == 1) {
-      return Color(0xFF000000);
+      return MaterialTheme.colors.surfaceContainerHigh;
     } else {
-      return Color(0xFFE06F7C);
+      return MaterialTheme.colors.surfaceContainerHighest;
     }
   }
 }
