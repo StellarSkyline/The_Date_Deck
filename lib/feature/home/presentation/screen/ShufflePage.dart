@@ -14,7 +14,6 @@ class ShufflePage extends StatelessWidget {
     final vm = context.read<ShuffleViewModel>();
     final controller = CardSwiperController();
 
-
     return BlocBuilder<ShuffleViewModel, ShuffleState>(
       builder: (context, state) {
         return Column(
@@ -24,20 +23,17 @@ class ShufflePage extends StatelessWidget {
             SizedBox(height: 8),
             SizedBox(
               height: 42,
-              child: HorizontalList(
-                onPressed: (index) => {vm.setCategoryIndex(index), vm.getCategory()},
-                selectedIndex: state.categoryIndex,
-              ),
+              child: HorizontalList(onPressed: (index) => {vm.setCategoryIndex(index), vm.getCategory()}, selectedIndex: state.categoryIndex),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsetsGeometry.all(10),
-                child: state.isLoading
-                    ? Align(
-                        alignment: Alignment.center,
-                        child: SizedBox(width: 100, height: 100, child: CircularProgressIndicator()),
-                      )
-                    : CardSwiper(
+              child: state.isLoading
+                  ? Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(width: 200, height: 200, child: CircularProgressIndicator()),
+                    )
+                  : Align(
+                      alignment: Alignment.center,
+                      child: CardSwiper(
                         controller: controller,
                         cardsCount: state.dateList.length,
                         allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
@@ -56,8 +52,58 @@ class ShufflePage extends StatelessWidget {
                           );
                         },
                       ),
-              ),
+                    ),
             ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.red.withOpacity(0.2), // Tinted background
+                    border: Border.all(
+                      color: Colors.red, // Stroke color
+                      width: 4.0, // Stroke thickness
+                    ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      iconSize: 35,
+                      icon: Icon(Icons.close_outlined),
+                      style: IconButton.styleFrom(foregroundColor: Colors.white),
+                      onPressed: () => controller.swipe(CardSwiperDirection.left),
+                    ),
+                  ),
+                ),
+
+                SizedBox(width: 30),
+
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF265368).withOpacity(0.2), // Tinted background
+                    border: Border.all(
+                      color: Color(0xFF265368), // Stroke color
+                      width: 4.0, // Stroke thickness
+                    ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      iconSize: 35,
+                      icon: Icon(Icons.favorite_border_outlined),
+                      style: IconButton.styleFrom(foregroundColor: Colors.white),
+                      onPressed: () => controller.swipe(CardSwiperDirection.right),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
           ],
         );
       },

@@ -110,7 +110,7 @@ class MaterialTheme {
       surfaceContainerLow: Color(0xff22191a),
       surfaceContainer: Color(0xff271d1e),
       //Hijacking for suite color changes for dark mode
-      surfaceContainerHigh: Color(0xFFFFFFFF),
+      surfaceContainerHigh: Color(0xFF000000),
       surfaceContainerHighest: Color(0xFFE06F7C),
     );
   }
