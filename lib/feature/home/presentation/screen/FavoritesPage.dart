@@ -42,7 +42,7 @@ class FavoritesPage extends StatelessWidget {
                             categoryName: state.favoriteList[index].category.displayName,
                             effortValue: state.favoriteList[index].effortValue,
                             onPress: (value) => {
-                              vm.deleteDate(state.favoriteList[index])
+                              vm.removeFavorite(state.favoriteList[index])
                             },
                           );
                         },

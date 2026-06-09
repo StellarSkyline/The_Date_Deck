@@ -48,8 +48,9 @@ class FavoriteViewModel extends Cubit<FavoriteState> {
     emit(state.copyWith(favoriteList: favorites, isEmpty: false));
   }
 
-  void deleteDate(Date date) {
-    homeRepo.deleteDate(date);
+  void removeFavorite(Date date) {
+    date.favorite = 0;
+    homeRepo.updateDate(date);
     getFavorites();
   }
 }
