@@ -56,9 +56,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Date Deck',
-      theme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.lightScheme()),
-      darkTheme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.darkScheme()),
-      themeMode: ThemeMode.system,
+      theme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.darkScheme()),
       home: isLoggedIn ? HomeScreen() : LoginGate(),
     );
   }

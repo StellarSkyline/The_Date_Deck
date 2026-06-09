@@ -45,10 +45,20 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text(title[_currentPage]),
+            title: Text(
+              title[_currentPage],
+              style: TextStyle(color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+            ),
             centerTitle: false,
-            actions: [IconButton(onPressed: () => vm.refreshAllDates(), icon: const Icon(Icons.refresh))],
+            actions: [
+              if (_currentPage == 0)
+                IconButton(
+                  onPressed: () => vm.refreshAllDates(),
+                  icon: Icon(Icons.refresh, color: Colors.white, size: 30),
+                ),
+            ],
           ),
+
           bottomNavigationBar: BottomNav(
             onPressed: (index) => {
               setState(() {
@@ -56,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }),
             },
           ),
+
           body: BlocBuilder<HomeViewModel, HomeState>(
             builder: (context, state) {
               if (state.isLoading) {
