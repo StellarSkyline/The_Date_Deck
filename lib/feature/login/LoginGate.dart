@@ -1,5 +1,5 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
-import 'package:date_deck/helper/AuthHelper.dart';
+import 'package:date_deck/helpers/AuthHelper.dart';
 import 'package:date_deck/theme.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';

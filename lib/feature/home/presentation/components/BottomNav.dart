@@ -41,6 +41,7 @@ class _BottomNavState extends State<BottomNav> {
     }
 
     return BottomNavigationBar(
+      backgroundColor: Colors.transparent,
       elevation: 0,
       items: pages,
       currentIndex: _currentSelection,
