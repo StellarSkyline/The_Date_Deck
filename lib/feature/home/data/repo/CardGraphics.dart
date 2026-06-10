@@ -35,11 +35,30 @@ class CardGraphics {
     return suitList[index]['suit'] as Widget;
   }
 
+  Widget getFaveSuitGraphic(int index) {
+    final suitList = [
+      {'suit': SvgPicture.asset('assets/icons/icn_club.svg', color: MaterialTheme.colors.surfaceContainer, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_spade.svg', color: MaterialTheme.colors.surfaceContainer, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_heart.svg', color: MaterialTheme.colors.surfaceContainerHighest, fit: BoxFit.fill)},
+      {'suit': SvgPicture.asset('assets/icons/icn_diamond.svg', color: MaterialTheme.colors.surfaceContainerHighest, fit: BoxFit.fill)},
+    ];
+
+    return suitList[index]['suit'] as Widget;
+  }
+
   final cardNumber = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
   Color getCardColor(int suitIndex) {
     if (suitIndex == 0 || suitIndex == 1) {
       return MaterialTheme.colors.surfaceContainerHigh;
+    } else {
+      return MaterialTheme.colors.surfaceContainerHighest;
+    }
+  }
+
+  Color getFaveCardColor(int suitIndex) {
+    if (suitIndex == 0 || suitIndex == 1) {
+      return MaterialTheme.colors.surfaceContainer;
     } else {
       return MaterialTheme.colors.surfaceContainerHighest;
     }

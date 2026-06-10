@@ -18,15 +18,11 @@ class HorizontalList extends StatelessWidget {
           padding: EdgeInsets.only(left: 15, right: 5),
 
           child: InputChip(
+            labelStyle: TextStyle(color: selectedIndex == index ? Colors.white : Color(0xFF949AA6)),
 
-            label: Text(
-              items[index],
-              style: TextStyle(color: Color(0xFF949AA6), fontSize: 15.0),
-            ),
+            label: Text(items[index], style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold)),
 
             selected: selectedIndex == index,
-
-            backgroundColor: Color(0xFF172034),
 
             selectedColor: Color(0xFF4E81EE),
 
@@ -34,14 +30,9 @@ class HorizontalList extends StatelessWidget {
 
             showCheckmark: false,
 
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(70.0),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(70.0)),
 
-            side: BorderSide(
-              color: Color(0xFF949AA6),
-              width: 1,
-            ),
+            side: BorderSide(color: Color(0xFF949AA6), width: 1),
           ),
         );
       },

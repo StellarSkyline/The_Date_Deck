@@ -26,7 +26,7 @@ class SavePage extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [EmptyHandler(textTitle: 'Date Idea successfully saved to server')],
+            children: [EmptyHandler(textTitle: 'Date Idea Saved', textDescription: "Thank you for adding ideas to the Deck",)],
           ),
         ),
       ),

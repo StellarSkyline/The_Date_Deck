@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List pages = [ShufflePage(), FavoritesPage(), AddDatePage(), AccountPage()];
-    final List title = ['Discover', 'Saved Dates', 'Add Date Idea', 'Account'];
+    final List title = ['Shuffle', 'Saved Dates', 'Add Date Idea', 'Account'];
     final vm = context.read<HomeViewModel>();
 
     if (!ConnectivityHelper.isOnline) {
