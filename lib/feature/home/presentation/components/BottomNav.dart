@@ -24,11 +24,8 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
-
     List<BottomNavigationBarItem> pages = [
       BottomNavigationBarItem(icon: Icon(Icons.shuffle), label: "Shuffle"),
       BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
@@ -40,20 +37,25 @@ class _BottomNavState extends State<BottomNav> {
       pages.removeAt(2);
     }
 
-    return BottomNavigationBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      items: pages,
-      currentIndex: _currentSelection,
-      type: BottomNavigationBarType.fixed,
-      onTap: (index) {
-        widget.onPressed(index);
-        setState(() {
-          _currentSelection = index;
-        });
-      },
-      unselectedItemColor: colorScheme.secondary,
-      selectedItemColor: colorScheme.primary,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: Color(0xFF111F41), width: 2.0)),
+      ),
+      child: BottomNavigationBar(
+        unselectedItemColor: Color(0xFF949AA6),
+        selectedItemColor: Color(0xFF70A3F3),
+        backgroundColor: Color(0xFF060F22),
+        elevation: 0,
+        items: pages,
+        currentIndex: _currentSelection,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          widget.onPressed(index);
+          setState(() {
+            _currentSelection = index;
+          });
+        },
+      ),
     );
   }
 }
