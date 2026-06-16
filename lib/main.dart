@@ -42,7 +42,7 @@ void main() async {
         BlocProvider(create: (context) => AccountViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       ],
-      child: MyApp(isLoggedIn: isLoggedIn,),
+        child: MyApp(isLoggedIn: isLoggedIn)
     ),
   );
 }
@@ -60,5 +60,4 @@ class MyApp extends StatelessWidget {
       home: isLoggedIn ? HomeScreen() : LoginGate(),
     );
   }
-
 }

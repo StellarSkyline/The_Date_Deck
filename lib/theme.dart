@@ -7,7 +7,6 @@ class MaterialTheme {
 
   const MaterialTheme(this.textTheme);
 
-
   static ColorScheme darkScheme() {
     return const ColorScheme(
       brightness: Brightness.dark,
@@ -69,11 +68,9 @@ class MaterialTheme {
     useMaterial3: true,
     brightness: colorScheme.brightness,
     colorScheme: colorScheme,
-      textTheme: textTheme.apply(
-          bodyColor: colorScheme.onSurface,
-          displayColor: colorScheme.onSurface),
+    textTheme: textTheme.apply(bodyColor: colorScheme.onSurface, displayColor: colorScheme.onSurface),
     scaffoldBackgroundColor: colorScheme.surface,
-      canvasColor: colorScheme.surface
+    canvasColor: colorScheme.surface,
   );
 
   List<ExtendedColor> get extendedColors => [];

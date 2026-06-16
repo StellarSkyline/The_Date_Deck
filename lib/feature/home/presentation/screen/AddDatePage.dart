@@ -65,7 +65,6 @@ class _AddDatePage extends State<AddDatePage> {
                         borderSide: BorderSide(color: Color(0xFF70A3F3), width: 0.5),
                       ),
                     ),
-                    // 1. Customize the background color of the pop-up list
                     dropdownColor: Colors.grey[900]!.withValues(alpha: 0.90),
                     borderRadius: BorderRadius.circular(8),
                     menuMaxHeight: 200,
@@ -105,7 +104,6 @@ class _AddDatePage extends State<AddDatePage> {
                         borderSide: BorderSide(color: Color(0xFF70A3F3), width: 0.5),
                       ),
                     ),
-                    // 1. Customize the background color of the pop-up list
                     dropdownColor: Colors.grey[900]!.withValues(alpha: 0.90),
                     borderRadius: BorderRadius.circular(8),
                     menuMaxHeight: 200,
@@ -144,7 +142,6 @@ class _AddDatePage extends State<AddDatePage> {
                         borderSide: BorderSide(color: Color(0xFF70A3F3), width: 0.5),
                       ),
                     ),
-                    // 1. Customize the background color of the pop-up list
                     dropdownColor: Colors.grey[900]!.withValues(alpha: 0.90),
                     borderRadius: BorderRadius.circular(8),
                     menuMaxHeight: 200,
@@ -179,7 +176,7 @@ class _AddDatePage extends State<AddDatePage> {
                     ),
                     cursorColor: Colors.white,
                     onChanged: (value) {
-                      setState(() {}); // Trigger rebuild to update button state
+                      setState(() {});
                     },
                   ),
                 ],
@@ -192,7 +189,7 @@ class _AddDatePage extends State<AddDatePage> {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: (controller.text.isEmpty || selectedCategory == null || selectedEffortValue == null || selectedSuit == null)
-                      ? null // Disable button when fields are empty
+                      ? null
                       : () {
                           vm.updateDate(Date(id: 0, name: controller.text, category: selectedCategory!, suit: selectedSuit!, effortValue: selectedEffortValue!, favorite: 0));
 

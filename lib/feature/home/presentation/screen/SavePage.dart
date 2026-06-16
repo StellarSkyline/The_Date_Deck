@@ -10,7 +10,6 @@ class SavePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //Jump Back to HomeScreen after 5 seconds
     Timer(Duration(seconds: 5), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -26,7 +25,7 @@ class SavePage extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [EmptyHandler(textTitle: 'Date Idea Saved', textDescription: "Thank you for adding ideas to the Deck",)],
+            children: [EmptyHandler(textTitle: 'Date Idea Saved', textDescription: "Thank you for adding ideas to the Deck")],
           ),
         ),
       ),
