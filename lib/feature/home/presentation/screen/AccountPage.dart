@@ -99,12 +99,12 @@ class AccountPage extends StatelessWidget {
                                         if (context.mounted) {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
-                                              backgroundColor: Color(0x1A4E81EE),
+                                              backgroundColor: Color(0xFF0D2240),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(15),
                                                 side: const BorderSide(color: Color(0xFF4E81EE), width: 0.5),
                                               ),
-                                              content: Text('Password reset email sent. Check your email.', style: TextStyle(color: Colors.white, fontSize: 10)),
+                                              content: Text('Password reset email sent. Check your email.', style: TextStyle(color: Colors.white, fontSize: 20)),
                                             ),
                                           );
                                         }
@@ -117,7 +117,7 @@ class AccountPage extends StatelessWidget {
                                                 borderRadius: BorderRadius.circular(15),
                                                 side: const BorderSide(color: Color(0xFF4E81EE), width: 0.5),
                                               ),
-                                              content: Text('Error Sending Reset Password Email', style: TextStyle(color: Colors.white, fontSize: 12)),
+                                              content: Text('Error Sending Reset Password Email', style: TextStyle(color: Colors.white, fontSize: 20)),
                                             ),
                                           );
                                         }
