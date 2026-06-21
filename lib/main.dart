@@ -22,24 +22,75 @@ import 'feature/login/LoginGate.dart';
 
 String appVersion = '';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  DateDao dao = await DateDeckApp.buildDatabase();
-  await DateDeckApp.initFirebaseAuth();
-  AuthHelper.listenToAuthChanges();
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
-  await ConnectivityHelper.initialize();
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  appVersion = packageInfo.version;
+  runApp(const AppBootstrap());
+}
 
-  //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
-  runApp(
-    MultiBlocProvider(
+class AppBootstrap extends StatefulWidget {
+  const AppBootstrap({super.key});
+
+  @override
+  State<AppBootstrap> createState() => _AppBootstrapState();
+}
+
+class _AppBootstrapState extends State<AppBootstrap> {
+  bool _isInitialized = false;
+  late DateDao _dao;
+  late bool _isLoggedIn;
+
+  @override
+  void initState() {
+    super.initState();
+    _initApp();
+  }
+
+  Future<void> _initApp() async {
+    final results = await Future.wait([
+      DateDeckApp.buildDatabase(),
+      DateDeckApp.initFirebaseAuth(),
+      SharedPreferences.getInstance(),
+      ConnectivityHelper.initialize(),
+      PackageInfo.fromPlatform(),
+    ]);
+
+    _dao = results[0] as DateDao;
+    final SharedPreferences prefs = results[2] as SharedPreferences;
+    final PackageInfo packageInfo = results[4] as PackageInfo;
+
+    AuthHelper.listenToAuthChanges();
+    _isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+    appVersion = packageInfo.version;
+
+    if (mounted) {
+      setState(() {
+        _isInitialized = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isInitialized) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: const Color(0xFF0D2240),
+        ),
+        home: const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(color: Color(0xFF4E81EE)),
+          ),
+        ),
+      );
+    }
+
+    return MultiBlocProvider(
       providers: [
         Provider(create: (context) => NetworkClient(client: Client())),
         Provider(
-          create: (context) => HomeRepository(dao: dao, networkClient: Provider.of<NetworkClient>(context, listen: false)),
+          create: (context) => HomeRepository(dao: _dao, networkClient: Provider.of<NetworkClient>(context, listen: false)),
         ),
         BlocProvider(create: (context) => ShuffleViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => FavoriteViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
@@ -47,9 +98,9 @@ void main() async {
         BlocProvider(create: (context) => AccountViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
         BlocProvider(create: (context) => HomeViewModel(homeRepo: Provider.of<HomeRepository>(context, listen: false))),
       ],
-        child: MyApp(isLoggedIn: isLoggedIn)
-    ),
-  );
+      child: MyApp(isLoggedIn: _isLoggedIn),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -61,8 +112,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Date Deck',
-      theme: ThemeData(useMaterial3: true, colorScheme: MaterialTheme.darkScheme()),
-      home: isLoggedIn ? HomeScreen() : LoginGate(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: MaterialTheme.darkScheme().copyWith(surface: const Color(0xFF0D2240)),
+        scaffoldBackgroundColor: const Color(0xFF0D2240),
+      ),
+      home: isLoggedIn ? const HomeScreen() : const LoginGate(),
     );
   }
 }

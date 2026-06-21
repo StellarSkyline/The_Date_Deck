@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:flutter/material.dart";
 
 class MaterialTheme {
@@ -27,7 +25,7 @@ class MaterialTheme {
       onError: Color(0xff690005),
       errorContainer: Color(0xff93000a),
       onErrorContainer: Color(0xffffdad6),
-      surface: Colors.transparent,
+      surface: const Color(0xFF0D2240),
       onSurface: Color(0xFF949AA6),
       onSurfaceVariant: Color(0xFF949AA6),
       outline: Color(0xFF4E81EE),
