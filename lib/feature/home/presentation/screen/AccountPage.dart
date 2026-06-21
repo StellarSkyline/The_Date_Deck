@@ -1,4 +1,5 @@
 import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
+import 'package:date_deck/feature/home/presentation/components/PopupDialogHelper.dart';
 import 'package:date_deck/feature/login/LoginGate.dart';
 import 'package:date_deck/helpers/AuthHelper.dart';
 import 'package:date_deck/main.dart';
@@ -79,8 +80,9 @@ class AccountPage extends StatelessWidget {
                               tileColor: Color(0x1A4E81EE),
                               title: Text(
                                 settings[index],
-                                style: TextStyle(fontSize: 20, color: index == 0 ? Color(0xFF4E81EE) : Colors.red, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 20, color: index == 0 ? Colors.white : Colors.red, fontWeight: FontWeight.bold),
                               ),
+                              subtitle: index == 0 ? Text('Send a Password Reset Link', style: TextStyle(fontSize: 15, color: Color(0xFF949AA6))) : null,
                               leading: index == 0 ? Icon(Icons.vpn_key_outlined, color: Color(0xFF4E81EE)) : Icon(Icons.logout, color: Colors.red),
                               trailing: Icon(Icons.arrow_forward_ios_outlined, color: Color(0xFF4E81EE)),
                               shape: RoundedRectangleBorder(
@@ -102,7 +104,7 @@ class AccountPage extends StatelessWidget {
                                                 borderRadius: BorderRadius.circular(15),
                                                 side: const BorderSide(color: Color(0xFF4E81EE), width: 0.5),
                                               ),
-                                              content: Text('Password reset email sent. Check your email.', style: TextStyle(color: Colors.white, fontSize: 12)),
+                                              content: Text('Password reset email sent. Check your email.', style: TextStyle(color: Colors.white, fontSize: 10)),
                                             ),
                                           );
                                         }
@@ -124,11 +126,33 @@ class AccountPage extends StatelessWidget {
 
                                   case 1:
                                     {
-                                      vm.clearDatabase();
-                                      await AuthHelper.signOut();
-                                      if (context.mounted) {
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginGate()));
-                                      }
+                                      PopupDialogHelper.showCustomDialog(
+                                        context: context,
+                                        title: "Signing Out",
+                                        description: "Signing out will delete local database cache",
+                                        btn1Title: "Confirm",
+                                        btn2Title: "Cancel",
+                                        onPress: (value) async {
+                                          switch (value) {
+                                            case 0:
+                                              {
+                                                Navigator.of(context).pop();
+                                                vm.clearDatabase();
+                                                await AuthHelper.signOut();
+                                                if (context.mounted) {
+                                                  Navigator.of(
+                                                    context,
+                                                    rootNavigator: true,
+                                                  ).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoginGate()), (route) => false);
+                                                }
+                                                break;
+                                              }
+                                            case 1:
+                                              Navigator.of(context).pop();
+                                              break;
+                                          }
+                                        },
+                                      );
                                     }
                                 }
                               },

@@ -10,7 +10,7 @@ class MaterialTheme {
   static ColorScheme darkScheme() {
     return const ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xffffb2b8),
+      primary: Color(0xFF4E81EE),
       surfaceTint: Color(0xffffb2b8),
       onPrimary: Color(0xff561d25),
       primaryContainer: Color(0xff72333a),
@@ -23,15 +23,15 @@ class MaterialTheme {
       onTertiary: Color(0xff422d00),
       tertiaryContainer: Color(0xff5e4200),
       onTertiaryContainer: Color(0xffffdea9),
-      error: Color(0xffffb4ab),
+      error: Colors.red,
       onError: Color(0xff690005),
       errorContainer: Color(0xff93000a),
       onErrorContainer: Color(0xffffdad6),
       surface: Colors.transparent,
-      onSurface: Color(0xfff0dedf),
-      onSurfaceVariant: Color(0xffd7c1c2),
-      outline: Color(0xff9f8c8d),
-      outlineVariant: Color(0xff524344),
+      onSurface: Color(0xFF949AA6),
+      onSurfaceVariant: Color(0xFF949AA6),
+      outline: Color(0xFF4E81EE),
+      outlineVariant: Color(0xFF4E81EE),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
       inverseSurface: Color(0xfff0dedf),
@@ -77,13 +77,6 @@ class MaterialTheme {
 
   static ColorScheme get colors {
     return darkScheme();
-  }
-
-  static Widget get logo {
-    final brightness = PlatformDispatcher.instance.platformBrightness;
-    return brightness == Brightness.dark
-        ? Image.asset('assets/images/img_dark_mode_logo.png', width: 350, height: 500, fit: BoxFit.contain)
-        : Image.asset('assets/images/img_light_mode_logo.png', width: 350, height: 500, fit: BoxFit.contain);
   }
 }
 
