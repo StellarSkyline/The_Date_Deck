@@ -17,7 +17,6 @@ class LoginGate extends StatelessWidget {
     return Stack(
       children: [
         GlowBackground(),
-
         StreamBuilder(
           stream: AuthHelper.auth.authStateChanges(),
           builder: (context, snapshot) {
