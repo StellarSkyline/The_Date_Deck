@@ -10,6 +10,7 @@ import 'package:date_deck/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,8 @@ import 'feature/home/domain/ShuffleViewModel.dart';
 import 'feature/home/presentation/screen/HomeScreen.dart';
 import 'feature/login/LoginGate.dart';
 
+String appVersion = '';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DateDao dao = await DateDeckApp.buildDatabase();
@@ -27,6 +30,8 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
   await ConnectivityHelper.initialize();
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  appVersion = packageInfo.version;
 
   //Dependency injection - Dependencies are created here and injected into Bloc Cubits which is then injected to the main App
   runApp(

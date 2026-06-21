@@ -42,9 +42,7 @@ class LoginGate extends StatelessWidget {
           },
           actions: [
             AuthStateChangeAction<SignedIn>((context, state) async {
-              // Run after sign-in, await before leaving sign-in flow.
               await vm.refreshAllDates();
-              // Do not manually push. authStateChanges() will rebuild and show HomeScreen.
             }),
           ],
         );
