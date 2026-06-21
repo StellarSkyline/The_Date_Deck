@@ -137,14 +137,9 @@ class AccountPage extends StatelessWidget {
                                             case 0:
                                               {
                                                 Navigator.of(context).pop();
+                                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginGate()));
                                                 vm.clearDatabase();
                                                 await AuthHelper.signOut();
-                                                if (context.mounted) {
-                                                  Navigator.of(
-                                                    context,
-                                                    rootNavigator: true,
-                                                  ).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const LoginGate()), (route) => false);
-                                                }
                                                 break;
                                               }
                                             case 1:
