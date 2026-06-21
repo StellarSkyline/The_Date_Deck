@@ -15,6 +15,7 @@ class AccountPage extends StatelessWidget {
     final settings = ['Password Reset', 'Sign Out'];
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: BlocBuilder<AccountViewModel, AccountState>(
         builder: (context, state) {
           return state.isLoading
