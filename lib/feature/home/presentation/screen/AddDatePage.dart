@@ -65,7 +65,7 @@ class _AddDatePage extends State<AddDatePage> {
                         borderSide: BorderSide(color: Color(0xFF70A3F3), width: 0.5),
                       ),
                     ),
-                    dropdownColor: Colors.grey[900]!.withValues(alpha: 0.90),
+                    dropdownColor: Color(0xFF0D2240),
                     borderRadius: BorderRadius.circular(8),
                     menuMaxHeight: 200,
                     alignment: AlignmentDirectional.centerStart,
@@ -104,7 +104,7 @@ class _AddDatePage extends State<AddDatePage> {
                         borderSide: BorderSide(color: Color(0xFF70A3F3), width: 0.5),
                       ),
                     ),
-                    dropdownColor: Colors.grey[900]!.withValues(alpha: 0.90),
+                    dropdownColor: Color(0xFF0D2240),
                     borderRadius: BorderRadius.circular(8),
                     menuMaxHeight: 200,
                     alignment: AlignmentDirectional.centerStart,
@@ -142,7 +142,7 @@ class _AddDatePage extends State<AddDatePage> {
                         borderSide: BorderSide(color: Color(0xFF70A3F3), width: 0.5),
                       ),
                     ),
-                    dropdownColor: Colors.grey[900]!.withValues(alpha: 0.90),
+                    dropdownColor: Color(0xFF0D2240),
                     borderRadius: BorderRadius.circular(8),
                     menuMaxHeight: 200,
                     alignment: AlignmentDirectional.centerStart,
@@ -175,6 +175,7 @@ class _AddDatePage extends State<AddDatePage> {
                       ),
                     ),
                     cursorColor: Colors.white,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
                     onChanged: (value) {
                       setState(() {});
                     },
@@ -204,7 +205,7 @@ class _AddDatePage extends State<AddDatePage> {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => SavePage()));
                         },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFE06F7C),
+                    backgroundColor: Color(0xFF4E81EE),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                   child: Text("Submit Date Idea", style: TextStyle(color: Colors.white, fontSize: 16)),
