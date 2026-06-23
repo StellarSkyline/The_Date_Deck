@@ -1,5 +1,6 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
+import 'package:date_deck/feature/home/presentation/components/GlowBackground.dart';
 import 'package:date_deck/feature/home/presentation/screen/AccountPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/AddDatePage.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
@@ -29,37 +30,54 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List pages = [ShufflePage(), FavoritesPage(), AddDatePage(), AccountPage()];
-    final colorScheme = Theme.of(context).colorScheme;
+    final List title = ['Shuffle', 'Saved Dates', 'Add Date Idea', 'Account'];
     final vm = context.read<HomeViewModel>();
 
     if (!ConnectivityHelper.isOnline) {
       pages.removeAt(2);
     }
 
-    return Scaffold(
-      backgroundColor: colorScheme.surface,
-        appBar: AppBar(
-          actions: [IconButton(onPressed: () => vm.refreshAllDates(), icon: const Icon(Icons.refresh))],
-        ),
-      bottomNavigationBar: BottomNav(
-        onPressed: (index) => {
-          setState(() {
-            _currentPage = index;
-          }),
-        },
-      ),
-        body:
-        BlocBuilder<HomeViewModel, HomeState>(
+    return Stack(
+      children: [
+        GlowBackground(),
+
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            title: Text(
+              title[_currentPage],
+              style: TextStyle(color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+            ),
+            centerTitle: false,
+            actions: [
+              if (_currentPage == 0)
+                IconButton(
+                  onPressed: () => vm.refreshAllDates(),
+                  icon: Icon(Icons.refresh, color: Colors.white, size: 30),
+                ),
+            ],
+          ),
+
+          bottomNavigationBar: BottomNav(
+            onPressed: (index) => {
+              setState(() {
+                _currentPage = index;
+              }),
+            },
+          ),
+
+          body: BlocBuilder<HomeViewModel, HomeState>(
             builder: (context, state) {
               if (state.isLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                return SafeArea(
-                  child: pages[_currentPage],
-                );
+                return SafeArea(child: pages[_currentPage]);
               }
-            }
-        )
+            },
+          ),
+        ),
+      ],
     );
   }
 

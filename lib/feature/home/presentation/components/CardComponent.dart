@@ -15,21 +15,15 @@ class CardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final graphics = CardGraphics();
     final suitGraphic = graphics.getSuitGraphic(suit.index);
     final suitColor = graphics.getCardColor(suit.index);
 
     return SizedBox(
-      width: 483,
-      height: 609,
       child: Card(
         elevation: 15,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: colorScheme.outline, width: 2),
-        ),
-        color: colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: Color(0xfffff8f7),
         child: Padding(
           padding: EdgeInsetsGeometry.all(8.0),
           child: Column(
@@ -46,20 +40,46 @@ class CardComponent extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                "Category: $categoryName",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: colorScheme.onSurface, fontWeight: FontWeight.bold),
-              ),
-              Expanded(child: graphics.graphicsList[effortValue - 1]),
-              Padding(
-                padding: EdgeInsetsGeometry.all(8.0),
-                child: Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: colorScheme.onSurface),
+              Expanded(
+                child: Align(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(height: 300, width: 300, child: graphics.graphicsList[effortValue - 1]),
+                      Padding(
+                        padding: EdgeInsets.only(left: 8, right: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 20,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF4E81EE), // Background color
+                                borderRadius: BorderRadius.circular(20.0), // Makes it pill-shaped
+                              ),
+                              child: Text(
+                                categoryName,
+                                style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Text(
+                              name,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

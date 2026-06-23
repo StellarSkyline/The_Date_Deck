@@ -1,6 +1,6 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
-import 'package:date_deck/helper/AuthHelper.dart';
-import 'package:date_deck/theme.dart';
+import 'package:date_deck/feature/home/presentation/components/GlowBackground.dart';
+import 'package:date_deck/helpers/AuthHelper.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,41 +14,43 @@ class LoginGate extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.read<HomeViewModel>();
 
-    return StreamBuilder(
-      stream: AuthHelper.auth.authStateChanges(),
-      builder: (context, snapshot) {
-        // Already logged in -> skip SignInScreen completely.
-        if (snapshot.hasData) {
-          return FutureBuilder(
-            future: vm.refreshAllDates(),
-            builder: (context, preloadSnapshot) {
-              if (preloadSnapshot.connectionState == ConnectionState.waiting) {
-                return const Scaffold(body: Center(child: CircularProgressIndicator()));
-              }
+    return Stack(
+      children: [
+        GlowBackground(),
+        StreamBuilder(
+          stream: AuthHelper.auth.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return FutureBuilder(
+                future: vm.refreshAllDates(),
+                builder: (context, preloadSnapshot) {
+                  if (preloadSnapshot.connectionState == ConnectionState.waiting) {
+                    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+                  }
 
-              if (preloadSnapshot.hasError) {
-                return Scaffold(body: Center(child: Text('Failed to load data: ${preloadSnapshot.error}')));
-              }
+                  if (preloadSnapshot.hasError) {
+                    return Scaffold(body: Center(child: Text('Failed to load data: ${preloadSnapshot.error}')));
+                  }
 
-              return HomeScreen();
-            },
-          );
-        }
+                  return HomeScreen();
+                },
+              );
+            }
 
-        return SignInScreen(
-          providers: [EmailAuthProvider()],
-          headerBuilder: (context, constraints, shrinkOffset) {
-            return MaterialTheme.logo;
+            return SignInScreen(
+              providers: [EmailAuthProvider()],
+              headerBuilder: (context, constraints, shrinkOffset) {
+                return Image.asset('assets/images/img_dark_mode_logo.png', width: 350, height: 500, fit: BoxFit.contain);
+              },
+              actions: [
+                AuthStateChangeAction<SignedIn>((context, state) async {
+                  await vm.refreshAllDates();
+                }),
+              ],
+            );
           },
-          actions: [
-            AuthStateChangeAction<SignedIn>((context, state) async {
-              // Run after sign-in, await before leaving sign-in flow.
-              await vm.refreshAllDates();
-              // Do not manually push. authStateChanges() will rebuild and show HomeScreen.
-            }),
-          ],
-        );
-      },
+        ),
+      ],
     );
   }
 }
