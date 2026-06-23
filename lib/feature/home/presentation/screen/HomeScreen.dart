@@ -1,6 +1,7 @@
 import 'package:date_deck/feature/home/domain/HomeViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/BottomNav.dart';
 import 'package:date_deck/feature/home/presentation/components/GlowBackground.dart';
+import 'package:date_deck/feature/home/presentation/components/PopupDialogHelper.dart';
 import 'package:date_deck/feature/home/presentation/screen/AccountPage.dart';
 import 'package:date_deck/feature/home/presentation/screen/AddDatePage.dart';
 import 'package:date_deck/feature/home/presentation/screen/FavoritesPage.dart';
@@ -53,8 +54,30 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               if (_currentPage == 0)
                 IconButton(
-                  onPressed: () => vm.refreshAllDates(),
                   icon: Icon(Icons.refresh, color: Colors.white, size: 30),
+                  onPressed: () {
+                    //onPressed: () => vm.refreshAllDates(),
+                    PopupDialogHelper.showCustomDialog(
+                      context: context,
+                      title: "Syncing Dates",
+                      description: "Syncing Dates will refresh and delete all saved dates",
+                      btn1Title: "Confirm",
+                      btn2Title: "Cancel",
+                      onPress: (value) {
+                        switch (value) {
+                          case 0:
+                            {
+                              Navigator.of(context).pop();
+                              vm.refreshAllDates();
+                            }
+                          case 1:
+                            {
+                              Navigator.of(context).pop();
+                            }
+                        }
+                      },
+                    );
+                  },
                 ),
             ],
           ),
