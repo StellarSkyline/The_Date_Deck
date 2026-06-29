@@ -1,4 +1,4 @@
-package com.TopazSkyline.date_deck
+package com.topazskyline.datedeck
 
 import io.flutter.embedding.android.FlutterActivity
 

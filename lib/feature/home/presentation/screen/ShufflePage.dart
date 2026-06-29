@@ -1,10 +1,9 @@
-import 'package:date_deck/feature/home/domain/ShuffleBloc/ShuffleViewModel.dart';
+import 'package:date_deck/feature/home/domain/ShuffleViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/HorizontalList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
-import '../../domain/ShuffleBloc/ShuffleState.dart';
 import '../components/CardComponent.dart';
 
 class ShufflePage extends StatelessWidget {
@@ -14,7 +13,6 @@ class ShufflePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = context.read<ShuffleViewModel>();
     final controller = CardSwiperController();
-    vm.getCategory();
 
     return BlocBuilder<ShuffleViewModel, ShuffleState>(
       builder: (context, state) {
@@ -25,26 +23,23 @@ class ShufflePage extends StatelessWidget {
             SizedBox(height: 8),
             SizedBox(
               height: 42,
-              child: HorizontalList(
-                onPressed: (index) => {vm.setCategoryIndex(index), vm.getCategory()},
-                selectedIndex: state.categoryIndex,
-              ),
+              child: HorizontalList(onPressed: (index) => {vm.setCategoryIndex(index), vm.getCategory()}, selectedIndex: state.categoryIndex),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsetsGeometry.all(10),
-                child: state.isLoading
-                    ? Align(
-                        alignment: Alignment.center,
-                        child: SizedBox(width: 100, height: 100, child: CircularProgressIndicator()),
-                      )
-                    : CardSwiper(
+              child: state.isLoading
+                  ? Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(width: 200, height: 200, child: CircularProgressIndicator()),
+                    )
+                  : Align(
+                      alignment: Alignment.center,
+                      child: CardSwiper(
                         controller: controller,
                         cardsCount: state.dateList.length,
                         allowedSwipeDirection: AllowedSwipeDirection.symmetric(horizontal: true, vertical: false),
                         onSwipe: (pIndex, cIndex, direction) {
                           if (direction == CardSwiperDirection.right) {
-                            vm.insertDate(state.dateList[pIndex]);
+                            vm.updateDate(state.dateList[pIndex]);
                           }
                           return true;
                         },
@@ -57,8 +52,58 @@ class ShufflePage extends StatelessWidget {
                           );
                         },
                       ),
-              ),
+                    ),
             ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.red.withOpacity(0.2), // Tinted background
+                    border: Border.all(
+                      color: Colors.red, // Stroke color
+                      width: 4.0, // Stroke thickness
+                    ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      iconSize: 35,
+                      icon: Icon(Icons.close_outlined),
+                      style: IconButton.styleFrom(foregroundColor: Colors.white),
+                      onPressed: () => controller.swipe(CardSwiperDirection.left),
+                    ),
+                  ),
+                ),
+
+                SizedBox(width: 30),
+
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF265368).withOpacity(0.2), // Tinted background
+                    border: Border.all(
+                      color: Color(0xFF265368), // Stroke color
+                      width: 4.0, // Stroke thickness
+                    ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      iconSize: 35,
+                      icon: Icon(Icons.favorite_border_outlined),
+                      style: IconButton.styleFrom(foregroundColor: Colors.white),
+                      onPressed: () => controller.swipe(CardSwiperDirection.right),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
           ],
         );
       },
