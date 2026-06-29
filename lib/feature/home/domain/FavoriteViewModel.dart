@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/model/date.dart';
+import '../data/model/date.dart';
+import '../data/repo/HomeRepository.dart';
 
-class FavoriteState{
+class FavoriteState {
   final bool isEmpty;
   final List<Widget> graphicsList;
   final List<Map<String, Object>> suitList;
@@ -14,7 +16,7 @@ class FavoriteState{
     this.graphicsList = const [],
     this.suitList = const [],
     this.cardNumber = const [],
-    this.favoriteList = const []
+    this.favoriteList = const [],
   });
 
   FavoriteState copyWith({
@@ -31,5 +33,24 @@ class FavoriteState{
       cardNumber: cardNumber ?? this.cardNumber,
       favoriteList: favoriteList ?? this.favoriteList,
     );
+  }
+}
+
+class FavoriteViewModel extends Cubit<FavoriteState> {
+  final HomeRepository homeRepo;
+
+  //Constructor and Home Repo injection
+  FavoriteViewModel({required this.homeRepo}) : super(FavoriteState());
+
+  void getFavorites() async {
+    emit(state.copyWith(isEmpty: true));
+    final favorites = await homeRepo.getAllFavoriteDates();
+    emit(state.copyWith(favoriteList: favorites, isEmpty: false));
+  }
+
+  void removeFavorite(Date date) {
+    date.favorite = 0;
+    homeRepo.updateDate(date);
+    getFavorites();
   }
 }

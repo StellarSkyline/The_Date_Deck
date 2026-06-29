@@ -2,6 +2,7 @@ import 'dart:math' as Math;
 
 import 'package:date_deck/feature/home/data/repo/CardGraphics.dart';
 import 'package:flutter/material.dart';
+
 import '../../data/model/suit.dart';
 
 class CardComponent extends StatelessWidget {
@@ -14,25 +15,15 @@ class CardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final graphics = CardGraphics();
-    //final suitGraphic = graphics.suitList[suit.index]['suit'] as Widget;
-
-    final suitGraphic = graphics.getSuitGraphic(suit.index, colorScheme.onSurface);
+    final suitGraphic = graphics.getSuitGraphic(suit.index);
+    final suitColor = graphics.getCardColor(suit.index);
 
     return SizedBox(
-      width: 483,
-      height: 609,
       child: Card(
         elevation: 15,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color: colorScheme.outline,
-            width: 2,
-          )
-        ),
-        color: colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: Color(0xfffff8f7),
         child: Padding(
           padding: EdgeInsetsGeometry.all(8.0),
           child: Column(
@@ -43,26 +34,52 @@ class CardComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: colorScheme.onSurface)),
+                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
                       SizedBox(width: 20, height: 20, child: suitGraphic),
                     ],
                   ),
                 ],
               ),
-              Text(
-                "Category: $categoryName",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 17, color: colorScheme.onSurface),
-              ),
-              Expanded(child: graphics.graphicsList[effortValue - 1]),
-              Padding(
-                padding: EdgeInsetsGeometry.all(8.0),
-                child: Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: colorScheme.onSurface),
+              Expanded(
+                child: Align(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(height: 300, width: 300, child: graphics.graphicsList[effortValue - 1]),
+                      Padding(
+                        padding: EdgeInsets.only(left: 8, right: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 20,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF4E81EE), // Background color
+                                borderRadius: BorderRadius.circular(20.0), // Makes it pill-shaped
+                              ),
+                              child: Text(
+                                categoryName,
+                                style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Text(
+                              name,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -74,7 +91,7 @@ class CardComponent extends StatelessWidget {
                       ),
                       Transform.rotate(
                         angle: Math.pi,
-                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: colorScheme.onSurface)),
+                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 20, color: suitColor)),
                       ),
                     ],
                   ),

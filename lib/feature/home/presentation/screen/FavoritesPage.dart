@@ -1,5 +1,4 @@
-import 'package:date_deck/feature/home/domain/FavoriteBloc/FavoriteState.dart';
-import 'package:date_deck/feature/home/domain/FavoriteBloc/FavoriteViewModel.dart';
+import 'package:date_deck/feature/home/domain/FavoriteViewModel.dart';
 import 'package:date_deck/feature/home/presentation/components/CardFavoriteComponent.dart';
 import 'package:date_deck/feature/home/presentation/components/EmptyHandler.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,11 @@ class FavoritesPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text("${state.favoriteList.length} ideas saved!", style: TextStyle(fontSize: 15, color: Color(0xFF949AA6))),
+            ),
+
             SizedBox(height: 8),
             Expanded(
               child: Padding(
@@ -26,15 +30,11 @@ class FavoritesPage extends StatelessWidget {
                 child: state.isEmpty
                     ? Align(
                         alignment: Alignment.center,
-                        child: SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: CircularProgressIndicator(),
-                        ),
+                        child: SizedBox(width: 100, height: 100, child: CircularProgressIndicator()),
                       )
                     : state.favoriteList.isEmpty
-                    ? EmptyHandler(textTitle: "Favorites is Empty")
-                    : ListView.builder(
+                    ? EmptyHandler(textTitle: "No Saved Dates Yet", textDescription: "Swipe right on ideas you love to save them here")
+                    : ListView.separated(
                         itemCount: state.favoriteList.length,
                         itemBuilder: (context, index) {
                           return CardFavoriteComponent(
@@ -42,8 +42,11 @@ class FavoritesPage extends StatelessWidget {
                             suit: state.favoriteList[index].suit,
                             categoryName: state.favoriteList[index].category.displayName,
                             effortValue: state.favoriteList[index].effortValue,
-                            onPress: (value) => {vm.deleteDate(state.favoriteList[index])},
+                            onPress: (value) => {vm.removeFavorite(state.favoriteList[index])},
                           );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 16);
                         },
                       ),
               ),

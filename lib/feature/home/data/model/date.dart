@@ -3,7 +3,6 @@ import 'package:floor/floor.dart';
 import 'category.dart';
 import 'suit.dart';
 
-
 @entity
 class Date {
   @primaryKey
@@ -17,8 +16,9 @@ class Date {
 
   final int effortValue;
 
+  int favorite;
 
-  Date ({required this.id, required this.name, required this.category, required this.suit, required this.effortValue});
+  Date({required this.id, required this.name, required this.category, required this.suit, required this.effortValue, required this.favorite});
 
   factory Date.fromJson(Map<String, dynamic> json) {
     return Date(
@@ -26,8 +26,8 @@ class Date {
       name: json['Name'] as String,
       category: Category.values.byName(json['Category']),
       suit: Suit.values.byName(json['Suit']),
-      effortValue: json['Effort Value'],
+      effortValue: json['EffortValue'] as int,
+      favorite: json['Favorite'] as int,
     );
   }
 }
-

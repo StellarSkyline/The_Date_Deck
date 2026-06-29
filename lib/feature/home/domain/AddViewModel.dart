@@ -5,8 +5,29 @@ import 'package:date_deck/feature/home/data/model/category.dart';
 import 'package:date_deck/feature/home/data/model/suit.dart';
 import 'package:date_deck/feature/home/data/repo/HomeRepository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/model/date.dart';
-import 'AddState.dart';
+
+import '../data/model/date.dart';
+
+
+class AddState{
+  final bool isLoading;
+  final Date saveDate;
+
+  AddState({
+    this.isLoading = false,
+    required this.saveDate,
+  });
+
+  AddState copyWith({
+    bool? isLoading,
+    Date? saveDate,
+  }) {
+    return AddState(
+      isLoading: isLoading ?? this.isLoading,
+      saveDate: saveDate ?? this.saveDate,
+    );
+  }
+}
 
 class AddViewModel extends Cubit<AddState> {
   final HomeRepository homeRepo;
@@ -21,6 +42,7 @@ class AddViewModel extends Cubit<AddState> {
             category: Category.Active,
             suit: Suit.Club,
             effortValue: 0,
+            favorite: 0,
           ),
         ),
       );
@@ -35,14 +57,15 @@ class AddViewModel extends Cubit<AddState> {
     var generatedId = Random().nextInt(9999);
     final Map<String, dynamic> requestBody = {
       "Category": state.saveDate.category.displayName,
-      "Effort Value":  state.saveDate.effortValue,
+      "EffortValue": state.saveDate.effortValue,
       "Name": state.saveDate.name,
       "Suit": state.saveDate.suit.name,
-      "id": generatedId
+      "id": generatedId,
+      "Favorite": 0
     };
 
     final body = jsonEncode(requestBody);
-    var response = await homeRepo.postDate(body, state.saveDate.category);
+    var response = await homeRepo.postDate(body);
 
     if(response) {
       emit(state.copyWith(isLoading: false));

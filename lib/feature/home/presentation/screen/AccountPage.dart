@@ -1,76 +1,171 @@
-import 'package:date_deck/feature/login/AuthHelper.dart';
+import 'package:date_deck/feature/home/domain/AccountViewModel.dart';
+import 'package:date_deck/feature/home/presentation/components/PopupDialogHelper.dart';
+import 'package:date_deck/feature/login/LoginGate.dart';
+import 'package:date_deck/helpers/AuthHelper.dart';
+import 'package:date_deck/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AccountPage extends StatefulWidget {
+class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _AccountPageState();
-}
-
-class _AccountPageState extends State<AccountPage> {
-  final controller = TextEditingController();
-  var email = '';
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFF4F4F4),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.surface),
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          body: Padding(
-            padding: EdgeInsetsGeometry.all(32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Logged in as: ${AuthHelper.user?.email}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
+    final vm = context.read<AccountViewModel>();
+    final settings = ['Password Reset', 'Sign Out'];
 
-                SizedBox(height: 20),
-
-                TextField(
-                  minLines: 1,
-                  controller: controller,
-                  decoration: InputDecoration(labelText: 'Reset Password Email', border: OutlineInputBorder()),
-                  textInputAction: TextInputAction.go,
-                  onSubmitted: (value ){
-                    AuthHelper.resetPassword(controller.text);
-                  },
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    var success = await AuthHelper.resetPassword(controller.text);
-                    if (success) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(const SnackBar(content: Text('Password reset email sent. Check your email.')));
-                      }
-                    } else {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Error sending password reset email. Please check the email address and try again.',
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: BlocBuilder<AccountViewModel, AccountState>(
+        builder: (context, state) {
+          return state.isLoading
+              ? Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(width: 100, height: 100, child: CircularProgressIndicator()),
+                )
+              : Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 400,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          color: Color(0x1A4E81EE),
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Color(0xFF4E81EE), width: 1.0),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 15),
+                            Icon(Icons.account_circle, size: 70, color: Colors.white),
+                            Text(
+                              'Logged in as: ',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                             ),
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  child: Text('Reset Password'),
-                ),
-                ElevatedButton(onPressed: () => AuthHelper.signOut(), child: Text('Sign Out')),
-              ],
-            ),
-          ),
-        ),
+                            Text(
+                              '${AuthHelper.user?.email}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 15, color: Color(0xFF949AA6)),
+                            ),
+                            SizedBox(height: 15),
+                            Image.asset('assets/images/img_dark_mode_logo.png', width: 75, height: 75, fit: BoxFit.contain),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: 15),
+
+                      Padding(
+                        padding: EdgeInsetsGeometry.directional(start: 5),
+                        child: Text(
+                          'Settings:',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(fontSize: 20, color: Color(0xFF949AA6), fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      SizedBox(height: 10),
+
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: settings.length,
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 10);
+                          },
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              tileColor: Color(0x1A4E81EE),
+                              title: Text(
+                                settings[index],
+                                style: TextStyle(fontSize: 20, color: index == 0 ? Colors.white : Colors.red, fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: index == 0 ? Text('Send a Password Reset Link', style: TextStyle(fontSize: 15, color: Color(0xFF949AA6))) : null,
+                              leading: index == 0 ? Icon(Icons.vpn_key_outlined, color: Color(0xFF4E81EE)) : Icon(Icons.logout, color: Colors.red),
+                              trailing: Icon(Icons.arrow_forward_ios_outlined, color: Color(0xFF4E81EE)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(color: Color(0xFF4E81EE), width: 0.5),
+                              ),
+                              onTap: () async {
+                                switch (index) {
+                                  case 0:
+                                    {
+                                      var success = await AuthHelper.resetPassword(AuthHelper.user!.email!);
+
+                                      if (success) {
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              backgroundColor: Color(0xFF0D2240),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                side: const BorderSide(color: Color(0xFF4E81EE), width: 0.5),
+                                              ),
+                                              content: Text('Password reset email sent. Check your email.', style: TextStyle(color: Colors.white, fontSize: 20)),
+                                            ),
+                                          );
+                                        }
+                                      } else {
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              backgroundColor: Color(0x1A4E81EE),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                side: const BorderSide(color: Color(0xFF4E81EE), width: 0.5),
+                                              ),
+                                              content: Text('Error Sending Reset Password Email', style: TextStyle(color: Colors.white, fontSize: 20)),
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    }
+
+                                  case 1:
+                                    {
+                                      PopupDialogHelper.showCustomDialog(
+                                        context: context,
+                                        title: "Signing Out",
+                                        description: "Signing out will delete local database cache",
+                                        btn1Title: "Confirm",
+                                        btn2Title: "Cancel",
+                                        onPress: (value) async {
+                                          switch (value) {
+                                            case 0:
+                                              {
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginGate()));
+                                                vm.clearDatabase();
+                                                await AuthHelper.signOut();
+                                                break;
+                                              }
+                                            case 1:
+                                              Navigator.of(context).pop();
+                                              break;
+                                          }
+                                        },
+                                      );
+                                    }
+                                }
+                              },
+                            );
+                          },
+                        ),
+                      ),
+
+                      Text(
+                        'Date Deck Version: $appVersion',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 12, color: Color(0xFF949AA6)),
+                      ),
+                    ],
+                  ),
+                );
+        },
       ),
     );
   }

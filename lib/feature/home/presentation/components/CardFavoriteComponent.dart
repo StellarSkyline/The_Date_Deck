@@ -1,6 +1,5 @@
-import 'dart:math' as Math;
-
 import 'package:flutter/material.dart';
+
 import '../../data/model/suit.dart';
 import '../../data/repo/CardGraphics.dart';
 
@@ -15,105 +14,77 @@ class CardFavoriteComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final graphics = CardGraphics();
-    final suitGraphic = graphics.getSuitGraphic(suit.index, colorScheme.onSurface);
+    final suitGraphic = graphics.getFaveSuitGraphic(suit.index);
+    final suitColor = graphics.getFaveCardColor(suit.index);
 
-    return SizedBox(
+    return Container(
       width: 397,
-      height: 200,
-      child: Card(
-        elevation: 15,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-              color: colorScheme.outline,
-              width: 2,
-            )
-        ),
-        color: colorScheme.surface,
-        child: Padding(
-          padding: EdgeInsetsGeometry.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Color(0xFF949AA6), width: 1.0),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(width: 80, height: 80, child: graphics.graphicsList[effortValue - 1]),
+          SizedBox(width: 10),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: colorScheme.onSurface)),
-                      suitGraphic,
-                    ],
-                  ),
-                ],
-              ),
+                      Row(
+                        children: [
+                          suitGraphic,
+                          SizedBox(width: 5),
+                          Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: suitColor)),
+                        ],
+                      ),
 
-              Expanded(
-                child: Row(
-                  children: [
-                    SizedBox(width: 100, height:100, child:graphics.graphicsList[effortValue - 1]),
-                    SizedBox(width:10),
-                    Expanded(
-                      child:
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Category: $categoryName",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 17, color: colorScheme.onSurface),
-                              ),
-                              Text(
-                                name,
-                                softWrap: true,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(fontSize: 15, color: colorScheme.onSurface),
-                              ),
-                            ],
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.directional(start: 0, end: 8, top: 0, bottom: 0),
-                        child: SizedBox(
-                          width: 115,
-                          height: 25,
-                          child: ElevatedButton(
-                            onPressed: () => {onPress(0)},
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              backgroundColor: (Color(0xFFE06F7C)),
-                            ),
-                            child: Text("Remove",
-                                style: TextStyle(color: Colors.white, fontSize: 15.0)
-                            ),
-                          ),
+                      SizedBox(width: 10),
+
+                      Container(
+                        width: 60,
+                        height: 20,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF4E81EE), // Background color
+                          borderRadius: BorderRadius.circular(20.0), // Makes it pill-shaped
+                        ),
+                        child: Text(
+                          categoryName,
+                          style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Transform.rotate(angle: Math.pi, child: suitGraphic),
-                      Transform.rotate(
-                        angle: Math.pi,
-                        child: Text(graphics.cardNumber[effortValue - 1], style: TextStyle(fontSize: 15, color: colorScheme.onSurface)),
-                      ),
                     ],
+                  ),
+                  SizedBox(height: 10),
+
+                  Text(
+                    name,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+
+          IconButton(
+            onPressed: () => onPress(0),
+            icon: Icon(Icons.delete_outline_outlined, color: Colors.red, size: 30),
+          ),
+
+          SizedBox(width: 10),
+        ],
       ),
     );
   }
